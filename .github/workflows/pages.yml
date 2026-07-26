@@ -34,6 +34,18 @@ jobs:
             exit 1
           fi
           echo "Clean."
+      - name: Fail if roadmap.json contains a script/handler injection
+        run: |
+          # data/roadmap.json prose fields (desc/intro/text/outro/table cells) render as
+          # raw HTML on purpose (see CLAUDE.md's escaping contract), so a merged PR could
+          # otherwise plant a <script> tag or an inline event handler that runs for every
+          # visitor. Catch that here instead of relying solely on PR review.
+          if grep -noiE '<script|javascript:|on(error|load|click|mouseover|focus|blur|change|submit|key(down|up|press)|animationstart|drag[a-z]*|scroll|toggle|input|paste|auxclick|pointerdown)[[:space:]]*=' \
+              data/roadmap.json; then
+            echo "::error::Possible script/handler injection found in data/roadmap.json."
+            exit 1
+          fi
+          echo "Clean."
 
   deploy:
     needs: validate

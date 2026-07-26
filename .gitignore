@@ -4,3 +4,11 @@ node_modules/
 *.log
 .vscode/
 .idea/
+
+# secrets -- should never be tracked
+.env
+.env.*
+*.pem
+*.key
+credentials*
+*terraform.tfstate*
