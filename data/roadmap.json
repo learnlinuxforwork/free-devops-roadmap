@@ -24,6 +24,28 @@
     ]
   },
 
+  "story": {
+    "id": "story",
+    "eyebrow": "00 · Why",
+    "title": "Why I Built This Roadmap",
+    "subtitle": "A note from Shea Bennett, founder of Shea's Tech",
+    "photo": "assets/img/Shea-Profile.png",
+    "photoAlt": "Shea Bennett, founder of Shea's Tech",
+    "body": [
+      "Shea Bennett started his career in Information Technology as a Helpdesk Analyst with no formal training or background in IT. He had no experience when he left the U.S. Navy, where he served as a Hospital Corpsman assigned to a Marine Corps battalion as a Fleet Marine Force (FMF) combat medic. His dream was to become a medical doctor, but the cost of medical education was simply too high — not something the Montgomery GI Bill alone could cover.",
+      "While working as a surgical technologist passing instruments at Naval Medical Center San Diego, he met engineers from AGFA HealthCare and asked one of them for help getting into IT. To his surprise, the man helped him land his first real IT job. Shea then spent the next few years training onsite at AGFA HealthCare's headquarters in northern New Jersey, flying back and forth from San Diego. He struggled at first — he's a visual learner, and in 2007 the most common way to learn IT was in-person bootcamps or classroom training, neither of which he could afford.",
+      "Then he found Train Signal, video-based IT training, and never looked back. Shea is <strong>100% self-taught</strong>. He went on to earn a Bachelor's and a Master's degree from National University in San Diego, and trained extensively alongside various government agencies and U.S. government IT contractors. He believes anyone can learn IT on their own without paying for a bootcamp — but that mentorship and networking, in person or on live video, are critical, because IT is a team sport.",
+      "He later married a Somali-Kenyan woman who opened his eyes to a world where most people can't afford the technology and training taken for granted in the U.S. and other wealthy countries — something he saw firsthand living and traveling in Kenya and beyond.",
+      "This roadmap is also an homage to his own start. When Shea got out of the Navy in San Diego with no money for anything beyond a cup of instant ramen from 7-Eleven, he had to focus on what mattered and hold onto every dollar just to make it. He eventually moved back home to Philadelphia, and after a year of real struggle, found a job in the DC Metro area — and never looked back."
+    ],
+    "quote": [
+      "This was built for that fundi in Kenya, that hustler in Nigeria, the determined in Rwanda or Ethiopia. The hungry surviving in the UAE. The Indonesian or Filipino brother or sister — determined, but never given a chance or guidance.",
+      "It could be that street vendor in East, West, or North Philadelphia, or in NYC. Or that front-desk hotel worker dreaming of changing their life.",
+      "Bismillah…"
+    ],
+    "closing": "If anything here is wrong, report it and we'll fix it."
+  },
+
   "overview": {
     "id": "overview",
     "icon": "compass",

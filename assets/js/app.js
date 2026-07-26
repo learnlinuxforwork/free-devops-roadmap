@@ -145,6 +145,24 @@
       "</section>"
     );
 
+    /* story */
+    var sy = data.story;
+    html.push(
+      '<section class="section story" id="' + sy.id + '">' +
+        sectionHead(sy.eyebrow, sy.title, sy.subtitle) +
+        '<div class="story__layout">' +
+          '<div class="story__photo"><img src="' + esc(sy.photo) + '" alt="' + esc(sy.photoAlt) + '" loading="lazy"></div>' +
+          '<div class="story__text prose">' +
+            sy.body.map(function (p) { return "<p>" + p + "</p>"; }).join("") +
+          "</div>" +
+        "</div>" +
+        '<div class="callout story__quote">' +
+          sy.quote.map(function (p) { return "<p>" + p + "</p>"; }).join("") +
+        "</div>" +
+        '<p class="story__closing">' + esc(sy.closing) + "</p>" +
+      "</section>"
+    );
+
     /* overview */
     var ov = data.overview;
     html.push(
@@ -383,6 +401,7 @@
       {
         label: "Get started",
         links: [
+          { href: "#" + data.story.id, text: data.story.title },
           { href: "#" + data.overview.id, text: data.overview.title },
           { href: "#" + data.stack.id, text: data.stack.title },
           { href: "#" + data.homelab.id, text: data.homelab.title },
