@@ -1,0 +1,852 @@
+{
+  "meta": {
+    "title": "Free DevOps Roadmap",
+    "subtitle": "Linux fundamentals to AWS Certified DevOps Engineer – Professional",
+    "tagline": "A 54-week, week-by-week self-study roadmap. Free forever.",
+    "edition": "July 2026",
+    "preparedFor": "Normal Broke People",
+    "site": "https://free.learnlinuxforwork.com",
+    "org": "Shea's Tech",
+    "links": {
+      "linuxTraining": "https://www.learnlinuxforwork.com",
+      "docLinux": "https://learnlinuxforwork.com/doc-linux",
+      "linuxcert": "https://linuxcert.guru/",
+      "kubecraft": "https://www.skool.com/linux/classroom"
+    }
+  },
+
+  "hero": {
+    "stats": [
+      { "value": "54", "label": "weeks" },
+      { "value": "9", "label": "phases" },
+      { "value": "6", "label": "certifications" },
+      { "value": "$0", "label": "to start" }
+    ]
+  },
+
+  "overview": {
+    "id": "overview",
+    "icon": "compass",
+    "title": "How This Plan Works",
+    "subtitle": "Turning a job description into a week-by-week build schedule",
+    "body": [
+      "This roadmap turns a real job description — designing, developing, and operating cloud-native applications on AWS — into a week-by-week study and build schedule. It is organized into <strong>9 phases across 54 weeks</strong> at a sustainable pace of 8–10 hours/week. If you can commit 16–20 hours/week, run two plan-weeks per calendar week and finish in roughly 6–7 months.",
+      "Every phase pairs hands-on labs with a certification checkpoint, because the core asks — Linux, cloud infrastructure, CI/CD, IaC, containers, monitoring, security — map almost one-to-one onto the RHCSA and AWS certification tracks. Certifications aren't the goal; they're forcing functions that make sure you actually cover the breadth employers expect."
+    ],
+    "rhythm": [
+      { "pct": "60%", "text": "hands-on labs and building (AWS Free Tier, a Linux lab machine, and a personal project repo)" },
+      { "pct": "30%", "text": "structured learning (courses, docs, exam objectives)" },
+      { "pct": "10%", "text": "review — write a short note on what you learned and what confused you" }
+    ],
+    "pacing": {
+      "headers": ["Track", "Duration", "Hrs/wk", "How it runs"],
+      "rows": [
+        ["Standard", "~13 months (54 wks)", "8–10", "Follow the plan exactly: one plan-week per calendar week."],
+        ["Accelerated", "~6.5 months (27 wks)", "16–20", "Two consecutive plan-weeks per calendar week. Best if you're job-searching full time."],
+        ["Extended", "~16 months (68 wks)", "6–8", "Stretch each phase by ~25%; useful if you're working full-time with limited evenings."]
+      ]
+    },
+    "note": {
+      "kind": "warn",
+      "title": "A note on certification volume",
+      "text": "Some working DevOps professionals recommend not over-indexing on certifications. If your goal is the fastest path to job-ready, treat Cloud Practitioner and Developer Associate as optional and spend the saved weeks on the capstone project plus Terraform and Kubernetes depth. Employers weigh a strong GitHub portfolio, the Professional-level cert, and demonstrable Linux skill most heavily."
+    }
+  },
+
+  "stack": {
+    "id": "training-stack",
+    "icon": "terminal",
+    "title": "Linux First: Your Training Stack",
+    "subtitle": "Why Linux comes before AWS — and where to train it",
+    "body": [
+      "Nearly every AWS workload in this plan runs on Linux: EC2 instances, container images, EKS worker nodes, build agents, and the shell you troubleshoot from. Engineers who skip this layer hit a wall around Phase 4, when a container won't start and the answer is a permissions bit, a systemd unit, or an SELinux label — not an AWS setting.",
+      "Phase 0 is therefore a full six-week Linux on-ramp, built around these resources."
+    ],
+    "resources": [
+      {
+        "name": "Learn Linux For Work",
+        "url": "https://www.learnlinuxforwork.com",
+        "display": "learnlinuxforwork.com",
+        "desc": "Structured, work-focused Linux training — the core curriculum for Phase 0. Start here before you touch the AWS phases.",
+        "tag": "Core"
+      },
+      {
+        "name": "Doc Linux",
+        "url": "https://learnlinuxforwork.com/doc-linux",
+        "display": "learnlinuxforwork.com/doc-linux",
+        "desc": "The companion reference: command documentation and syntax lookups. Keep it open in a second tab while you lab.",
+        "tag": "Reference"
+      },
+      {
+        "name": "LinuxCert Guru",
+        "url": "https://linuxcert.guru/",
+        "display": "linuxcert.guru",
+        "desc": "Hands-on RHCSA mock exams — timed, practical, performance-based. Your Week 4 checkpoint and recurring pressure test.",
+        "tag": "Mock exams"
+      },
+      {
+        "name": "Kubecraft Linux",
+        "url": "https://www.skool.com/linux/classroom",
+        "display": "skool.com/linux/classroom",
+        "desc": "Community classroom for Linux and Kubernetes — structured lessons plus people to ask when you get stuck.",
+        "tag": "Community"
+      },
+      {
+        "name": "Red Hat Interactive Labs",
+        "url": "https://www.redhat.com/en/interactive-labs",
+        "display": "redhat.com/en/interactive-labs",
+        "desc": "Free browser-based RHEL labs from Red Hat. Zero setup, no VM required.",
+        "tag": "Free labs"
+      },
+      {
+        "name": "LabEx",
+        "url": "https://tidd.ly/4yFi0UN",
+        "display": "labex.io",
+        "desc": "Guided live-environment labs for Linux, Docker, and Kubernetes.",
+        "tag": "Labs"
+      },
+      {
+        "name": "KodeKloud",
+        "url": "https://tidd.ly/4fBRIub",
+        "display": "kodekloud.com",
+        "desc": "Browser-based DevOps labs and playgrounds — Kubernetes, Terraform, Ansible, CI/CD.",
+        "tag": "Labs"
+      },
+      {
+        "name": "Linux Foundation",
+        "url": "https://tidd.ly/4pCL8rI",
+        "display": "training.linuxfoundation.org",
+        "desc": "LFCS training and certification — the distro-neutral alternative to RHCSA.",
+        "tag": "Cert"
+      }
+    ],
+    "note": {
+      "kind": "info",
+      "title": "Hands-on labs — the non-negotiable habit",
+      "text": "Reading about Linux does not build Linux skill. Every week in Phase 0 ends with a lab you type yourself on a live system: break it, fix it, and write down what you did. Then prove it under time pressure with a mock exam. Can't finish a task without looking it up? Look it up, then redo the lab cold."
+    },
+    "outro": "Browser labs are perfect for a quick repetition, but they reset when you close the tab. For the RHCSA you need a machine you own, can break, and can rebuild — that's the Home Lab section. Whatever you run on, keep a <strong>break/fix log</strong> in a Git repo from day one, and work in the terminal only — no GUI."
+  },
+
+  "homelab": {
+    "id": "home-lab",
+    "icon": "server",
+    "title": "Build Your Home Lab",
+    "subtitle": "Real hardware, real RHEL — the setup that actually prepares you for the RHCSA",
+    "body": [
+      "The RHCSA is a hands-on exam — you are dropped at a shell prompt on a real Red Hat system and told to fix it. Browser labs are fine for reps, but they hide what bites you on exam day: bootloaders, partitioning, network config, and recovering a machine that won't boot. <strong>Install Linux on real hardware.</strong> A $120 used business laptop is the single best purchase in this plan."
+    ],
+    "startHere": {
+      "kind": "success",
+      "title": "Start here — the three-step path",
+      "steps": [
+        "Buy a used business laptop (~$100–$200) with 16 GB RAM and an SSD.",
+        "Wipe it and install <strong>RHEL 10</strong> using the free Red Hat Developer subscription (covers up to <strong>16 machines</strong>), or <strong>Rocky Linux 10</strong> if you'd rather not create an account.",
+        "Break it, fix it, reinstall it. Repeat until reinstalling is boring."
+      ]
+    },
+    "budgetNote": {
+      "kind": "warn",
+      "title": "Don't buy everything at once",
+      "text": "One used laptop running RHEL 10 gets you through Phase 0 and the RHCSA — that alone makes you job-ready on the Linux side. Add a home server around Phase 3 when Terraform and Kubernetes need more nodes, and networking gear only if you want CCNA-level practice. Everything in this section is optional except the first laptop."
+    },
+    "groups": [
+      {
+        "step": "Step 1",
+        "title": "Pick your operating system",
+        "intro": "Both are RHEL 10 for exam purposes. Use real RHEL if you can; Rocky is the free rebuild — same commands, no account required.",
+        "columns": ["Operating system", "What it is and when to use it", "Cost"],
+        "items": [
+          {
+            "name": "Red Hat Enterprise Linux 10",
+            "sub": "Developer Edition — developers.redhat.com",
+            "url": "https://developers.redhat.com/products/rhel/download",
+            "desc": "The real thing. The <strong>Red Hat Developer Subscription for Individuals</strong> is free and covers up to <strong>16 physical or virtual systems</strong> — more than enough for a full home lab. Create a free account, activate the subscription, then download the boot or DVD ISO (x86_64 or aarch64). <a href=\"https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux\" target=\"_blank\" rel=\"noopener\">Read the FAQ</a> for the terms.",
+            "meta": "Free · 16 systems"
+          },
+          {
+            "name": "Rocky Linux 10",
+            "sub": "rockylinux.org",
+            "url": "https://rockylinux.org/",
+            "desc": "A community rebuild of RHEL 10 — bug-for-bug compatible, no account, no limits. Use it for extra nodes once you've used up your 16 RHEL entitlements, or if you want to lab without registering anything.",
+            "meta": "Free · unlimited"
+          }
+        ],
+        "after": {
+          "title": "Installing it",
+          "bullets": [
+            "Download the DVD ISO from <a href=\"https://developers.redhat.com/products/rhel/download\" target=\"_blank\" rel=\"noopener\">developers.redhat.com</a> (RHEL) or <a href=\"https://rockylinux.org/\" target=\"_blank\" rel=\"noopener\">rockylinux.org</a> (Rocky).",
+            "Write it to a USB stick with <code>dd</code> or balenaEtcher, then boot the laptop from USB.",
+            "<strong>Install to bare metal</strong> — wipe the whole disk. This is a lab machine, not your daily driver.",
+            "Need more than one node? Install <a href=\"https://www.virtualbox.org/\" target=\"_blank\" rel=\"noopener\">Oracle VirtualBox</a> on a second machine (or on the laptop itself) and run 2–3 VMs. Snapshot before every lab so you can roll back in seconds."
+          ]
+        }
+      },
+      {
+        "step": "Option A",
+        "title": "Used laptops (cheapest, recommended to start)",
+        "intro": "Off-lease corporate laptops are the best value in computing. Look for an Intel i5/i7 or Ryzen 5/7, <strong>16 GB RAM</strong>, and a <strong>256 GB+ SSD</strong>. ThinkPad T/X, Dell Latitude, and HP EliteBook all have excellent Linux driver support.",
+        "columns": ["Seller", "What to expect", "Condition"],
+        "items": [
+          {
+            "name": "eBay — Renew4me",
+            "url": "https://www.ebay.com/str/renew4me",
+            "desc": "Cleaned, tested, refurbished machines. Pay a little more, get something that works out of the box. Best first stop if this is your only lab machine.",
+            "meta": "Refurbished"
+          },
+          {
+            "name": "eBay — NurTech",
+            "url": "https://www.ebay.com/str/nurtech",
+            "desc": "Cheapest and roughest. Expect cosmetic damage and possible self-repairs (battery, keyboard, screen). Great value if you're comfortable with a screwdriver.",
+            "meta": "Budget / as-is"
+          }
+        ]
+      },
+      {
+        "step": "Option B",
+        "title": "Buy a new laptop built for Linux",
+        "intro": "If you'd rather not gamble on used hardware, these vendors ship Linux preinstalled and tested. More expensive, zero driver hunting.",
+        "columns": ["Vendor", "Notes", "Based in"],
+        "items": [
+          { "name": "Laptop with Linux", "url": "https://laptopwithlinux.com", "desc": "Clevo hardware, wide config options", "meta": "Netherlands" },
+          { "name": "System76", "url": "https://system76.com/", "desc": "Clevo hardware; ships with Pop!_OS or Ubuntu", "meta": "USA" },
+          { "name": "Framework", "url": "https://frame.work/", "desc": "Modular and repairable — highly customizable", "meta": "USA" },
+          { "name": "Purism", "url": "https://puri.sm/", "desc": "Privacy and security focused, hardware kill switches", "meta": "USA" },
+          { "name": "StarLabs", "url": "https://us.starlabs.systems/", "desc": "Compact Linux-first laptops, coreboot firmware", "meta": "UK / USA" },
+          { "name": "NovaCustom", "url": "https://novacustom.com/", "desc": "Clevo hardware, coreboot options", "meta": "Netherlands" },
+          { "name": "Tuxedo Computers", "url": "https://www.tuxedocomputers.com/", "desc": "Built in Germany, own TUXEDO OS", "meta": "Germany" },
+          { "name": "Slimbook", "url": "https://slimbook.com/en/", "desc": "Assembled in Spain, thin and light", "meta": "Spain" },
+          { "name": "NitroKey", "url": "https://www.nitrokey.com/", "desc": "Security-hardened hardware and keys", "meta": "Germany" },
+          { "name": "Eurocom", "url": "https://eurocom.com", "desc": "Heavy-duty mobile workstations", "meta": "Canada" },
+          { "name": "Lenovo ThinkPad", "url": "https://www.lenovo.com/us/en/d/linux-laptops-desktops/", "desc": "Certified Linux ThinkPads, easiest to buy", "meta": "Global" }
+        ]
+      },
+      {
+        "step": "Step 2",
+        "title": "Pick a hypervisor (both free and open source)",
+        "intro": "Around Phase 3 one laptop stops being enough. Put a used server in a closet, run a free hypervisor, and you have a dozen VMs on demand.",
+        "columns": ["Platform", "What it gives you", ""],
+        "items": [
+          { "name": "Proxmox VE", "sub": "proxmox.com", "url": "https://www.proxmox.com/en/", "desc": "The home-lab default. Debian-based, web UI, KVM VMs plus LXC containers, snapshots, clustering.", "meta": "" },
+          { "name": "OpenNebula", "sub": "opennebula.io", "url": "https://opennebula.io/", "desc": "A full private-cloud platform. Steeper curve, better story for multi-node clusters.", "meta": "" }
+        ]
+      },
+      {
+        "step": "Step 3",
+        "title": "Buy a used or refurbished server",
+        "intro": "Target a Dell PowerEdge R630/R730 or HP DL360/DL380: dual CPUs, 64–128 GB RAM, a few hundred dollars. They're loud — a closet or garage is ideal.",
+        "columns": ["Vendor", "Notes", "Site"],
+        "items": [
+          { "name": "The Server Store", "url": "https://www.theserverstore.com/", "desc": "Wide inventory, configure-to-order", "meta": "theserverstore.com" },
+          { "name": "Server Monkey", "url": "https://www.servermonkey.com/", "desc": "Refurb servers, parts, warranties", "meta": "servermonkey.com" },
+          { "name": "New Server Life (NSL)", "url": "https://newserverlife.com/", "desc": "Onsite colocation: Miami, Dallas, SF, Warsaw", "meta": "newserverlife.com" },
+          { "name": "TechMikeNY on eBay", "url": "https://www.ebay.com/str/techmikeny", "desc": "Well-reviewed eBay storefront", "meta": "ebay.com/str/techmikeny" },
+          { "name": "TechMikeNY (direct)", "url": "https://techmikeny.com/", "desc": "Buy direct, skip eBay fees", "meta": "techmikeny.com" },
+          { "name": "SaveMyServer", "url": "https://savemyserver.com/", "desc": "Refurbished enterprise gear", "meta": "savemyserver.com" },
+          { "name": "UsedServers", "url": "https://www.usedservers.com/", "desc": "Used servers, storage, networking", "meta": "usedservers.com" },
+          { "name": "PC Server & Parts", "url": "https://pcserverandparts.com/refurbished-servers/", "desc": "Refurbished servers and spare parts", "meta": "pcserverandparts.com" }
+        ]
+      },
+      {
+        "step": "Step 4",
+        "title": "Networking gear for hybrid-cloud practice (optional)",
+        "intro": "To simulate hybrid setups — VPNs, routing, firewalls between on-prem and AWS — add real networking gear and work CCNA material alongside the plan.",
+        "columns": ["Hardware", "What it's for", ""],
+        "items": [
+          { "name": "Protectli", "sub": "protectli.com", "url": "https://protectli.com/", "desc": "Fanless firewall appliances. Run pfSense, OPNsense, or VyOS; VPN your lab to a VPC.", "meta": "" },
+          { "name": "CCNA Lab Racks", "sub": "eBay — GeoNetwork US", "url": "https://www.ebay.com/str/geonetworkusstore", "desc": "Prebuilt racks of Cisco switches and routers — real IOS, cabling, console ports.", "meta": "" }
+        ]
+      }
+    ]
+  },
+
+  "certs": {
+    "id": "certifications",
+    "icon": "award",
+    "title": "Certification Roadmap",
+    "subtitle": "One Linux cert, five AWS certs, taken in this order",
+    "body": [
+      "RHCSA proves the Linux layer; the AWS track proves the cloud layer. Cloud Practitioner and Developer Associate are marked optional — include them if you want extra structure or are newer to IT, skip them to move faster toward the Professional-level cert."
+    ],
+    "items": [
+      {
+        "n": 1,
+        "name": "Red Hat Certified System Administrator (RHCSA)",
+        "code": "EX200",
+        "codeUrl": "https://www.redhat.com/en/services/certification/rhcsa",
+        "level": "Foundational (strongly recommended)",
+        "week": 6,
+        "timing": "End of Week 6",
+        "cost": "~$500",
+        "featured": true,
+        "prep": [
+          { "label": "learnlinuxforwork.com", "url": "https://www.learnlinuxforwork.com" },
+          { "label": "Doc Linux", "url": "https://learnlinuxforwork.com/doc-linux" },
+          { "label": "linuxcert.guru mock exams", "url": "https://linuxcert.guru/" },
+          { "label": "Red Hat Interactive Labs", "url": "https://www.redhat.com/en/interactive-labs" }
+        ]
+      },
+      {
+        "n": 2,
+        "name": "AWS Certified Cloud Practitioner",
+        "code": "CLF-C02",
+        "codeUrl": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+        "level": "Foundational (optional)",
+        "week": 12,
+        "timing": "End of Week 12",
+        "cost": "$100",
+        "featured": false,
+        "prep": [
+          { "label": "AWS Skill Builder", "url": "https://skillbuilder.aws/" },
+          { "label": "Cantrill video training", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf" },
+          { "label": "Tutorials Dojo", "url": "https://portal.tutorialsdojo.com/ref/sheastech" }
+        ]
+      },
+      {
+        "n": 3,
+        "name": "AWS Certified Solutions Architect – Associate",
+        "code": "SAA-C03",
+        "codeUrl": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+        "level": "Associate",
+        "week": 20,
+        "timing": "End of Week 20",
+        "cost": "$150",
+        "featured": false,
+        "prep": [
+          { "label": "Cantrill SAA-C03 course", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf" },
+          { "label": "Skill Builder", "url": "https://skillbuilder.aws/" },
+          { "label": "Tutorials Dojo", "url": "https://portal.tutorialsdojo.com/ref/sheastech" }
+        ]
+      },
+      {
+        "n": 4,
+        "name": "AWS Certified Developer – Associate",
+        "code": "DVA-C02",
+        "codeUrl": "https://aws.amazon.com/certification/certified-developer-associate/",
+        "level": "Associate (optional)",
+        "week": 40,
+        "timing": "End of Week 40",
+        "cost": "$150",
+        "featured": false,
+        "prep": [
+          { "label": "Cantrill DVA-C02 course", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf" },
+          { "label": "Tutorials Dojo", "url": "https://portal.tutorialsdojo.com/ref/sheastech" },
+          { "label": "KodeKloud", "url": "https://tidd.ly/4fBRIub" }
+        ]
+      },
+      {
+        "n": 5,
+        "name": "AWS Certified SysOps Administrator – Associate",
+        "code": "SOA-C02",
+        "codeUrl": "https://aws.amazon.com/certification/certified-sysops-admin-associate/",
+        "level": "Associate",
+        "week": 46,
+        "timing": "End of Week 46",
+        "cost": "$150",
+        "featured": false,
+        "prep": [
+          { "label": "AWS Skill Builder", "url": "https://skillbuilder.aws/" },
+          { "label": "Tutorials Dojo", "url": "https://portal.tutorialsdojo.com/ref/sheastech" },
+          { "label": "KodeKloud", "url": "https://tidd.ly/4fBRIub" }
+        ]
+      },
+      {
+        "n": 6,
+        "name": "AWS Certified DevOps Engineer – Professional",
+        "code": "DOP-C02",
+        "codeUrl": "https://aws.amazon.com/certification/certified-devops-engineer-professional/",
+        "level": "Professional (capstone)",
+        "week": 54,
+        "timing": "End of Week 54",
+        "cost": "$300",
+        "featured": true,
+        "prep": [
+          { "label": "Cantrill DOP-C02 course", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf" },
+          { "label": "Tutorials Dojo", "url": "https://portal.tutorialsdojo.com/ref/sheastech" },
+          { "label": "KodeKloud", "url": "https://tidd.ly/4fBRIub" }
+        ]
+      }
+    ],
+    "note": {
+      "kind": "info",
+      "title": "Optional add-ons (post-plan)",
+      "text": "<a href=\"https://aws.amazon.com/certification/certified-security-specialty/\" target=\"_blank\" rel=\"noopener\">AWS Certified Security – Specialty (SCS-C02)</a> deepens the security and compliance bullet and is a strong differentiator for regulated or government-adjacent environments. On the Linux side, <a href=\"https://www.redhat.com/en/services/certification/rhce\" target=\"_blank\" rel=\"noopener\">RHCE (EX294)</a> is the natural follow-on to RHCSA and pairs directly with Phase 7's configuration management work; <a href=\"https://tidd.ly/4pCL8rI\" target=\"_blank\" rel=\"noopener\">LFCS from the Linux Foundation</a> is the distro-neutral alternative."
+    }
+  },
+
+  "coverage": {
+    "id": "coverage-map",
+    "icon": "map",
+    "title": "Job Description Coverage Map",
+    "subtitle": "Every responsibility mapped to a phase — plus the adjacent skills nobody lists",
+    "columns": ["Responsibility", "Covered in", "Phase"],
+    "rows": [
+      ["Operate and troubleshoot Linux systems underpinning cloud workloads", "Shell fluency, permissions, systemd, storage/LVM, networking, SELinux, RHCSA-level tasks", "Phase 0"],
+      ["Design, develop, integrate, test, and maintain cloud-native applications", "Python/Bash scripting, REST APIs, serverless (Lambda), unit/integration testing, SDLC automation", "Phase 0, 2, 5"],
+      ["Support AWS cloud infrastructure deployments and modernization", "Core AWS services, VPC networking, HA/DR patterns, migration patterns", "Phase 1–2"],
+      ["Develop and maintain CI/CD pipelines", "CodePipeline/CodeBuild/CodeDeploy, GitHub Actions/Jenkins, deployment strategies", "Phase 5"],
+      ["Implement IaC with Terraform and/or CloudFormation", "Terraform (modules, state, testing), CloudFormation/CDK, policy-as-code", "Phase 3"],
+      ["Deploy and manage containerized apps with Kubernetes and Docker", "Docker fundamentals, Kubernetes core objects, Amazon EKS, Helm, GitOps", "Phase 4"],
+      ["Support integration, troubleshooting, monitoring, and issue resolution", "CloudWatch, X-Ray, Prometheus/Grafana, centralized logging, incident response/runbooks", "Phase 6"],
+      ["Collaborate cross-functionally in Agile environments", "Scrum/Kanban ceremonies, Jira/Confluence, technical documentation, code review practice", "Phase 7"],
+      ["Implement cloud monitoring, logging, and observability", "Metrics/logs/traces (the three pillars), SLOs/SLIs, dashboards, alerting design", "Phase 6"],
+      ["Performance optimization, scalability planning, operational sustainment", "Auto scaling, load testing, cost optimization/FinOps basics, capacity planning", "Phase 2, 6, 8"],
+      ["Security and configuration management best practices", "IAM least privilege, KMS/Secrets Manager, GuardDuty/Security Hub/Config, patching & config management (Ansible)", "Phase 0, 7"],
+      ["<em>Not explicitly listed but expected in practice</em>", "Artifact/package management (ECR, CodeArtifact), secrets management, GitOps, on-call practices, cost/FinOps awareness, technical writing, interview-ready portfolio project", "Woven throughout"]
+    ]
+  },
+
+  "phases": [
+    {
+      "id": "phase-0",
+      "n": 0,
+      "title": "Linux Foundations",
+      "weeks": "Weeks 1–6",
+      "subtitle": "Command line, systems administration, RHCSA readiness, Git, and scripting — before you touch AWS",
+      "cert": "RHCSA (EX200)",
+      "items": [
+        {
+          "week": "Week 1",
+          "focus": "Linux & the shell",
+          "hours": "8–10",
+          "tasks": [
+            "Install RHEL 10 or Rocky Linux 10 on a real machine (see Home Lab)",
+            "Filesystem hierarchy, navigation, redirection, pipes, grep/sed/awk",
+            "File permissions, ownership, umask, ACLs; hard vs symbolic links",
+            "Lab: recover a system you locked yourself out of"
+          ],
+          "resources": [
+            { "label": "Learn Linux For Work", "url": "https://www.learnlinuxforwork.com" },
+            { "label": "Doc Linux", "url": "https://learnlinuxforwork.com/doc-linux" },
+            { "label": "Kubecraft Linux", "url": "https://www.skool.com/linux/classroom" },
+            { "label": "Red Hat Labs", "url": "https://www.redhat.com/en/interactive-labs" }
+          ]
+        },
+        {
+          "week": "Week 2",
+          "focus": "Users, services & packages",
+          "hours": "8–10",
+          "tasks": [
+            "Users, groups, sudo policy, password aging, /etc/skel",
+            "systemd: units, targets, systemctl, journald log analysis",
+            "Package management with dnf/yum, repos, and module streams",
+            "Scheduled tasks: cron, anacron, systemd timers"
+          ],
+          "resources": [
+            { "label": "Learn Linux For Work", "url": "https://www.learnlinuxforwork.com" },
+            { "label": "Doc Linux", "url": "https://learnlinuxforwork.com/doc-linux" },
+            { "label": "LabEx", "url": "https://tidd.ly/4yFi0UN" }
+          ]
+        },
+        {
+          "week": "Week 3",
+          "focus": "Storage, networking & SELinux",
+          "hours": "8–10",
+          "tasks": [
+            "Partitions, LVM, filesystems, /etc/fstab, swap",
+            "NetworkManager/nmcli, static IPs, DNS, routing, firewalld",
+            "SELinux modes, contexts, booleans, and troubleshooting denials",
+            "TCP/IP and subnetting; curl, dig, traceroute, ss"
+          ],
+          "resources": [
+            { "label": "Learn Linux For Work", "url": "https://www.learnlinuxforwork.com" },
+            { "label": "Doc Linux", "url": "https://learnlinuxforwork.com/doc-linux" },
+            { "label": "Red Hat Labs", "url": "https://www.redhat.com/en/interactive-labs" }
+          ]
+        },
+        {
+          "week": "Week 4",
+          "focus": "RHCSA checkpoint",
+          "hours": "8–10",
+          "tasks": [
+            "Sit a full timed, hands-on RHCSA mock exam — no notes, no internet",
+            "Score it, log every missed objective, rebuild those labs from scratch",
+            "Repeat a second mock at the end of the week; target a clean pass",
+            "Optional: book the real EX200 for the end of Week 6"
+          ],
+          "resources": [
+            { "label": "linuxcert.guru RHCSA mock exams", "url": "https://linuxcert.guru/" },
+            { "label": "Linux Foundation", "url": "https://tidd.ly/4pCL8rI" }
+          ]
+        },
+        {
+          "week": "Week 5",
+          "focus": "Git & version control",
+          "hours": "8–10",
+          "tasks": [
+            "Branching, merging, rebasing, conflict resolution",
+            "Open a PR against a public repo; practice code review etiquette",
+            "Set up a GitHub org for the capstone project — start it now",
+            "Move your break/fix log into the repo and commit to it weekly"
+          ],
+          "resources": [
+            { "label": "Pro Git book", "url": "https://git-scm.com/book/en/v2" },
+            { "label": "The Odin Project", "url": "https://www.theodinproject.com/" }
+          ]
+        },
+        {
+          "week": "Week 6",
+          "focus": "Python & Bash automation",
+          "hours": "8–10",
+          "tasks": [
+            "Bash: functions, arg parsing, set -euo pipefail, traps",
+            "Python: file I/O, error handling, venvs, requests",
+            "Write 3 automation scripts (log parser, backup script, API poller)",
+            "Install and configure boto3; make your first AWS API call"
+          ],
+          "resources": [
+            { "label": "Scrimba Python", "url": "https://scrimba.com/learn-python-c03?via=u4481332" },
+            { "label": "Automate the Boring Stuff", "url": "https://automatetheboringstuff.com/" }
+          ]
+        }
+      ],
+      "exit": {
+        "kind": "success",
+        "title": "Phase 0 exit criteria",
+        "text": "You can pass a timed RHCSA mock without notes, you push to Git without thinking about it, and you have three working automation scripts in a public repo. If any of those is shaky, spend an extra week here — every phase that follows assumes it."
+      }
+    },
+    {
+      "id": "phase-1",
+      "n": 1,
+      "title": "AWS Cloud Foundations",
+      "weeks": "Weeks 7–12",
+      "subtitle": "Core services, plus AWS Certified Cloud Practitioner (optional but recommended)",
+      "cert": "CLF-C02",
+      "items": [
+        { "week": "Week 7", "focus": "AWS fundamentals", "hours": "8–10",
+          "tasks": ["Global infrastructure (regions/AZs), shared responsibility model", "IAM: users, groups, roles, policies; enable MFA on root", "Set up AWS Organizations plus a sandbox account with a budget alarm"],
+          "resources": [{ "label": "AWS Skill Builder", "url": "https://skillbuilder.aws/" }, { "label": "Cantrill video training", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf" }] },
+        { "week": "Week 8", "focus": "Compute & storage", "hours": "8–10",
+          "tasks": ["Launch and connect to EC2 instances; AMIs and instance types", "S3 buckets, storage classes, versioning; EBS vs EFS", "Deploy a static site to S3 + CloudFront"],
+          "resources": [{ "label": "Cloud Practitioner Essentials", "url": "https://skillbuilder.aws/" }, { "label": "AWS Free Tier", "url": "https://aws.amazon.com/free/" }] },
+        { "week": "Week 9", "focus": "Networking in AWS", "hours": "8–10",
+          "tasks": ["Build a custom VPC: public/private subnets, route tables, IGW/NAT", "Security groups vs NACLs; VPC peering basics", "Diagram your VPC — keep it for your portfolio"],
+          "resources": [{ "label": "AWS VPC documentation", "url": "https://docs.aws.amazon.com/vpc/" }, { "label": "draw.io", "url": "https://app.diagrams.net/" }] },
+        { "week": "Week 10", "focus": "Databases & messaging", "hours": "8–10",
+          "tasks": ["RDS (Postgres/MySQL) setup, multi-AZ concept, snapshots", "DynamoDB basics: partition keys, GSIs, on-demand vs provisioned", "SQS and SNS: decouple two of your Week 6 scripts using a queue"],
+          "resources": [{ "label": "AWS Skill Builder labs", "url": "https://skillbuilder.aws/" }, { "label": "KodeKloud", "url": "https://tidd.ly/4fBRIub" }] },
+        { "week": "Week 11", "focus": "Cost & Well-Architected", "hours": "6–8",
+          "tasks": ["The Well-Architected Framework's 6 pillars", "Billing dashboards, Cost Explorer, budgets and alerts", "Practice exam #1 for Cloud Practitioner; log your weak areas"],
+          "resources": [{ "label": "Tutorials Dojo", "url": "https://portal.tutorialsdojo.com/ref/sheastech" }, { "label": "Well-Architected", "url": "https://aws.amazon.com/architecture/well-architected/" }] },
+        { "week": "Week 12", "focus": "Certification checkpoint", "hours": "6–8",
+          "tasks": ["Full practice exam(s); review every missed domain", "Sit the AWS Certified Cloud Practitioner (CLF-C02) exam"],
+          "resources": [{ "label": "AWS exam guide (CLF-C02)", "url": "https://aws.amazon.com/certification/certified-cloud-practitioner/" }] }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "n": 2,
+      "title": "Architecture Deep Dive",
+      "weeks": "Weeks 13–20",
+      "subtitle": "Advanced AWS services, plus AWS Certified Solutions Architect – Associate",
+      "cert": "SAA-C03",
+      "items": [
+        { "week": "Week 13", "focus": "Compute at scale", "hours": "8–10",
+          "tasks": ["Auto Scaling Groups, launch templates, scaling policies", "Application and Network Load Balancers, target groups, health checks"],
+          "resources": [{ "label": "SAA-C03 exam guide", "url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/" }, { "label": "Cantrill SAA course", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf" }] },
+        { "week": "Week 14", "focus": "Advanced networking", "hours": "8–10",
+          "tasks": ["Transit Gateway, VPC peering at scale, Site-to-Site VPN, Direct Connect concepts", "Route 53 routing policies and health checks"],
+          "resources": [{ "label": "AWS Networking whitepapers", "url": "https://aws.amazon.com/whitepapers/" }] },
+        { "week": "Week 15", "focus": "Storage deep dive", "hours": "8–10",
+          "tasks": ["S3 lifecycle policies, replication, storage class analysis", "FSx and Storage Gateway use cases — know when to pick what"],
+          "resources": [{ "label": "AWS Storage documentation", "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/" }] },
+        { "week": "Week 16", "focus": "HA & disaster recovery", "hours": "8–10",
+          "tasks": ["Multi-AZ vs multi-region patterns; RTO/RPO tradeoffs", "Design and diagram a DR strategy for a sample 3-tier app"],
+          "resources": [{ "label": "AWS DR whitepaper", "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-workloads-on-aws.html" }] },
+        { "week": "Week 17", "focus": "Security services", "hours": "8–10",
+          "tasks": ["KMS envelope encryption, Secrets Manager vs Parameter Store", "IAM policy deep dive: conditions, permission boundaries, SCPs"],
+          "resources": [{ "label": "AWS Security best practices", "url": "https://docs.aws.amazon.com/security/" }] },
+        { "week": "Week 18", "focus": "Serverless architecture", "hours": "8–10",
+          "tasks": ["Lambda (cold starts, concurrency, layers), API Gateway", "Step Functions and EventBridge; build a small event-driven app"],
+          "resources": [{ "label": "AWS Serverless Land", "url": "https://serverlessland.com/" }] },
+        { "week": "Week 19", "focus": "Exam prep", "hours": "8–10",
+          "tasks": ["2–3 full-length SAA-C03 practice exams", "Rebuild weak-area labs from scratch, untimed"],
+          "resources": [{ "label": "Tutorials Dojo SAA-C03", "url": "https://portal.tutorialsdojo.com/ref/sheastech" }] },
+        { "week": "Week 20", "focus": "Certification checkpoint", "hours": "4–6",
+          "tasks": ["Sit the AWS Certified Solutions Architect – Associate (SAA-C03) exam"],
+          "resources": [{ "label": "AWS exam guide (SAA-C03)", "url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/" }] }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "n": 3,
+      "title": "Infrastructure as Code",
+      "weeks": "Weeks 21–26",
+      "subtitle": "Terraform and CloudFormation, from syntax to a real provisioned environment",
+      "cert": null,
+      "items": [
+        { "week": "Week 21", "focus": "Terraform fundamentals", "hours": "8–10",
+          "tasks": ["HCL syntax, providers, resources, variables, outputs", "State file mechanics; local vs remote state"],
+          "resources": [{ "label": "HashiCorp Learn", "url": "https://developer.hashicorp.com/terraform/tutorials" }, { "label": "KodeKloud", "url": "https://tidd.ly/4fBRIub" }] },
+        { "week": "Week 22", "focus": "Terraform at scale", "hours": "8–10",
+          "tasks": ["Modules, workspaces, remote state with S3 + DynamoDB locking", "Refactor Week 9's hand-built VPC into a reusable Terraform module"],
+          "resources": [{ "label": "Terraform Up & Running", "url": "https://www.terraformupandrunning.com/" }] },
+        { "week": "Week 23", "focus": "CloudFormation", "hours": "8–10",
+          "tasks": ["Templates, parameters, stacks, change sets, nested stacks", "Recreate one Terraform stack in CloudFormation to compare tradeoffs"],
+          "resources": [{ "label": "AWS CloudFormation docs", "url": "https://docs.aws.amazon.com/cloudformation/" }] },
+        { "week": "Week 24", "focus": "CDK & tool selection", "hours": "6–8",
+          "tasks": ["AWS CDK overview (Python or TypeScript)", "Write a one-pager: when to choose Terraform vs CloudFormation vs CDK"],
+          "resources": [{ "label": "AWS CDK Workshop", "url": "https://cdkworkshop.com/" }] },
+        { "week": "Week 25", "focus": "Capstone infra build", "hours": "10–12",
+          "tasks": ["Provision a full multi-tier VPC + app infra (ALB, ASG, RDS) via Terraform", "Push to GitHub with a README documenting the architecture"],
+          "resources": [{ "label": "Your own repo", "url": "" }] },
+        { "week": "Week 26", "focus": "IaC quality & policy", "hours": "8–10",
+          "tasks": ["terraform validate/plan/fmt in a CI check", "Static analysis with checkov or tflint; intro to policy-as-code (OPA/Sentinel)"],
+          "resources": [{ "label": "checkov docs", "url": "https://www.checkov.io/" }] }
+      ]
+    },
+    {
+      "id": "phase-4",
+      "n": 4,
+      "title": "Containers & Kubernetes",
+      "weeks": "Weeks 27–34",
+      "subtitle": "Docker fundamentals through production-style Amazon EKS deployments",
+      "cert": null,
+      "items": [
+        { "week": "Week 27", "focus": "Docker fundamentals", "hours": "8–10",
+          "tasks": ["Images vs containers, Dockerfile best practices, multi-stage builds", "Container networking and volumes; how namespaces and cgroups actually work"],
+          "resources": [{ "label": "Docker docs", "url": "https://docs.docker.com/" }, { "label": "LabEx hands-on labs", "url": "https://tidd.ly/4yFi0UN" }] },
+        { "week": "Week 28", "focus": "Docker in practice", "hours": "8–10",
+          "tasks": ["Docker Compose for multi-container apps", "Push images to Amazon ECR; image scanning basics"],
+          "resources": [{ "label": "AWS ECR docs", "url": "https://docs.aws.amazon.com/ecr/" }, { "label": "LabEx", "url": "https://tidd.ly/4yFi0UN" }] },
+        { "week": "Week 29", "focus": "Kubernetes fundamentals", "hours": "8–10",
+          "tasks": ["Pods, Deployments, Services, Namespaces, ReplicaSets", "kubectl fluency; run a local cluster with kind or minikube"],
+          "resources": [{ "label": "Kubernetes.io docs", "url": "https://kubernetes.io/docs/home/" }, { "label": "KodeKloud CKA labs", "url": "https://tidd.ly/4fBRIub" }] },
+        { "week": "Week 30", "focus": "K8s networking & storage", "hours": "8–10",
+          "tasks": ["Ingress controllers, ConfigMaps/Secrets, PersistentVolumes and Claims", "Namespaces and RBAC basics"],
+          "resources": [{ "label": "Kubernetes.io docs", "url": "https://kubernetes.io/docs/home/" }, { "label": "LabEx", "url": "https://tidd.ly/4yFi0UN" }] },
+        { "week": "Week 31", "focus": "Amazon EKS", "hours": "8–10",
+          "tasks": ["Stand up an EKS cluster (eksctl or Terraform)", "IAM Roles for Service Accounts (IRSA); node groups vs Fargate"],
+          "resources": [{ "label": "EKS Workshop", "url": "https://www.eksworkshop.com/" }] },
+        { "week": "Week 32", "focus": "Helm & GitOps", "hours": "8–10",
+          "tasks": ["Package your capstone app as a Helm chart", "Set up ArgoCD or Flux for a GitOps deployment flow"],
+          "resources": [{ "label": "Helm docs", "url": "https://helm.sh/docs/" }, { "label": "ArgoCD docs", "url": "https://argo-cd.readthedocs.io/" }] },
+        { "week": "Week 33", "focus": "Scaling & resilience", "hours": "8–10",
+          "tasks": ["Horizontal Pod Autoscaler, Cluster Autoscaler/Karpenter", "Pod disruption budgets, resource requests/limits, readiness/liveness probes"],
+          "resources": [{ "label": "AWS EKS best practices", "url": "https://docs.aws.amazon.com/eks/latest/best-practices/" }] },
+        { "week": "Week 34", "focus": "Capstone milestone", "hours": "10–12",
+          "tasks": ["Deploy the containerized capstone app to EKS end-to-end", "Document the deployment architecture in your repo"],
+          "resources": [{ "label": "Your own repo", "url": "" }] }
+      ]
+    },
+    {
+      "id": "phase-5",
+      "n": 5,
+      "title": "CI/CD Pipelines",
+      "weeks": "Weeks 35–40",
+      "subtitle": "Pipeline design, plus AWS Certified Developer – Associate (optional)",
+      "cert": "DVA-C02",
+      "items": [
+        { "week": "Week 35", "focus": "CI/CD concepts", "hours": "8–10",
+          "tasks": ["Trunk-based development vs GitFlow; pipeline stages (build/test/deploy)", "Testing pyramid: unit, integration, contract, smoke tests"],
+          "resources": [{ "label": "DVA-C02 exam guide", "url": "https://aws.amazon.com/certification/certified-developer-associate/" }, { "label": "Cantrill DVA course", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf" }] },
+        { "week": "Week 36", "focus": "AWS-native pipelines", "hours": "8–10",
+          "tasks": ["CodePipeline + CodeBuild + CodeDeploy end-to-end for the capstone app", "CodeArtifact for package and dependency management"],
+          "resources": [{ "label": "AWS CI/CD documentation", "url": "https://docs.aws.amazon.com/codepipeline/" }] },
+        { "week": "Week 37", "focus": "GitHub Actions / Jenkins", "hours": "8–10",
+          "tasks": ["Build a workflow: lint → test → build image → push to ECR → deploy to EKS", "Optional: stand up Jenkins in a container to compare self-hosted vs managed CI"],
+          "resources": [{ "label": "GitHub Actions docs", "url": "https://docs.github.com/en/actions" }] },
+        { "week": "Week 38", "focus": "Deployment strategies", "hours": "8–10",
+          "tasks": ["Blue/green and canary deployments on EKS and CodeDeploy", "Feature flags and rollback procedures — practice triggering and rolling back a bad deploy"],
+          "resources": [{ "label": "AWS CodeDeploy docs", "url": "https://docs.aws.amazon.com/codedeploy/" }] },
+        { "week": "Week 39", "focus": "Exam prep", "hours": "8–10",
+          "tasks": ["2 full-length DVA-C02 practice exams", "Review Lambda, API Gateway, and CI/CD service limits and quirks"],
+          "resources": [{ "label": "Tutorials Dojo DVA-C02", "url": "https://portal.tutorialsdojo.com/ref/sheastech" }] },
+        { "week": "Week 40", "focus": "Certification checkpoint (optional)", "hours": "4–6",
+          "tasks": ["Sit the AWS Certified Developer – Associate (DVA-C02) exam, or skip it and bank the week for capstone work"],
+          "resources": [{ "label": "AWS exam guide (DVA-C02)", "url": "https://aws.amazon.com/certification/certified-developer-associate/" }] }
+      ]
+    },
+    {
+      "id": "phase-6",
+      "n": 6,
+      "title": "Monitoring & Observability",
+      "weeks": "Weeks 41–46",
+      "subtitle": "CloudWatch through open-source observability, plus AWS Certified SysOps Administrator – Associate",
+      "cert": "SOA-C02",
+      "items": [
+        { "week": "Week 41", "focus": "CloudWatch & X-Ray", "hours": "8–10",
+          "tasks": ["Metrics, custom metrics, log groups/insights, alarms, dashboards", "Instrument the capstone app with X-Ray tracing"],
+          "resources": [{ "label": "SOA-C02 exam guide", "url": "https://aws.amazon.com/certification/certified-sysops-admin-associate/" }, { "label": "AWS Skill Builder", "url": "https://skillbuilder.aws/" }] },
+        { "week": "Week 42", "focus": "Prometheus & Grafana", "hours": "8–10",
+          "tasks": ["Deploy kube-prometheus-stack on your EKS cluster", "Build a Grafana dashboard for the capstone app's key metrics"],
+          "resources": [{ "label": "Prometheus", "url": "https://prometheus.io/docs/" }, { "label": "Grafana docs", "url": "https://grafana.com/docs/" }] },
+        { "week": "Week 43", "focus": "Centralized logging", "hours": "8–10",
+          "tasks": ["Ship container logs via Fluent Bit to OpenSearch or CloudWatch Logs", "Practice log-based troubleshooting on an intentionally broken deploy"],
+          "resources": [{ "label": "AWS OpenSearch docs", "url": "https://docs.aws.amazon.com/opensearch-service/" }] },
+        { "week": "Week 44", "focus": "Incident response", "hours": "8–10",
+          "tasks": ["Write a runbook for your capstone app (common failure modes + remediation)", "Learn SLOs/SLIs/error budgets; define one for the capstone app"],
+          "resources": [{ "label": "Google SRE Book, ch. 4–6", "url": "https://sre.google/sre-book/table-of-contents/" }] },
+        { "week": "Week 45", "focus": "Exam prep", "hours": "8–10",
+          "tasks": ["2 full-length SOA-C02 practice exams", "Review deployment, patching, and troubleshooting scenario questions"],
+          "resources": [{ "label": "Tutorials Dojo SOA-C02", "url": "https://portal.tutorialsdojo.com/ref/sheastech" }] },
+        { "week": "Week 46", "focus": "Certification checkpoint", "hours": "4–6",
+          "tasks": ["Sit the AWS Certified SysOps Administrator – Associate (SOA-C02) exam"],
+          "resources": [{ "label": "AWS exam guide (SOA-C02)", "url": "https://aws.amazon.com/certification/certified-sysops-admin-associate/" }] }
+      ]
+    },
+    {
+      "id": "phase-7",
+      "n": 7,
+      "title": "Security, Compliance & Agile Practice",
+      "weeks": "Weeks 47–48",
+      "subtitle": "Closing the security and collaboration gaps in the job description",
+      "cert": null,
+      "items": [
+        { "week": "Week 47", "focus": "Security & config management", "hours": "8–10",
+          "tasks": ["Enable GuardDuty, Security Hub, and AWS Config with conformance packs", "Set up Ansible for configuration management and patching on a small EC2 fleet — this is where your Phase 0 Linux work pays off directly", "Review least-privilege IAM patterns across the whole capstone project", "Harden a Linux host: SSH policy, firewalld, SELinux enforcing, CIS baseline"],
+          "resources": [{ "label": "AWS Security best practices", "url": "https://docs.aws.amazon.com/security/" }, { "label": "Ansible docs", "url": "https://docs.ansible.com/" }, { "label": "Doc Linux", "url": "https://learnlinuxforwork.com/doc-linux" }] },
+        { "week": "Week 48", "focus": "Agile & collaboration", "hours": "6–8",
+          "tasks": ["Learn Scrum ceremonies and Kanban; set up a Jira or GitHub Projects board", "Write ADRs (architecture decision records) for 2–3 capstone decisions", "Practice a mock design review or code review with a peer or mentor"],
+          "resources": [{ "label": "Scrum Guide", "url": "https://scrumguides.org/" }] }
+      ]
+    },
+    {
+      "id": "phase-8",
+      "n": 8,
+      "title": "Capstone & Professional Certification",
+      "weeks": "Weeks 49–54",
+      "subtitle": "Pull every skill together into a portfolio project, then sit the Professional exam",
+      "cert": "DOP-C02",
+      "items": [
+        { "week": "Weeks 49–50", "focus": "Capstone finalization", "hours": "10–12",
+          "tasks": ["Full stack: Terraform-provisioned VPC → EKS → containerized microservices → CI/CD → monitoring", "Write a polished README with an architecture diagram and a short demo video/GIF", "Publish the repo publicly — this is your interview artifact"],
+          "resources": [{ "label": "Your own repo", "url": "" }] },
+        { "week": "Weeks 51–53", "focus": "DOP-C02 exam prep", "hours": "10–12",
+          "tasks": ["Review all 6 exam domains: SDLC automation, config management/IaC, resilient solutions, monitoring/logging, incident response, security/compliance", "3+ full-length DOP-C02 practice exams; redo any lab tied to a missed question"],
+          "resources": [{ "label": "Tutorials Dojo DOP-C02", "url": "https://portal.tutorialsdojo.com/ref/sheastech" }] },
+        { "week": "Week 54", "focus": "Certification checkpoint", "hours": "6–8",
+          "tasks": ["Sit the AWS Certified DevOps Engineer – Professional (DOP-C02) exam", "Update your resume and LinkedIn with certs plus the capstone project link"],
+          "resources": [{ "label": "AWS exam guide (DOP-C02)", "url": "https://aws.amazon.com/certification/certified-devops-engineer-professional/" }] }
+      ]
+    }
+  ],
+
+  "resources": {
+    "id": "resources",
+    "icon": "book",
+    "title": "Core Resource List",
+    "subtitle": "Primarily free and low-cost resources referenced throughout the plan",
+    "groups": [
+      {
+        "category": "Linux",
+        "items": [
+          { "name": "Learn Linux For Work", "url": "https://www.learnlinuxforwork.com", "desc": "The core Phase 0 curriculum. Work-focused Linux training built for people heading into cloud and DevOps roles." },
+          { "name": "Doc Linux", "url": "https://learnlinuxforwork.com/doc-linux", "desc": "Command documentation and syntax lookups. Keep it open in a second tab during every lab." },
+          { "name": "LinuxCert Guru", "url": "https://linuxcert.guru/", "desc": "Hands-on, performance-based RHCSA mock exams. Your Week 4 checkpoint and recurring pressure test." },
+          { "name": "Kubecraft Linux", "url": "https://www.skool.com/linux/classroom", "desc": "Community classroom for Linux and Kubernetes. Structured lessons plus people to ask when you get stuck — use it from Week 1." },
+          { "name": "Red Hat Interactive Labs", "url": "https://www.redhat.com/en/interactive-labs", "desc": "Browser-based RHEL labs from Red Hat. Free, zero setup, no VM required." },
+          { "name": "Linux Foundation (LFCS)", "url": "https://tidd.ly/4pCL8rI", "desc": "Distro-neutral alternative or complement to RHCSA, plus Kubernetes (CKA/CKAD) tracks." },
+          { "name": "OverTheWire Bandit", "url": "https://overthewire.org/wargames/bandit/", "desc": "Free shell puzzles — a fun way to build command-line reflexes." }
+        ]
+      },
+      {
+        "category": "Hands-on labs",
+        "items": [
+          { "name": "LabEx", "url": "https://tidd.ly/4yFi0UN", "desc": "Guided live-environment labs for Linux, Docker, and Kubernetes." },
+          { "name": "KodeKloud", "url": "https://tidd.ly/4fBRIub", "desc": "Browser-based DevOps labs and playgrounds — Kubernetes, Terraform, Ansible, CI/CD." },
+          { "name": "EKS Workshop", "url": "https://www.eksworkshop.com/", "desc": "Free, thorough, hands-on Amazon EKS labs." },
+          { "name": "AWS CDK Workshop", "url": "https://cdkworkshop.com/", "desc": "Free guided CDK walkthrough in Python or TypeScript." }
+        ]
+      },
+      {
+        "category": "AWS learning",
+        "items": [
+          { "name": "AWS Skill Builder", "url": "https://skillbuilder.aws/", "desc": "AWS's own training platform. Free tier covers most of what this plan needs." },
+          { "name": "Cantrill — learn.cantrill.io", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf", "desc": "Deep, hands-on video courses for SAA-C03, DVA-C02, SOA-C02, and DOP-C02. The single best value for the Professional-level exam." },
+          { "name": "Tutorials Dojo", "url": "https://portal.tutorialsdojo.com/ref/sheastech", "desc": "Practice exams for all 5 AWS certs — roughly $15–$20 each, with high-quality answer explanations." },
+          { "name": "AWS Free Tier", "url": "https://aws.amazon.com/free/", "desc": "Free tier has usage limits — set billing alarms on day one." },
+          { "name": "AWS Whitepapers", "url": "https://aws.amazon.com/whitepapers/", "desc": "Networking, DR, and Well-Architected papers referenced throughout Phase 2." }
+        ]
+      },
+      {
+        "category": "Programming",
+        "items": [
+          { "name": "Scrimba — Learn Python", "url": "https://scrimba.com/learn-python-c03?via=u4481332", "desc": "Interactive, code-as-you-watch Python course. Used in Phase 0 Week 6." },
+          { "name": "Automate the Boring Stuff", "url": "https://automatetheboringstuff.com/", "desc": "Free to read online. Practical Python for sysadmin-style tasks." },
+          { "name": "The Odin Project", "url": "https://www.theodinproject.com/", "desc": "HTML, CSS, and JavaScript from zero. Not required for the RHCSA, but it makes the \"cloud-native application development\" half of the job description far less mysterious." },
+          { "name": "Scrimba — Learn HTML & CSS", "url": "https://scrimba.com/learn-html-and-css-c0p?via=u4481332", "desc": "Interactive front-end fundamentals, same code-as-you-watch format." },
+          { "name": "Pro Git book", "url": "https://git-scm.com/book/en/v2", "desc": "Free to read online. The reference for branching, rebasing, and history rewriting." }
+        ]
+      },
+      {
+        "category": "Tooling & docs",
+        "items": [
+          { "name": "HashiCorp Learn", "url": "https://developer.hashicorp.com/terraform/tutorials", "desc": "Official free Terraform tutorials." },
+          { "name": "checkov", "url": "https://www.checkov.io/", "desc": "Static analysis for Terraform and CloudFormation." },
+          { "name": "Docker docs", "url": "https://docs.docker.com/", "desc": "The official reference, and better than most courses." },
+          { "name": "Kubernetes.io", "url": "https://kubernetes.io/docs/home/", "desc": "Concepts and tasks documentation — your primary K8s source." },
+          { "name": "Helm docs", "url": "https://helm.sh/docs/", "desc": "Charting and templating reference." },
+          { "name": "ArgoCD docs", "url": "https://argo-cd.readthedocs.io/", "desc": "GitOps continuous delivery for Kubernetes." },
+          { "name": "GitHub Actions docs", "url": "https://docs.github.com/en/actions", "desc": "Free tier covers personal projects comfortably." },
+          { "name": "Prometheus", "url": "https://prometheus.io/docs/", "desc": "Metrics collection and alerting." },
+          { "name": "Grafana", "url": "https://grafana.com/docs/", "desc": "Dashboards and visualization." },
+          { "name": "Ansible docs", "url": "https://docs.ansible.com/", "desc": "Configuration management and patching — Phase 7." },
+          { "name": "Google SRE Book", "url": "https://sre.google/sre-book/table-of-contents/", "desc": "Free online. Chapters 4–6 cover SLOs and error budgets." },
+          { "name": "Scrum Guide", "url": "https://scrumguides.org/", "desc": "Free, short, and the actual source of truth for Scrum." }
+        ]
+      },
+      {
+        "category": "Home lab",
+        "items": [
+          { "name": "RHEL 10 Developer Edition", "url": "https://developers.redhat.com/products/rhel/download", "desc": "Free RHEL for up to 16 systems." },
+          { "name": "Red Hat Developer subscription FAQ", "url": "https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux", "desc": "The terms of the no-cost individual developer subscription." },
+          { "name": "Rocky Linux 10", "url": "https://rockylinux.org/", "desc": "The unlimited free RHEL rebuild." },
+          { "name": "Oracle VirtualBox", "url": "https://www.virtualbox.org/", "desc": "Free hypervisor for running extra nodes on a laptop." },
+          { "name": "Proxmox VE", "url": "https://www.proxmox.com/en/", "desc": "The home-lab hypervisor default." },
+          { "name": "OpenNebula", "url": "https://opennebula.io/", "desc": "Full private-cloud platform for multi-node labs." }
+        ]
+      },
+      {
+        "category": "Community",
+        "items": [
+          { "name": "r/devops", "url": "https://www.reddit.com/r/devops/", "desc": "Plus r/aws and r/linuxadmin. Good for unblocking and reality checks." },
+          { "name": "AWS re:Post", "url": "https://repost.aws/", "desc": "AWS's official Q&A community." }
+        ]
+      }
+    ]
+  },
+
+  "costs": {
+    "id": "costs",
+    "icon": "wallet",
+    "title": "Estimated Costs",
+    "subtitle": "Exams, practice tests, hardware, and AWS usage across the 54 weeks",
+    "columns": ["Item", "Estimate"],
+    "rows": [
+      ["<a href=\"https://www.redhat.com/en/services/certification/rhcsa\" target=\"_blank\" rel=\"noopener\">RHCSA exam (EX200)</a>", "~$500 (optional but strongly recommended)"],
+      ["5 AWS exam fees (CLF, SAA, DVA, SOA, DOP)", "$850 total ($100 + $150 + $150 + $150 + $300)"],
+      ["RHCSA mock exams — <a href=\"https://linuxcert.guru/\" target=\"_blank\" rel=\"noopener\">linuxcert.guru</a>", "Low-cost; check the site for current pricing"],
+      ["AWS practice exam bundles — <a href=\"https://portal.tutorialsdojo.com/ref/sheastech\" target=\"_blank\" rel=\"noopener\">Tutorials Dojo</a> x5", "~$75–$100 total"],
+      ["<a href=\"https://aws.amazon.com/free/\" target=\"_blank\" rel=\"noopener\">AWS usage beyond free tier</a> (labs, EKS cluster hours)", "~$15–$30/month during Phases 3–8"],
+      ["<a href=\"https://developers.redhat.com/products/rhel/download\" target=\"_blank\" rel=\"noopener\">RHEL 10 Developer Edition</a> (16 systems) or <a href=\"https://rockylinux.org/\" target=\"_blank\" rel=\"noopener\">Rocky Linux 10</a>", "$0"],
+      ["Used lab laptop — <a href=\"https://www.ebay.com/str/renew4me\" target=\"_blank\" rel=\"noopener\">Renew4me</a> / <a href=\"https://www.ebay.com/str/nurtech\" target=\"_blank\" rel=\"noopener\">NurTech</a>", "~$100–$200 one-time"],
+      ["Used home-lab server + <a href=\"https://www.proxmox.com/en/\" target=\"_blank\" rel=\"noopener\">Proxmox</a> (optional, Phase 3+)", "~$200–$500 one-time"],
+      ["AWS video training — <a href=\"https://learn.cantrill.io?affcode=212820_n7shpfjf\" target=\"_blank\" rel=\"noopener\">learn.cantrill.io</a>", "~$40–$70 per course, optional"],
+      ["Optional books (<a href=\"https://www.terraformupandrunning.com/\" target=\"_blank\" rel=\"noopener\">Terraform Up & Running</a>, etc.)", "~$30–$50 each, optional"]
+    ],
+    "note": {
+      "kind": "danger",
+      "title": "The #1 cause of surprise AWS bills",
+      "text": "Always shut down or destroy EKS clusters, RDS instances, and NAT gateways when you're not actively labbing. <code>terraform destroy</code> is your friend. Set a budget alarm in Week 7 and check Cost Explorer every Friday."
+    }
+  },
+
+  "tips": {
+    "id": "tips",
+    "icon": "target",
+    "title": "Tips for Staying On Track",
+    "subtitle": "The habits that separate a finished plan from an abandoned one",
+    "items": [
+      { "head": "Build in public.", "text": "Commit to the capstone repo weekly, even in small increments. It becomes your interview talking point and a public record of momentum." },
+      { "head": "Keep a break/fix log.", "text": "Every error you hit and how you solved it. Start it in Week 1 alongside your Linux labs. This is gold for interviews and for your own review." },
+      { "head": "Lab it, don't read it.", "text": "If you haven't typed it on a live system, you don't know it. Pair every reading session with a hands-on lab the same day — Red Hat Interactive Labs, LabEx, and KodeKloud all run in the browser." },
+      { "head": "Pressure-test with mocks.", "text": "Timed, hands-on mock exams expose the gaps that untimed practice hides. Redo any lab tied to a missed objective." },
+      { "head": "Don't chase 100% comprehension.", "text": "Associate-level material sticks better after professional-level review. Flag it, keep moving, revisit during the review week before each exam." },
+      { "head": "Find an accountability partner.", "text": "Especially for the DOP-C02 push in Weeks 51–54 — it's the hardest exam in the plan." },
+      { "head": "Buy the voucher early.", "text": "Treat every exam voucher purchase as a deadline. Buy it 2–3 weeks out to force commitment." },
+      { "head": "Revisit the fundamentals.", "text": "When a Kubernetes or AWS problem stops making sense, drop down a layer — it's usually Linux." }
+    ]
+  }
+}

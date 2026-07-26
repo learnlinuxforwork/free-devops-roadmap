@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate roadmap.json
+        run: python3 -c "import json;json.load(open('data/roadmap.json'));print('roadmap.json is valid')"
+      - name: Fail if Windows or Azure content sneaks in
+        run: |
+          # README.md documents the scope policy itself, so it is exempt.
+          if grep -rniE '\b(microsoft|azure|windows|powershell|wsl2?|rufus)\b' \
+              --include='*.html' --include='*.css' --include='*.js' --include='*.json' \
+              --exclude-dir='.git' . ; then
+            echo "::error::Excluded platform content found. This repo is Linux-only."
+            exit 1
+          fi
+          echo "Clean."
+
+  deploy:
+    needs: validate
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
