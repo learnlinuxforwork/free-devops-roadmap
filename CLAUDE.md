@@ -149,10 +149,12 @@ deploys to GitHub Pages. `CNAME` pins the custom domain; do not delete it.
 - [x] Settings → Pages → Source set to **GitHub Actions**.
 - [x] DNS: `CNAME` record `free` → `learnlinuxforwork.github.io` created and live.
 - [x] Enforce HTTPS turned on in Settings → Pages.
-- [x] Lab guide pages (`lab/phase-0-week-*.html`) built for Phase 0, Weeks 1-6.
-- [ ] Lab guide pages for Phases 1-8 (Weeks 7-54) — see "Lab guide pages" above for the
-      pattern to follow. Continue phase by phase; each phase's weeks live in
-      `data/roadmap.json` under `phases[].items[]`.
+- [x] Lab guide pages built for all 9 phases, all 54 weeks (51 pages — Phase 8 groups
+      Weeks 49-50 and 51-53 into single pages, matching how those items are grouped in
+      `data/roadmap.json`). Every week has a `"lab"` field and a `.week__lab` pill.
+      Prev/next nav chains unbroken from `phase-0-week-1.html` to `phase-8-week-54.html`.
+      Verified: JSON valid, scope check clean, zero broken internal links across all 51
+      pages, deployed live.
 
 ## Style
 
