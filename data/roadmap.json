@@ -744,8 +744,9 @@
       {
         "category": "Hands-on labs",
         "items": [
-          { "name": "LabEx", "url": "https://tidd.ly/4yFi0UN", "desc": "Guided live-environment labs for Linux, Docker, and Kubernetes." },
-          { "name": "KodeKloud", "url": "https://tidd.ly/4fBRIub", "desc": "Browser-based DevOps labs and playgrounds — Kubernetes, Terraform, Ansible, CI/CD." },
+          { "name": "Learn Linux for Work Hands-On Labs (Ubuntu/Rocky Linux)", "url": "https://learnlinuxforwork.com/portal/lab", "desc": "Guided hands-on labs on real Ubuntu and Rocky Linux systems, built to match the Phase 0 curriculum.", "badge": "Requires Login" },
+          { "name": "LabEx", "url": "https://tidd.ly/4yFi0UN", "desc": "Guided live-environment labs for Linux, Docker, and Kubernetes.", "badge": "Requires Login" },
+          { "name": "KodeKloud", "url": "https://tidd.ly/4fBRIub", "desc": "Browser-based DevOps labs and playgrounds — Kubernetes, Terraform, Ansible, CI/CD.", "badge": "Requires Login" },
           { "name": "EKS Workshop", "url": "https://www.eksworkshop.com/", "desc": "Free, thorough, hands-on Amazon EKS labs." },
           { "name": "AWS CDK Workshop", "url": "https://cdkworkshop.com/", "desc": "Free guided CDK walkthrough in Python or TypeScript." }
         ]
