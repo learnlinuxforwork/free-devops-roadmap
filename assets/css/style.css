@@ -697,6 +697,14 @@ pre.codeblock code { background: none; border: 0; padding: 0; font-size: inherit
   .stat__v { font-size: 21px; }
   .hero__cta { gap: 8px; }
   .doc-hero__nav { flex-wrap: wrap; }
+  .phase__head { gap: 10px; padding: 14px; }
+  .phase__badge { width: 34px; height: 34px; border-radius: 9px; }
+  .phase__badge b { font-size: 14.5px; }
+  .phase__ring { display: none; }
+  .phase__right { gap: 8px; }
+  .phase__title { font-size: 14.5px; }
+  .phase__sub { font-size: 11.5px; }
+  .week__right { gap: 8px; }
 }
 
 @media print {
