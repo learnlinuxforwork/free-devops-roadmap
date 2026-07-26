@@ -550,7 +550,7 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); text-decoratio
 .res__desc { font-size: 12.8px; color: var(--text-2); margin-top: 3px; }
 
 /* --------------------------------------------------------- lab pages --- */
-.doc-shell { max-width: min(900px, 94vw); margin: 0; padding: 30px 28px 96px; }
+.doc-shell { max-width: min(900px, 94vw); margin: 0 auto; padding: 30px 28px 96px; }
 .doc-back {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 13px; font-weight: 600; color: var(--text-2);
