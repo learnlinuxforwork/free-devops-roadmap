@@ -7,7 +7,7 @@
 **A free, open-source, 54-week self-study roadmap from `ls -la` to**
 **AWS Certified DevOps Engineer – Professional.**
 
-[**free.learnlinuxforwork.com**](https://free.learnlinuxforwork.com)
+[**free.learnlinuxforwork.com**](https://free.learnlinuxforwork.com) · [CHANGELOG](CHANGELOG.md)
 
 [![License: AGPL v3](https://img.shields.io/badge/license-AGPL--3.0--or--later-0aa3ad?style=flat-square)](https://learnlinuxforwork.com/license)
 [![Live site](https://img.shields.io/badge/live-free.learnlinuxforwork.com-0aa3ad?style=flat-square)](https://free.learnlinuxforwork.com)
