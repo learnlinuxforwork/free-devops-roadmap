@@ -10,7 +10,7 @@
   --cyan-bright: #00e5ee;
   --radius: 12px;
   --radius-sm: 8px;
-  --maxw: 1320px;
+  --maxw: min(1520px, 96vw);
   --sidebar-w: 268px;
   --header-h: 62px;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
@@ -176,12 +176,13 @@ li { margin-bottom: 5px; }
   padding: 4px;
 }
 .brand__mark--logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.brand__text { min-width: 0; }
+.brand__text { min-width: 0; display: block; }
 .brand__title {
+  display: block;
   font-size: 14.5px; font-weight: 700; color: var(--text);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.brand__sub { font-size: 11px; color: var(--text-3); line-height: 1.2; }
+.brand__sub { display: block; font-size: 11px; color: var(--text-3); line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .header__spacer { flex: 1; }
 
@@ -240,7 +241,7 @@ li { margin-bottom: 5px; }
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   max-width: var(--maxw);
-  margin: 0 auto;
+  margin: 0;
   gap: 0;
 }
 
@@ -303,7 +304,7 @@ li { margin-bottom: 5px; }
   font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--cyan-bright); margin-bottom: 12px;
 }
-.hero h1 { font-size: 34px; letter-spacing: -0.025em; margin-bottom: 10px; }
+.hero h1 { font-size: clamp(28px, 2.5vw, 40px); letter-spacing: -0.025em; margin-bottom: 10px; }
 .hero__lead { font-size: 15.5px; color: #c9d4d8; max-width: 62ch; margin-bottom: 22px; }
 .hero__stats { display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 24px; }
 .stat__v { font-size: 25px; font-weight: 800; color: var(--cyan-bright); line-height: 1.1; }
@@ -326,7 +327,7 @@ li { margin-bottom: 5px; }
   content: ""; width: 22px; height: 3px; border-radius: 2px;
   background: linear-gradient(90deg, var(--accent-2), var(--accent));
 }
-.section h2 { font-size: 25px; letter-spacing: -0.02em; margin-bottom: 5px; }
+.section h2 { font-size: clamp(22px, 1.6vw, 28px); letter-spacing: -0.02em; margin-bottom: 5px; }
 .section__sub { color: var(--text-2); font-size: 14.5px; }
 
 .prose { max-width: 78ch; color: var(--text-2); }
@@ -549,7 +550,7 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); text-decoratio
 .res__desc { font-size: 12.8px; color: var(--text-2); margin-top: 3px; }
 
 /* --------------------------------------------------------- lab pages --- */
-.doc-shell { max-width: 860px; margin: 0 auto; padding: 30px 28px 96px; }
+.doc-shell { max-width: min(900px, 94vw); margin: 0; padding: 30px 28px 96px; }
 .doc-back {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 13px; font-weight: 600; color: var(--text-2);
@@ -564,7 +565,7 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); text-decoratio
   color: #fff; box-shadow: var(--shadow-lg);
 }
 .doc-hero__kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan-bright); margin-bottom: 10px; }
-.doc-hero h1 { font-size: 26px; letter-spacing: -0.02em; margin-bottom: 8px; color: #fff; }
+.doc-hero h1 { font-size: clamp(24px, 1.8vw, 30px); letter-spacing: -0.02em; margin-bottom: 8px; color: #fff; }
 .doc-hero__meta { font-size: 13.5px; color: #c9d4d8; }
 .doc-hero__meta span + span::before { content: "·"; margin: 0 8px; opacity: 0.6; }
 .doc-hero__nav { display: flex; gap: 10px; margin-top: 18px; }
@@ -618,7 +619,7 @@ pre.codeblock code { background: none; border: 0; padding: 0; font-size: inherit
   padding: 28px 20px 46px;
   color: var(--text-3); font-size: 13px;
 }
-.footer__inner { max-width: var(--maxw); margin: 0 auto; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; }
+.footer__inner { max-width: var(--maxw); margin: 0; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; }
 .footer a { color: var(--text-2); }
 .footer__links { display: flex; flex-wrap: wrap; gap: 16px; }
 
@@ -656,6 +657,22 @@ pre.codeblock code { background: none; border: 0; padding: 0; font-size: inherit
   .brand__sub { display: none; }
   .doc-hero { padding: 22px 18px; }
   .doc-hero h1 { font-size: 22px; }
+}
+
+/* Below this, header icons alone (menu/mark/reset/theme/github) approach the
+   viewport width — drop the progress readout and tighten spacing so the
+   brand mark and title never get squeezed to zero width. */
+@media (max-width: 480px) {
+  .header { padding: 0 12px; gap: 6px; }
+  .header__progress { display: none; }
+  .btn { padding: 6px 10px; }
+  .btn--icon { padding: 6px; }
+  .brand__mark { width: 28px; height: 28px; }
+  .brand__title { font-size: 13.5px; }
+  .hero__stats { gap: 14px 22px; }
+  .stat__v { font-size: 21px; }
+  .hero__cta { gap: 8px; }
+  .doc-hero__nav { flex-wrap: wrap; }
 }
 
 @media print {
