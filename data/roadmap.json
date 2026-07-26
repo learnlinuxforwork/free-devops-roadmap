@@ -761,12 +761,12 @@
       {
         "category": "Linux",
         "items": [
-          { "name": "Learn Linux For Work", "url": "https://www.learnlinuxforwork.com", "desc": "The core Phase 0 curriculum. Work-focused Linux training built for people heading into cloud and DevOps roles." },
-          { "name": "Doc Linux", "url": "https://learnlinuxforwork.com/doc-linux", "desc": "Command documentation and syntax lookups. Keep it open in a second tab during every lab." },
-          { "name": "LinuxCert Guru", "url": "https://linuxcert.guru/", "desc": "Hands-on, performance-based RHCSA mock exams. Your Week 4 checkpoint and recurring pressure test." },
-          { "name": "Kubecraft Linux", "url": "https://www.skool.com/linux/classroom", "desc": "Community classroom for Linux and Kubernetes. Structured lessons plus people to ask when you get stuck — use it from Week 1." },
-          { "name": "Red Hat Interactive Labs", "url": "https://www.redhat.com/en/interactive-labs", "desc": "Browser-based RHEL labs from Red Hat. Free, zero setup, no VM required." },
-          { "name": "Linux Foundation (LFCS)", "url": "https://tidd.ly/4pCL8rI", "desc": "Distro-neutral alternative or complement to RHCSA, plus Kubernetes (CKA/CKAD) tracks." },
+          { "name": "Learn Linux For Work", "url": "https://www.learnlinuxforwork.com", "desc": "The core Phase 0 curriculum. Work-focused Linux training built for people heading into cloud and DevOps roles.", "badge": "Requires Login" },
+          { "name": "Doc Linux", "url": "https://learnlinuxforwork.com/doc-linux", "desc": "Command documentation and syntax lookups. Keep it open in a second tab during every lab.", "badge": "Requires Login" },
+          { "name": "LinuxCert Guru", "url": "https://linuxcert.guru/", "desc": "Hands-on, performance-based RHCSA mock exams. Your Week 4 checkpoint and recurring pressure test.", "badge": "Requires Login" },
+          { "name": "Kubecraft Linux", "url": "https://www.skool.com/linux/classroom", "desc": "Community classroom for Linux and Kubernetes. Structured lessons plus people to ask when you get stuck — use it from Week 1.", "badge": "Requires Login" },
+          { "name": "Red Hat Interactive Labs", "url": "https://www.redhat.com/en/interactive-labs", "desc": "Browser-based RHEL labs from Red Hat. Free, zero setup, no VM required.", "badge": "Requires Login" },
+          { "name": "Linux Foundation (LFCS)", "url": "https://tidd.ly/4pCL8rI", "desc": "Distro-neutral alternative or complement to RHCSA, plus Kubernetes (CKA/CKAD) tracks.", "badge": "Requires Login" },
           { "name": "OverTheWire Bandit", "url": "https://overthewire.org/wargames/bandit/", "desc": "Free shell puzzles — a fun way to build command-line reflexes." }
         ]
       },
@@ -776,63 +776,63 @@
           { "name": "Learn Linux for Work Live Labs", "url": "https://learnlinuxforwork.com/portal/lab", "desc": "Guided hands-on labs on real Ubuntu and Rocky Linux systems, built to match the Phase 0 curriculum.", "badge": "Requires Login" },
           { "name": "LabEx", "url": "https://tidd.ly/4yFi0UN", "desc": "Guided live-environment labs for Linux, Docker, and Kubernetes.", "badge": "Requires Login" },
           { "name": "KodeKloud", "url": "https://tidd.ly/4fBRIub", "desc": "Browser-based DevOps labs and playgrounds — Kubernetes, Terraform, Ansible, CI/CD.", "badge": "Requires Login" },
-          { "name": "EKS Workshop", "url": "https://www.eksworkshop.com/", "desc": "Free, thorough, hands-on Amazon EKS labs." },
-          { "name": "AWS CDK Workshop", "url": "https://cdkworkshop.com/", "desc": "Free guided CDK walkthrough in Python or TypeScript." }
+          { "name": "EKS Workshop", "url": "https://www.eksworkshop.com/", "desc": "Free, thorough, hands-on Amazon EKS labs.", "badge": "Requires Login" },
+          { "name": "AWS CDK Workshop", "url": "https://cdkworkshop.com/", "desc": "Free guided CDK walkthrough in Python or TypeScript.", "badge": "Requires Login" }
         ]
       },
       {
         "category": "AWS learning",
         "items": [
-          { "name": "AWS Skill Builder", "url": "https://skillbuilder.aws/", "desc": "AWS's own training platform. Free tier covers most of what this plan needs." },
-          { "name": "Cantrill — learn.cantrill.io", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf", "desc": "Deep, hands-on video courses for SAA-C03, DVA-C02, SOA-C02, and DOP-C02. The single best value for the Professional-level exam." },
-          { "name": "Tutorials Dojo", "url": "https://portal.tutorialsdojo.com/ref/sheastech", "desc": "Practice exams for all 5 AWS certs — roughly $15–$20 each, with high-quality answer explanations." },
-          { "name": "AWS Free Tier", "url": "https://aws.amazon.com/free/", "desc": "Free tier has usage limits — set billing alarms on day one." },
-          { "name": "AWS Whitepapers", "url": "https://aws.amazon.com/whitepapers/", "desc": "Networking, DR, and Well-Architected papers referenced throughout Phase 2." }
+          { "name": "AWS Skill Builder", "url": "https://skillbuilder.aws/", "desc": "AWS's own training platform. Free tier covers most of what this plan needs.", "badge": "Requires Login" },
+          { "name": "Cantrill — learn.cantrill.io", "url": "https://learn.cantrill.io?affcode=212820_n7shpfjf", "desc": "Deep, hands-on video courses for SAA-C03, DVA-C02, SOA-C02, and DOP-C02. The single best value for the Professional-level exam.", "badge": "Requires Login" },
+          { "name": "Tutorials Dojo", "url": "https://portal.tutorialsdojo.com/ref/sheastech", "desc": "Practice exams for all 5 AWS certs — roughly $15–$20 each, with high-quality answer explanations.", "badge": "Requires Login" },
+          { "name": "AWS Free Tier", "url": "https://aws.amazon.com/free/", "desc": "Free tier has usage limits — set billing alarms on day one.", "badge": "Requires Login" },
+          { "name": "AWS Whitepapers", "url": "https://aws.amazon.com/whitepapers/", "desc": "Networking, DR, and Well-Architected papers referenced throughout Phase 2.", "badge": "Requires Login" }
         ]
       },
       {
         "category": "Programming",
         "items": [
-          { "name": "Scrimba — Learn Python", "url": "https://scrimba.com/learn-python-c03?via=u4481332", "desc": "Interactive, code-as-you-watch Python course. Used in Phase 0 Week 6." },
-          { "name": "Automate the Boring Stuff", "url": "https://automatetheboringstuff.com/", "desc": "Free to read online. Practical Python for sysadmin-style tasks." },
-          { "name": "The Odin Project", "url": "https://www.theodinproject.com/", "desc": "HTML, CSS, and JavaScript from zero. Not required for the RHCSA, but it makes the \"cloud-native application development\" half of the job description far less mysterious." },
-          { "name": "Scrimba — Learn HTML & CSS", "url": "https://scrimba.com/learn-html-and-css-c0p?via=u4481332", "desc": "Interactive front-end fundamentals, same code-as-you-watch format." },
-          { "name": "Pro Git book", "url": "https://git-scm.com/book/en/v2", "desc": "Free to read online. The reference for branching, rebasing, and history rewriting." }
+          { "name": "Scrimba — Learn Python", "url": "https://scrimba.com/learn-python-c03?via=u4481332", "desc": "Interactive, code-as-you-watch Python course. Used in Phase 0 Week 6.", "badge": "Requires Login" },
+          { "name": "Automate the Boring Stuff", "url": "https://automatetheboringstuff.com/", "desc": "Free to read online. Practical Python for sysadmin-style tasks.", "badge": "Requires Login" },
+          { "name": "The Odin Project", "url": "https://www.theodinproject.com/", "desc": "HTML, CSS, and JavaScript from zero. Not required for the RHCSA, but it makes the \"cloud-native application development\" half of the job description far less mysterious.", "badge": "Requires Login" },
+          { "name": "Scrimba — Learn HTML & CSS", "url": "https://scrimba.com/learn-html-and-css-c0p?via=u4481332", "desc": "Interactive front-end fundamentals, same code-as-you-watch format.", "badge": "Requires Login" },
+          { "name": "Pro Git book", "url": "https://git-scm.com/book/en/v2", "desc": "Free to read online. The reference for branching, rebasing, and history rewriting.", "badge": "Requires Login" }
         ]
       },
       {
         "category": "Tooling & docs",
         "items": [
-          { "name": "HashiCorp Learn", "url": "https://developer.hashicorp.com/terraform/tutorials", "desc": "Official free Terraform tutorials." },
-          { "name": "checkov", "url": "https://www.checkov.io/", "desc": "Static analysis for Terraform and CloudFormation." },
-          { "name": "Docker docs", "url": "https://docs.docker.com/", "desc": "The official reference, and better than most courses." },
-          { "name": "Kubernetes.io", "url": "https://kubernetes.io/docs/home/", "desc": "Concepts and tasks documentation — your primary K8s source." },
-          { "name": "Helm docs", "url": "https://helm.sh/docs/", "desc": "Charting and templating reference." },
-          { "name": "ArgoCD docs", "url": "https://argo-cd.readthedocs.io/", "desc": "GitOps continuous delivery for Kubernetes." },
-          { "name": "GitHub Actions docs", "url": "https://docs.github.com/en/actions", "desc": "Free tier covers personal projects comfortably." },
-          { "name": "Prometheus", "url": "https://prometheus.io/docs/", "desc": "Metrics collection and alerting." },
-          { "name": "Grafana", "url": "https://grafana.com/docs/", "desc": "Dashboards and visualization." },
-          { "name": "Ansible docs", "url": "https://docs.ansible.com/", "desc": "Configuration management and patching — Phase 7." },
-          { "name": "Google SRE Book", "url": "https://sre.google/sre-book/table-of-contents/", "desc": "Free online. Chapters 4–6 cover SLOs and error budgets." },
-          { "name": "Scrum Guide", "url": "https://scrumguides.org/", "desc": "Free, short, and the actual source of truth for Scrum." }
+          { "name": "HashiCorp Learn", "url": "https://developer.hashicorp.com/terraform/tutorials", "desc": "Official free Terraform tutorials.", "badge": "Requires Login" },
+          { "name": "checkov", "url": "https://www.checkov.io/", "desc": "Static analysis for Terraform and CloudFormation.", "badge": "Requires Login" },
+          { "name": "Docker docs", "url": "https://docs.docker.com/", "desc": "The official reference, and better than most courses.", "badge": "Requires Login" },
+          { "name": "Kubernetes.io", "url": "https://kubernetes.io/docs/home/", "desc": "Concepts and tasks documentation — your primary K8s source.", "badge": "Requires Login" },
+          { "name": "Helm docs", "url": "https://helm.sh/docs/", "desc": "Charting and templating reference.", "badge": "Requires Login" },
+          { "name": "ArgoCD docs", "url": "https://argo-cd.readthedocs.io/", "desc": "GitOps continuous delivery for Kubernetes.", "badge": "Requires Login" },
+          { "name": "GitHub Actions docs", "url": "https://docs.github.com/en/actions", "desc": "Free tier covers personal projects comfortably.", "badge": "Requires Login" },
+          { "name": "Prometheus", "url": "https://prometheus.io/docs/", "desc": "Metrics collection and alerting.", "badge": "Requires Login" },
+          { "name": "Grafana", "url": "https://grafana.com/docs/", "desc": "Dashboards and visualization.", "badge": "Requires Login" },
+          { "name": "Ansible docs", "url": "https://docs.ansible.com/", "desc": "Configuration management and patching — Phase 7.", "badge": "Requires Login" },
+          { "name": "Google SRE Book", "url": "https://sre.google/sre-book/table-of-contents/", "desc": "Free online. Chapters 4–6 cover SLOs and error budgets.", "badge": "Requires Login" },
+          { "name": "Scrum Guide", "url": "https://scrumguides.org/", "desc": "Free, short, and the actual source of truth for Scrum.", "badge": "Requires Login" }
         ]
       },
       {
         "category": "Home lab",
         "items": [
-          { "name": "RHEL 10 Developer Edition", "url": "https://developers.redhat.com/products/rhel/download", "desc": "Free RHEL for up to 16 systems." },
-          { "name": "Red Hat Developer subscription FAQ", "url": "https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux", "desc": "The terms of the no-cost individual developer subscription." },
-          { "name": "Rocky Linux 10", "url": "https://rockylinux.org/", "desc": "The unlimited free RHEL rebuild." },
-          { "name": "Oracle VirtualBox", "url": "https://www.virtualbox.org/", "desc": "Free hypervisor for running extra nodes on a laptop." },
-          { "name": "Proxmox VE", "url": "https://www.proxmox.com/en/", "desc": "The home-lab hypervisor default." },
-          { "name": "OpenNebula", "url": "https://opennebula.io/", "desc": "Full private-cloud platform for multi-node labs." }
+          { "name": "RHEL 10 Developer Edition", "url": "https://developers.redhat.com/products/rhel/download", "desc": "Free RHEL for up to 16 systems.", "badge": "Requires Login" },
+          { "name": "Red Hat Developer subscription FAQ", "url": "https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux", "desc": "The terms of the no-cost individual developer subscription.", "badge": "Requires Login" },
+          { "name": "Rocky Linux 10", "url": "https://rockylinux.org/", "desc": "The unlimited free RHEL rebuild.", "badge": "Requires Login" },
+          { "name": "Oracle VirtualBox", "url": "https://www.virtualbox.org/", "desc": "Free hypervisor for running extra nodes on a laptop.", "badge": "Requires Login" },
+          { "name": "Proxmox VE", "url": "https://www.proxmox.com/en/", "desc": "The home-lab hypervisor default.", "badge": "Requires Login" },
+          { "name": "OpenNebula", "url": "https://opennebula.io/", "desc": "Full private-cloud platform for multi-node labs.", "badge": "Requires Login" }
         ]
       },
       {
         "category": "Community",
         "items": [
-          { "name": "r/devops", "url": "https://www.reddit.com/r/devops/", "desc": "Plus r/aws and r/linuxadmin. Good for unblocking and reality checks." },
-          { "name": "AWS re:Post", "url": "https://repost.aws/", "desc": "AWS's official Q&A community." },
+          { "name": "r/devops", "url": "https://www.reddit.com/r/devops/", "desc": "Plus r/aws and r/linuxadmin. Good for unblocking and reality checks.", "badge": "Requires Login" },
+          { "name": "AWS re:Post", "url": "https://repost.aws/", "desc": "AWS's official Q&A community.", "badge": "Requires Login" },
           { "name": "The Hood", "url": "https://learnlinuxforwork.com/the-hood", "desc": "Learn Linux For Work's community space to ask questions and connect with other learners.", "badge": "Requires Login" }
         ]
       }
