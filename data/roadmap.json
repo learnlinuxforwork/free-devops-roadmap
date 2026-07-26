@@ -700,10 +700,10 @@
       "subtitle": "Closing the security and collaboration gaps in the job description",
       "cert": null,
       "items": [
-        { "week": "Week 47", "focus": "Security & config management", "hours": "8–10",
+        { "week": "Week 47", "focus": "Security & config management", "hours": "8–10", "lab": "lab/phase-7-week-47.html",
           "tasks": ["Enable GuardDuty, Security Hub, and AWS Config with conformance packs", "Set up Ansible for configuration management and patching on a small EC2 fleet — this is where your Phase 0 Linux work pays off directly", "Review least-privilege IAM patterns across the whole capstone project", "Harden a Linux host: SSH policy, firewalld, SELinux enforcing, CIS baseline"],
           "resources": [{ "label": "AWS Security best practices", "url": "https://docs.aws.amazon.com/security/" }, { "label": "Ansible docs", "url": "https://docs.ansible.com/" }, { "label": "Doc Linux", "url": "https://learnlinuxforwork.com/doc-linux" }] },
-        { "week": "Week 48", "focus": "Agile & collaboration", "hours": "6–8",
+        { "week": "Week 48", "focus": "Agile & collaboration", "hours": "6–8", "lab": "lab/phase-7-week-48.html",
           "tasks": ["Learn Scrum ceremonies and Kanban; set up a Jira or GitHub Projects board", "Write ADRs (architecture decision records) for 2–3 capstone decisions", "Practice a mock design review or code review with a peer or mentor"],
           "resources": [{ "label": "Scrum Guide", "url": "https://scrumguides.org/" }] }
       ]
@@ -716,13 +716,13 @@
       "subtitle": "Pull every skill together into a portfolio project, then sit the Professional exam",
       "cert": "DOP-C02",
       "items": [
-        { "week": "Weeks 49–50", "focus": "Capstone finalization", "hours": "10–12",
+        { "week": "Weeks 49–50", "focus": "Capstone finalization", "hours": "10–12", "lab": "lab/phase-8-weeks-49-50.html",
           "tasks": ["Full stack: Terraform-provisioned VPC → EKS → containerized microservices → CI/CD → monitoring", "Write a polished README with an architecture diagram and a short demo video/GIF", "Publish the repo publicly — this is your interview artifact"],
           "resources": [{ "label": "Your own repo", "url": "" }] },
-        { "week": "Weeks 51–53", "focus": "DOP-C02 exam prep", "hours": "10–12",
+        { "week": "Weeks 51–53", "focus": "DOP-C02 exam prep", "hours": "10–12", "lab": "lab/phase-8-weeks-51-53.html",
           "tasks": ["Review all 6 exam domains: SDLC automation, config management/IaC, resilient solutions, monitoring/logging, incident response, security/compliance", "3+ full-length DOP-C02 practice exams; redo any lab tied to a missed question"],
           "resources": [{ "label": "Tutorials Dojo DOP-C02", "url": "https://portal.tutorialsdojo.com/ref/sheastech" }] },
-        { "week": "Week 54", "focus": "Certification checkpoint", "hours": "6–8",
+        { "week": "Week 54", "focus": "Certification checkpoint", "hours": "6–8", "lab": "lab/phase-8-week-54.html",
           "tasks": ["Sit the AWS Certified DevOps Engineer – Professional (DOP-C02) exam", "Update your resume and LinkedIn with certs plus the capstone project link"],
           "resources": [{ "label": "AWS exam guide (DOP-C02)", "url": "https://aws.amazon.com/certification/certified-devops-engineer-professional/" }] }
       ]

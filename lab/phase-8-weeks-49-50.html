@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weeks 49-50: Capstone finalization — Free DevOps Roadmap</title>
+<meta name="description" content="Weeks 49-50 lab guide: verifying the full capstone stack end to end, writing a polished README with an architecture diagram and demo, and safely publishing the repo publicly.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-8-weeks-49-50.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark brand__mark--logo"><img src="../assets/img/ST-Brain-Logo.png" alt="Shea's Tech" width="24" height="24"></span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 8 · Capstone &amp; Professional Certification</div>
+    <h1>Weeks 49–50: Capstone finalization</h1>
+    <div class="doc-hero__meta"><span>10–12 hrs</span><span>Weeks 49–54</span><span>DOP-C02 track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-7-week-48.html">&larr; Week 48</a>
+      <a class="btn" href="phase-8-weeks-51-53.html">Weeks 51-53 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Full stack: Terraform-provisioned VPC → EKS → containerized microservices → CI/CD → monitoring</h2>
+      <div class="prose">
+        <p>This is every phase of the roadmap operating as one system, not a checklist review. Walk the full chain end to end and fix whatever's drifted: Terraform apply from a clean checkout, EKS healthy, the GitOps pipeline deploying on push, dashboards showing real traffic, alarms wired to something that actually notifies you.</p>
+      </div>
+      <div class="codeblock__label">A single end-to-end verification pass</div>
+      <pre class="codeblock"><code>cd infra &amp;&amp; terraform init &amp;&amp; terraform plan     # should show zero unexpected drift
+kubectl get pods -n roadmap -o wide
+kubectl get hpa,pdb -n roadmap
+curl -s https://api.roadmap.&lt;yourdomain&gt;/healthz
+# push a trivial commit and time how long it takes to reach production automatically
+git commit --allow-empty -m &quot;chore: verify pipeline&quot; &amp;&amp; git push</code></pre>
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>If anything in this chain requires a manual step you'd forget under pressure, fix it now — Phase 8 is not the week to discover a gap in the automation.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>Write a polished README with an architecture diagram and a short demo video/GIF</h2>
+      <div class="codeblock__label">A README structure that reads well to a hiring manager skimming for 90 seconds</div>
+      <pre class="codeblock"><code># Capstone: [Project Name]
+
+One-sentence description of what it does and for whom.
+
+![architecture diagram](docs/architecture.svg)
+
+## Highlights
+- Multi-AZ, auto-scaled infrastructure provisioned entirely via Terraform
+- GitOps deployment to EKS via ArgoCD -- push to main, live in under 5 minutes
+- Full observability: Prometheus/Grafana dashboards, defined SLOs, incident runbook
+
+## Demo
+![demo](docs/demo.gif)
+
+## Tech stack
+AWS (EKS, RDS, VPC, ALB) · Terraform · Docker · Kubernetes · Helm · ArgoCD · GitHub Actions · Prometheus/Grafana
+
+## Run it yourself
+See docs/setup.md</code></pre>
+      <div class="codeblock__label">Record a quick terminal demo GIF</div>
+      <pre class="codeblock"><code># asciinema is a lightweight option for a terminal walkthrough
+asciinema rec demo.cast
+# ... narrate the deploy-to-live-traffic flow ...
+agg demo.cast docs/demo.gif</code></pre>
+      <div class="callout callout--success">
+        <div class="callout__title">Checkpoint</div>
+        <p>Have someone outside this roadmap — ideally non-technical — read only the README and tell you back what the project does. If they can't, the first paragraph needs another pass.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">3</span>Publish the repo publicly — this is your interview artifact</h2>
+      <div class="codeblock__label">Final pre-publish checklist</div>
+      <pre class="codeblock"><code>grep -rniE &#x27;password|secret|api[_-]?key&#x27; --include=&#x27;*.tf&#x27; --include=&#x27;*.yaml&#x27; . \
+  | grep -v &#x27;variable\|description&#x27;   # scan for anything that looks like a leaked credential
+
+cat .gitignore   # confirm terraform.tfstate, .env, *.pem are all excluded
+
+git log --all --full-history -- &#x27;*.pem&#x27; &#x27;*.env&#x27;   # confirm none were EVER committed, even in old commits</code></pre>
+      <div class="codeblock__label">Make it public</div>
+      <pre class="codeblock"><code>gh repo edit &lt;you&gt;/capstone-project --visibility public --accept-visibility-change-consequences</code></pre>
+      <div class="callout callout--warn">
+        <div class="callout__title">Common trap</div>
+        <p>A secret committed and later deleted is still in Git history forever unless you rewrite history (<code>git filter-repo</code>) — deleting the file in a new commit does not remove it from the repo. Scan history, not just the current working tree, before flipping to public.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-7-week-48.html">&larr; Week 48</a>
+    <a class="btn" href="phase-8-weeks-51-53.html">Weeks 51-53 &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>
