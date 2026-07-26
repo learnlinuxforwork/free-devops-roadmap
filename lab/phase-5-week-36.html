@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 36: AWS-native pipelines — Free DevOps Roadmap</title>
+<meta name="description" content="Week 36 lab guide: building an end-to-end CodePipeline with CodeBuild and CodeDeploy, and setting up CodeArtifact as a private, cached package repository.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-5-week-36.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark brand__mark--logo"><img src="../assets/img/ST-Brain-Logo.png" alt="Shea's Tech" width="24" height="24"></span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 5 · CI/CD Pipelines</div>
+    <h1>Week 36: AWS-native pipelines</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 35–40</span><span>DVA-C02 track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-5-week-35.html">&larr; Week 35</a>
+      <a class="btn" href="phase-5-week-37.html">Week 37 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://docs.aws.amazon.com/codepipeline/" target="_blank" rel="noopener noreferrer">AWS CI/CD documentation</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>CodePipeline + CodeBuild + CodeDeploy end-to-end for the capstone app</h2>
+      <div class="codeblock__label">buildspec.yml — what CodeBuild actually executes</div>
+      <pre class="codeblock"><code>version: 0.2
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_URI
+  build:
+    commands:
+      - docker build -t $ECR_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION .
+  post_build:
+    commands:
+      - docker push $ECR_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - printf &#x27;[{&quot;name&quot;:&quot;api&quot;,&quot;imageUri&quot;:&quot;%s&quot;}]&#x27; $ECR_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION &gt; imagedefinitions.json
+artifacts:
+  files: [imagedefinitions.json]</code></pre>
+      <div class="codeblock__label">Wire the three services into one pipeline</div>
+      <pre class="codeblock"><code>aws codepipeline create-pipeline --pipeline file://pipeline.json
+# pipeline.json defines three stages, each backed by a real service:
+#   Source  -&gt; CodeStar connection to GitHub, triggers on push to main
+#   Build   -&gt; CodeBuild project running the buildspec above
+#   Deploy  -&gt; CodeDeploy (or ECS/EKS deploy action) using imagedefinitions.json</code></pre>
+      <div class="prose">
+        <p>This is the AWS-native equivalent of the GitHub Actions workflow you'll build next week — same three logical stages, different vendor. Building both gives you a real basis for comparison instead of a guess.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>CodeArtifact for package and dependency management</h2>
+      <div class="codeblock__label">Create a repository and point pip/npm at it</div>
+      <pre class="codeblock"><code>aws codeartifact create-domain --domain roadmap
+aws codeartifact create-repository \
+  --domain roadmap --repository roadmap-packages
+
+aws codeartifact login --tool pip --domain roadmap --repository roadmap-packages
+pip install requests   # now resolves through your private, cached CodeArtifact repo</code></pre>
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>Point CodeArtifact's <code>roadmap-packages</code> repo at the public PyPI as an upstream, then confirm a package installs even the first time (proxied through CodeArtifact and cached) — that caching layer is what protects you when a public registry has an outage.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-5-week-35.html">&larr; Week 35</a>
+    <a class="btn" href="phase-5-week-37.html">Week 37 &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>

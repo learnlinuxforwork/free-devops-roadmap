@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 37: GitHub Actions / Jenkins — Free DevOps Roadmap</title>
+<meta name="description" content="Week 37 lab guide: a complete GitHub Actions workflow from lint through EKS deploy, and standing up self-hosted Jenkins to compare against managed CI.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-5-week-37.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark brand__mark--logo"><img src="../assets/img/ST-Brain-Logo.png" alt="Shea's Tech" width="24" height="24"></span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 5 · CI/CD Pipelines</div>
+    <h1>Week 37: GitHub Actions / Jenkins</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 35–40</span><span>DVA-C02 track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-5-week-36.html">&larr; Week 36</a>
+      <a class="btn" href="phase-5-week-38.html">Week 38 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://docs.github.com/en/actions" target="_blank" rel="noopener noreferrer">GitHub Actions docs</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Build a workflow: lint → test → build image → push to ECR → deploy to EKS</h2>
+      <div class="codeblock__label">A complete GitHub Actions workflow tying the whole roadmap together</div>
+      <pre class="codeblock"><code>name: ci-cd
+on:
+  push: { branches: [main] }
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install ruff pytest
+      - run: ruff check .
+      - run: pytest
+  build-and-push:
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with: { role-to-assume: ${{ secrets.DEPLOY_ROLE_ARN }}, aws-region: us-east-1 }
+      - uses: aws-actions/amazon-ecr-login@v2
+        id: ecr
+      - run: |
+          docker build -t ${{ steps.ecr.outputs.registry }}/roadmap-api:${{ github.sha }} .
+          docker push ${{ steps.ecr.outputs.registry }}/roadmap-api:${{ github.sha }}
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          helm upgrade roadmap-api ./charts/roadmap-api \
+            --set image.tag=${{ github.sha }} -n roadmap</code></pre>
+      <div class="prose">
+        <p>Notice the deploy step doesn't run <code>kubectl apply</code> directly against the cluster — it updates the Helm values and, if you're running ArgoCD from Week 32, pushing that change to Git is enough; ArgoCD picks it up. Either approach is fine, but be consistent.</p>
+      </div>
+      <div class="callout callout--success">
+        <div class="callout__title">Checkpoint</div>
+        <p>Push a commit with a deliberately failing test and confirm the pipeline stops at the <code>ci</code> job — no image ever gets built or pushed for code that doesn't pass.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>Optional: stand up Jenkins in a container to compare self-hosted vs managed CI</h2>
+      <div class="codeblock__label">Jenkins in a container, fastest path to a running instance</div>
+      <pre class="codeblock"><code>docker run -d --name jenkins -p 8080:8080 -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword</code></pre>
+      <div class="codeblock__label">A minimal declarative Jenkinsfile, same shape as the GitHub Actions workflow above</div>
+      <pre class="codeblock"><code>pipeline {
+  agent any
+  stages {
+    stage(&#x27;Test&#x27;) { steps { sh &#x27;pytest&#x27; } }
+    stage(&#x27;Build&#x27;) { steps { sh &#x27;docker build -t roadmap-api:$GIT_COMMIT .&#x27; } }
+    stage(&#x27;Push&#x27;)  { steps { sh &#x27;docker push roadmap-api:$GIT_COMMIT&#x27; } }
+  }
+}</code></pre>
+      <div class="codeblock__label">The tradeoff, in one table</div>
+      <pre class="codeblock"><code>GitHub Actions   Zero infra to manage, generous free tier, tied to GitHub
+Jenkins          You own patching/scaling/plugins, but full control and any Git host</code></pre>
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>You don't need to keep Jenkins running — the point was feeling the operational difference firsthand. Tear it down: <code>docker rm -f jenkins</code>.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-5-week-36.html">&larr; Week 36</a>
+    <a class="btn" href="phase-5-week-38.html">Week 38 &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>
