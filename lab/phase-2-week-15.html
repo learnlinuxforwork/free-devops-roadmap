@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 15: Storage deep dive — Free DevOps Roadmap</title>
+<meta name="description" content="Week 15 lab guide: S3 lifecycle policies and cross-region replication, storage class analysis, and choosing between FSx variants and Storage Gateway modes.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-2-week-15.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark brand__mark--logo"><img src="../assets/img/ST-Brain-Logo.png" alt="Shea's Tech" width="24" height="24"></span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 2 · Architecture Deep Dive</div>
+    <h1>Week 15: Storage deep dive</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 13–20</span><span>SAA-C03 track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-2-week-14.html">&larr; Week 14</a>
+      <a class="btn" href="phase-2-week-16.html">Week 16 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/" target="_blank" rel="noopener noreferrer">AWS Storage documentation</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>S3 lifecycle policies, replication, storage class analysis</h2>
+      <div class="codeblock__label">Lifecycle policy — age data down to cheaper storage automatically</div>
+      <pre class="codeblock"><code>{
+  &quot;Rules&quot;: [{
+    &quot;ID&quot;: &quot;archive-old-logs&quot;, &quot;Status&quot;: &quot;Enabled&quot;, &quot;Filter&quot;: {&quot;Prefix&quot;: &quot;logs/&quot;},
+    &quot;Transitions&quot;: [
+      {&quot;Days&quot;: 30, &quot;StorageClass&quot;: &quot;STANDARD_IA&quot;},
+      {&quot;Days&quot;: 90, &quot;StorageClass&quot;: &quot;GLACIER&quot;}
+    ],
+    &quot;Expiration&quot;: {&quot;Days&quot;: 365}
+  }]
+}</code></pre>
+      <div class="codeblock__label">Apply it, and turn on cross-region replication for disaster recovery</div>
+      <pre class="codeblock"><code>aws s3api put-bucket-lifecycle-configuration \
+  --bucket roadmap-capstone-&lt;yourname&gt; --lifecycle-configuration file://lifecycle.json
+
+aws s3api put-bucket-replication --bucket roadmap-capstone-&lt;yourname&gt; \
+  --replication-configuration file://replication.json</code></pre>
+      <div class="prose">
+        <p>Storage class analysis (in the console under Management -&gt; Storage class analysis) watches actual access patterns for 30+ days and recommends which prefixes are good lifecycle candidates — don't guess at transition days, let the data tell you.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>FSx and Storage Gateway use cases — know when to pick what</h2>
+      <div class="codeblock__label">FSx family — pick by workload, not by habit</div>
+      <pre class="codeblock"><code>FSx for Lustre       High-performance computing, ML training, needs S3 integration
+FSx for OpenZFS      POSIX filesystem semantics, snapshots, needs NFS compatibility
+FSx for NetApp ONTAP  Migrating existing NetApp workloads, needs multi-protocol (NFS/SMB)</code></pre>
+      <div class="codeblock__label">Storage Gateway — bridge on-premises storage to AWS</div>
+      <pre class="codeblock"><code>File Gateway     On-prem NFS/SMB share backed by S3 objects
+Volume Gateway    iSCSI block volumes, cached or stored mode, backed by EBS snapshots
+Tape Gateway      Virtual tape library — replace physical backup tape with S3/Glacier</code></pre>
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>For a given exam-style scenario ('an on-prem app needs an NFS mount that looks local but is backed by cloud storage'), name the exact service in under 10 seconds — File Gateway. That kind of pattern-matching is most of what SAA-C03 storage questions test.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-2-week-14.html">&larr; Week 14</a>
+    <a class="btn" href="phase-2-week-16.html">Week 16 &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>

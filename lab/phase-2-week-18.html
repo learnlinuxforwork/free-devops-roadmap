@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 18: Serverless architecture — Free DevOps Roadmap</title>
+<meta name="description" content="Week 18 lab guide: Lambda cold starts, reserved and provisioned concurrency, layers, API Gateway, Step Functions state machines, and EventBridge rules.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-2-week-18.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark brand__mark--logo"><img src="../assets/img/ST-Brain-Logo.png" alt="Shea's Tech" width="24" height="24"></span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 2 · Architecture Deep Dive</div>
+    <h1>Week 18: Serverless architecture</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 13–20</span><span>SAA-C03 track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-2-week-17.html">&larr; Week 17</a>
+      <a class="btn" href="phase-2-week-19.html">Week 19 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://serverlessland.com/" target="_blank" rel="noopener noreferrer">AWS Serverless Land</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Lambda (cold starts, concurrency, layers), API Gateway</h2>
+      <div class="codeblock__label">Create a function and control concurrency</div>
+      <pre class="codeblock"><code>aws lambda create-function --function-name roadmap-api \
+  --runtime python3.13 --handler app.handler \
+  --role arn:aws:iam::&lt;ACCOUNT_ID&gt;:role/roadmap-lambda-role \
+  --zip-file fileb://function.zip
+
+# Reserved concurrency caps how many run at once -- protects downstream systems
+aws lambda put-function-concurrency \
+  --function-name roadmap-api --reserved-concurrent-executions 10
+
+# Provisioned concurrency keeps N instances warm -- eliminates cold starts for that many
+aws lambda put-provisioned-concurrency-config \
+  --function-name roadmap-api --qualifier &#x27;$LATEST&#x27; --provisioned-concurrent-executions 2</code></pre>
+      <div class="codeblock__label">Layers — share dependencies across functions without bundling them each time</div>
+      <pre class="codeblock"><code>aws lambda publish-layer-version --layer-name roadmap-shared-deps \
+  --zip-file fileb://layer.zip --compatible-runtimes python3.13</code></pre>
+      <div class="codeblock__label">API Gateway HTTP API in front of it</div>
+      <pre class="codeblock"><code>aws apigatewayv2 create-api --name roadmap-http-api \
+  --protocol-type HTTP --target arn:aws:lambda:us-east-1:&lt;ACCOUNT_ID&gt;:function:roadmap-api</code></pre>
+      <div class="prose">
+        <p>A cold start happens when Lambda has to initialize a new execution environment — download the code, start the runtime, run init code — before it can handle your request. Provisioned concurrency trades cost for eliminating that latency on a guaranteed number of instances.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>Step Functions and EventBridge; build a small event-driven app</h2>
+      <div class="codeblock__label">A state machine in Amazon States Language</div>
+      <pre class="codeblock"><code>{
+  &quot;Comment&quot;: &quot;Process an order&quot;,
+  &quot;StartAt&quot;: &quot;ValidateOrder&quot;,
+  &quot;States&quot;: {
+    &quot;ValidateOrder&quot;: {&quot;Type&quot;: &quot;Task&quot;, &quot;Resource&quot;: &quot;arn:aws:lambda:...:validate&quot;,
+      &quot;Next&quot;: &quot;ChargePayment&quot;},
+    &quot;ChargePayment&quot;: {&quot;Type&quot;: &quot;Task&quot;, &quot;Resource&quot;: &quot;arn:aws:lambda:...:charge&quot;,
+      &quot;Catch&quot;: [{&quot;ErrorEquals&quot;: [&quot;States.ALL&quot;], &quot;Next&quot;: &quot;RefundOrder&quot;}],
+      &quot;Next&quot;: &quot;ShipOrder&quot;},
+    &quot;ShipOrder&quot;: {&quot;Type&quot;: &quot;Task&quot;, &quot;Resource&quot;: &quot;arn:aws:lambda:...:ship&quot;, &quot;End&quot;: true},
+    &quot;RefundOrder&quot;: {&quot;Type&quot;: &quot;Task&quot;, &quot;Resource&quot;: &quot;arn:aws:lambda:...:refund&quot;, &quot;End&quot;: true}
+  }
+}</code></pre>
+      <div class="codeblock__label">Create it, and wire an EventBridge rule to trigger it on a schedule or an event</div>
+      <pre class="codeblock"><code>aws stepfunctions create-state-machine \
+  --name roadmap-order-flow --definition file://state-machine.json \
+  --role-arn arn:aws:iam::&lt;ACCOUNT_ID&gt;:role/roadmap-sfn-role
+
+aws events put-rule --name new-order-rule \
+  --event-pattern &#x27;{&quot;source&quot;: [&quot;roadmap.orders&quot;], &quot;detail-type&quot;: [&quot;OrderPlaced&quot;]}&#x27;
+aws events put-targets --rule new-order-rule \
+  --targets &quot;Id&quot;=&quot;1&quot;,&quot;Arn&quot;=&quot;&lt;STATE_MACHINE_ARN&gt;&quot;,&quot;RoleArn&quot;=&quot;&lt;EVENTBRIDGE_ROLE_ARN&gt;&quot;</code></pre>
+      <div class="callout callout--success">
+        <div class="callout__title">Checkpoint</div>
+        <p>Publish a test event to EventBridge and watch it trigger the Step Functions execution end to end in the console's visual workflow graph — including the Catch branch, by making the charge step fail on purpose once.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-2-week-17.html">&larr; Week 17</a>
+    <a class="btn" href="phase-2-week-19.html">Week 19 &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>
