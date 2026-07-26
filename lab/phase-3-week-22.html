@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 22: Terraform at scale — Free DevOps Roadmap</title>
+<meta name="description" content="Week 22 lab guide: Terraform modules, workspaces, remote state in S3 with DynamoDB locking, and refactoring a hand-built VPC into a reusable module.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-3-week-22.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark brand__mark--logo"><img src="../assets/img/ST-Brain-Logo.png" alt="Shea's Tech" width="24" height="24"></span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 3 · Infrastructure as Code</div>
+    <h1>Week 22: Terraform at scale</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 21–26</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-3-week-21.html">&larr; Week 21</a>
+      <a class="btn" href="phase-3-week-23.html">Week 23 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://www.terraformupandrunning.com/" target="_blank" rel="noopener noreferrer">Terraform Up &amp; Running</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Modules, workspaces, remote state with S3 + DynamoDB locking</h2>
+      <div class="codeblock__label">A reusable module structure</div>
+      <pre class="codeblock"><code>modules/vpc/
+  main.tf        # resources
+  variables.tf   # inputs
+  outputs.tf     # what callers can reference
+
+# root main.tf calling it:
+module &quot;vpc&quot; {
+  source   = &quot;./modules/vpc&quot;
+  cidr_block = &quot;10.0.0.0/16&quot;
+}</code></pre>
+      <div class="codeblock__label">Workspaces — one config, multiple isolated state files</div>
+      <pre class="codeblock"><code>terraform workspace new staging
+terraform workspace new production
+terraform workspace select staging
+terraform apply    # applies against staging&#x27;s own state, isolated from production</code></pre>
+      <div class="codeblock__label">Remote state in S3 with DynamoDB locking</div>
+      <pre class="codeblock"><code>terraform {
+  backend &quot;s3&quot; {
+    bucket         = &quot;roadmap-tfstate-&lt;yourname&gt;&quot;
+    key            = &quot;capstone/terraform.tfstate&quot;
+    region         = &quot;us-east-1&quot;
+    dynamodb_table = &quot;terraform-locks&quot;
+    encrypt        = true
+  }
+}</code></pre>
+      <div class="codeblock__label">Provision the backend itself first (a classic chicken-and-egg -- do this once, manually)</div>
+      <pre class="codeblock"><code>aws s3api create-bucket --bucket roadmap-tfstate-&lt;yourname&gt;
+aws s3api put-bucket-versioning --bucket roadmap-tfstate-&lt;yourname&gt; \
+  --versioning-configuration Status=Enabled
+aws dynamodb create-table --table-name terraform-locks \
+  --attribute-definitions AttributeName=LockID,AttributeType=S \
+  --key-schema AttributeName=LockID,KeyType=HASH \
+  --billing-mode PAY_PER_REQUEST</code></pre>
+      <div class="callout callout--success">
+        <div class="callout__title">Checkpoint</div>
+        <p>Run <code>terraform apply</code> from two terminals at once and confirm the second one blocks on the DynamoDB lock instead of corrupting state — that's the entire reason the lock table exists.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>Refactor Week 9&#x27;s hand-built VPC into a reusable Terraform module</h2>
+      <div class="prose">
+        <p>Take the VPC you built by hand with the CLI in Week 9 — public/private subnets, IGW, NAT, route tables — and express it as a Terraform module with variables for CIDR blocks and AZ count, so it can be re-applied to build identical VPCs for staging and production.</p>
+      </div>
+      <div class="codeblock__label">Sketch of the module&#x27;s variables</div>
+      <pre class="codeblock"><code>variable &quot;vpc_cidr&quot;        { type = string }
+variable &quot;az_count&quot;        { type = number, default = 2 }
+variable &quot;environment&quot;     { type = string }   # &quot;staging&quot; | &quot;production&quot;</code></pre>
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>Destroy the hand-built VPC entirely, then <code>terraform apply</code> the module and confirm the resulting VPC is functionally identical — same subnet layout, same route tables, same NAT behavior.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-3-week-21.html">&larr; Week 21</a>
+    <a class="btn" href="phase-3-week-23.html">Week 23 &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>
