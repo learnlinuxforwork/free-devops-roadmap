@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 8: Compute &amp; storage — Free DevOps Roadmap</title>
+<meta name="description" content="Week 8 lab guide: launching and connecting to EC2, choosing instance types, S3 storage classes and versioning, EBS vs EFS, and deploying a static site behind CloudFront.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-1-week-8.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark brand__mark--logo"><img src="../assets/img/ST-Brain-Logo.png" alt="Shea's Tech" width="24" height="24"></span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 1 · AWS Cloud Foundations</div>
+    <h1>Week 8: Compute &amp; storage</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 7–12</span><span>CLF-C02 track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-1-week-7.html">&larr; Week 7</a>
+      <a class="btn" href="phase-1-week-9.html">Week 9 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://skillbuilder.aws/" target="_blank" rel="noopener noreferrer">Cloud Practitioner Essentials</a>
+      <a class="chip" href="https://aws.amazon.com/free/" target="_blank" rel="noopener noreferrer">AWS Free Tier</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Launch and connect to EC2 instances; AMIs and instance types</h2>
+      <div class="codeblock__label">Find an AMI and launch an instance</div>
+      <pre class="codeblock"><code>aws ec2 describe-images --owners amazon \
+  --filters &quot;Name=name,Values=al2023-ami-*-x86_64&quot; \
+  --query &#x27;Images | sort_by(@,&amp;CreationDate) | [-1].ImageId&#x27; --output text
+
+aws ec2 create-key-pair --key-name roadmap-key \
+  --query &#x27;KeyMaterial&#x27; --output text &gt; roadmap-key.pem
+chmod 400 roadmap-key.pem
+
+aws ec2 run-instances \
+  --image-id ami-xxxxxxxx --instance-type t3.micro \
+  --key-name roadmap-key --security-groups default \
+  --count 1 --tag-specifications &#x27;ResourceType=instance,Tags=[{Key=Name,Value=roadmap-week8}]&#x27;</code></pre>
+      <div class="codeblock__label">Connect</div>
+      <pre class="codeblock"><code>aws ec2 describe-instances --filters &quot;Name=tag:Name,Values=roadmap-week8&quot; \
+  --query &#x27;Reservations[].Instances[].PublicIpAddress&#x27; --output text
+
+ssh -i roadmap-key.pem ec2-user@&lt;PUBLIC_IP&gt;</code></pre>
+      <div class="prose">
+        <p>Instance types follow a family-generation-size pattern: <code>t3.micro</code> is burstable general purpose, <code>m6i.large</code> is fixed-performance general purpose, <code>c7g.xlarge</code> is compute-optimized on Graviton (ARM). The letter tells you the family, the number the generation, the suffix hints at the chip.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>S3 buckets, storage classes, versioning; EBS vs EFS</h2>
+      <div class="codeblock__label">S3 basics</div>
+      <pre class="codeblock"><code>aws s3 mb s3://roadmap-capstone-&lt;yourname&gt;
+aws s3api put-bucket-versioning \
+  --bucket roadmap-capstone-&lt;yourname&gt; --versioning-configuration Status=Enabled
+aws s3 cp report.pdf s3://roadmap-capstone-&lt;yourname&gt;/ --storage-class STANDARD_IA
+aws s3 ls s3://roadmap-capstone-&lt;yourname&gt; --recursive</code></pre>
+      <div class="codeblock__label">EBS — block storage attached to one instance</div>
+      <pre class="codeblock"><code>aws ec2 create-volume --availability-zone us-east-1a --size 20 --volume-type gp3
+aws ec2 attach-volume --volume-id vol-xxxx --instance-id i-xxxx --device /dev/xvdf</code></pre>
+      <div class="codeblock__label">EFS — shared network filesystem mountable by many instances</div>
+      <pre class="codeblock"><code>aws efs create-file-system --performance-mode generalPurpose
+aws efs create-mount-target --file-system-id fs-xxxx \
+  --subnet-id subnet-xxxx --security-groups sg-xxxx
+
+# on the EC2 instance:
+sudo mount -t efs fs-xxxx:/ /mnt/efs-share</code></pre>
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>State from memory: EBS is single-instance block storage (like a virtual hard disk), EFS is multi-instance shared NFS storage, and S3 is object storage with no filesystem semantics at all — you don't mount it, you PUT and GET objects by key.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">3</span>Deploy a static site to S3 + CloudFront</h2>
+      <div class="codeblock__label">Bucket + upload (kept private — CloudFront reads via Origin Access Control)</div>
+      <pre class="codeblock"><code>aws s3 mb s3://roadmap-static-site-&lt;yourname&gt;
+aws s3 sync ./site s3://roadmap-static-site-&lt;yourname&gt;/ --delete</code></pre>
+      <div class="codeblock__label">CloudFront distribution</div>
+      <pre class="codeblock"><code>aws cloudfront create-distribution \
+  --origin-domain-name roadmap-static-site-&lt;yourname&gt;.s3.amazonaws.com \
+  --default-root-object index.html</code></pre>
+      <div class="codeblock__label">Invalidate the cache after a redeploy</div>
+      <pre class="codeblock"><code>aws cloudfront create-invalidation \
+  --distribution-id EXXXXXXXXXXXX --paths &quot;/*&quot;</code></pre>
+      <div class="callout callout--warn">
+        <div class="callout__title">Common trap</div>
+        <p>Forgetting to invalidate the CloudFront cache after an S3 update is the single most common “why isn't my change showing up” moment in this stack. Cache TTLs default to 24 hours.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-1-week-7.html">&larr; Week 7</a>
+    <a class="btn" href="phase-1-week-9.html">Week 9 &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>

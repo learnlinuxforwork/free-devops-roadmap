@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 11: Cost &amp; Well-Architected — Free DevOps Roadmap</title>
+<meta name="description" content="Week 11 lab guide: the AWS Well-Architected Framework&#x27;s six pillars, Cost Explorer and budget alerts, and Cloud Practitioner practice exam review.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-1-week-11.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark brand__mark--logo"><img src="../assets/img/ST-Brain-Logo.png" alt="Shea's Tech" width="24" height="24"></span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 1 · AWS Cloud Foundations</div>
+    <h1>Week 11: Cost &amp; Well-Architected</h1>
+    <div class="doc-hero__meta"><span>6–8 hrs</span><span>Weeks 7–12</span><span>CLF-C02 track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-1-week-10.html">&larr; Week 10</a>
+      <a class="btn" href="phase-1-week-12.html">Week 12 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://portal.tutorialsdojo.com/ref/sheastech" target="_blank" rel="noopener noreferrer">Tutorials Dojo</a>
+      <a class="chip" href="https://aws.amazon.com/architecture/well-architected/" target="_blank" rel="noopener noreferrer">Well-Architected</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>The Well-Architected Framework&#x27;s 6 pillars</h2>
+      <div class="codeblock__label">The six pillars — know what each one actually asks</div>
+      <pre class="codeblock"><code>Operational Excellence   Run and monitor systems, improve processes continuously
+Security                 Protect data, systems, and assets; least privilege by default
+Reliability               Recover from failure automatically; scale to meet demand
+Performance Efficiency    Use resources efficiently; keep up as demand and tech evolve
+Cost Optimization         Avoid unneeded spend; understand where money goes
+Sustainability            Minimize environmental impact of running workloads</code></pre>
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>For your capstone VPC from Week 9, name one concrete decision you made that maps to Reliability (hint: Multi-AZ) and one that maps to Cost Optimization (hint: NAT gateway is billed hourly plus per-GB — is one enough, or do you need one per AZ?).</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>Billing dashboards, Cost Explorer, budgets and alerts</h2>
+      <div class="codeblock__label">Enable and query Cost Explorer</div>
+      <pre class="codeblock"><code>aws ce get-cost-and-usage \
+  --time-period Start=2026-07-01,End=2026-07-25 \
+  --granularity DAILY \
+  --metrics &quot;UnblendedCost&quot; \
+  --group-by Type=DIMENSION,Key=SERVICE</code></pre>
+      <div class="codeblock__label">A budget with an alert threshold</div>
+      <pre class="codeblock"><code>aws budgets create-budget --account-id &lt;ACCOUNT_ID&gt; \
+  --budget &#x27;{
+    &quot;BudgetName&quot;: &quot;phase1-cap&quot;,
+    &quot;BudgetLimit&quot;: {&quot;Amount&quot;: &quot;25&quot;, &quot;Unit&quot;: &quot;USD&quot;},
+    &quot;TimeUnit&quot;: &quot;MONTHLY&quot;, &quot;BudgetType&quot;: &quot;COST&quot;
+  }&#x27; \
+  --notifications-with-subscribers &#x27;[{
+    &quot;Notification&quot;: {&quot;NotificationType&quot;: &quot;ACTUAL&quot;, &quot;ComparisonOperator&quot;: &quot;GREATER_THAN&quot;,
+                      &quot;Threshold&quot;: 80, &quot;ThresholdType&quot;: &quot;PERCENTAGE&quot;},
+    &quot;Subscribers&quot;: [{&quot;SubscriptionType&quot;: &quot;EMAIL&quot;, &quot;Address&quot;: &quot;you@example.com&quot;}]
+  }]&#x27;</code></pre>
+      <div class="callout callout--warn">
+        <div class="callout__title">Common trap</div>
+        <p>NAT gateways, unattached EBS volumes, and idle RDS instances are the three most common sources of surprise AWS bills for learners. Tear down anything from a prior week you're not actively using.</p>
+      </div>
+
+    </div>
+    <div class="task-block">
+      <h2><span class="task-block__n">3</span>Practice exam #1 for Cloud Practitioner; log your weak areas</h2>
+      <div class="prose">
+        <p>Take a full-length CLF-C02 practice exam under real conditions — timed, no notes. Score yourself against the four exam domains: Cloud Concepts, Security and Compliance, Cloud Technology and Services, Billing and Pricing.</p>
+      </div>
+      <div class="codeblock__label">Add this to the break/fix log you&#x27;ve been keeping since Phase 0</div>
+      <pre class="codeblock"><code>## 2026-07-25 -- CLF-C02 practice exam #1 -- Score: 68%
+
+### Weak domain: Billing and Pricing
+- Missed: Savings Plans vs Reserved Instances tradeoffs
+- Missed: which services have a free tier vs which don&#x27;t
+- Action: re-read AWS pricing pages for EC2, S3, RDS this week</code></pre>
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>Score at or above 80% before moving to Week 12 — if you're below that, spend extra time on the weakest domain rather than pushing forward on schedule.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-1-week-10.html">&larr; Week 10</a>
+    <a class="btn" href="phase-1-week-12.html">Week 12 &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>
