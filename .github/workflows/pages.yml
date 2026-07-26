@@ -24,9 +24,12 @@ jobs:
       - name: Fail if Windows or Azure content sneaks in
         run: |
           # README.md documents the scope policy itself, so it is exempt.
+          # unsupported.html and assets/js/gate.js implement the OS/browser gate that
+          # tells Windows and Edge visitors to install Linux or macOS -- they need the
+          # literal words to do that, so they are exempt too. See CLAUDE.md.
           if grep -rniE '\b(microsoft|azure|windows|powershell|wsl2?|rufus)\b' \
               --include='*.html' --include='*.css' --include='*.js' --include='*.json' \
-              --exclude-dir='.git' . ; then
+              --exclude-dir='.git' --exclude='unsupported.html' --exclude='gate.js' . ; then
             echo "::error::Excluded platform content found. This repo is Linux-only."
             exit 1
           fi

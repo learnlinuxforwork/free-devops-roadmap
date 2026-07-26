@@ -18,6 +18,12 @@ site share the same source content; the site is now the canonical version.
    `*.js`, and `*.json` for `microsoft|azure|windows|powershell|wsl|rufus` and **fails the
    build** on a match. `README.md` is exempt because it documents the policy itself. If you
    need a USB-writing tool, use `dd` or balenaEtcher — not Rufus.
+   - **Two more exemptions, both intentional:** `unsupported.html` and `assets/js/gate.js`
+     implement the OS/browser gate — every page except `unsupported.html` loads `gate.js`,
+     which redirects Windows and Microsoft Edge visitors to `unsupported.html`, a page that
+     tells them (by name) to install Linux or macOS instead. Those two files necessarily
+     contain the literal words and are excluded from the grep by name. Don't "clean up" the
+     Windows/Microsoft/Edge references out of them — that's the entire point of the page.
 2. **License is AGPL-3.0-or-later.** Keep the `LICENSE` file intact and keep the license
    header comments at the top of `style.css` and `app.js`. New source files get the same
    header.
@@ -48,6 +54,13 @@ assets/js/app.js        One IIFE. fetch()es data/roadmap.json, renders every sec
 assets/js/lab.js        Tiny IIFE shared by every page under lab/. Theme toggle only —
                         no fetch, no progress tracking. Lab pages are static HTML, not
                         rendered by app.js.
+assets/js/gate.js       OS/browser gate. Loaded (render-blocking, no defer/async, on
+                        purpose) from every page except unsupported.html. Redirects
+                        Windows and Microsoft Edge visitors to unsupported.html.
+unsupported.html        The gate's destination. Explains the site is Linux/macOS-only
+                        and links out to install Ubuntu, Rocky Linux, or RHEL. Does NOT
+                        load gate.js itself (would infinite-loop). See "Hard constraints"
+                        above for why this file is exempt from the scope-check grep.
 data/roadmap.json       ALL CONTENT. This is the file to edit for any content change.
 lab/                    One static HTML page per week: phase-<n>-week-<n>.html.
                         Real commands/configs/scripts for that week's tasks, plus a
