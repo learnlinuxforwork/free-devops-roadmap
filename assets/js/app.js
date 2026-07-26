@@ -151,7 +151,7 @@
           ov.rhythm.map(function (r) {
             return (
               '<div class="rhythm__row"><span class="rhythm__pct">' + esc(r.pct) + "</span>" +
-              '<span class="rhythm__track"><span class="rhythm__fill" style="width:' + esc(r.pct) + '"></span></span>' +
+              '<span class="rhythm__track"><span class="rhythm__fill" data-rhythm-fill data-target="' + parseInt(r.pct, 10) + '" style="width:0%"></span></span>' +
               '<span class="rhythm__text">' + esc(r.text) + "</span></div>"
             );
           }).join("") +
@@ -549,6 +549,11 @@
     var label = document.getElementById("overallLabel");
     if (fill) fill.style.width = pct + "%";
     if (label) label.textContent = pct + "% · " + done + "/" + total;
+
+    document.querySelectorAll("[data-rhythm-fill]").forEach(function (el) {
+      var target = parseFloat(el.dataset.target) || 0;
+      el.style.width = (target * pct) / 100 + "%";
+    });
   }
 
   /* -------------------------------------------------------------- boot - */

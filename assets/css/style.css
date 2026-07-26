@@ -394,7 +394,7 @@ li { margin-bottom: 5px; }
 .rhythm__row { display: flex; align-items: center; gap: 12px; font-size: 14px; }
 .rhythm__pct { flex: none; width: 44px; font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
 .rhythm__track { flex: none; width: 110px; height: 8px; border-radius: 99px; background: var(--bg-sunken); border: 1px solid var(--border); overflow: hidden; }
-.rhythm__fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+.rhythm__fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width 0.35s var(--ease); }
 .rhythm__text { color: var(--text-2); }
 
 /* tables */
