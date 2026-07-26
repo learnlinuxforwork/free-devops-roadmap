@@ -1,34 +1,51 @@
+<div align="center">
+
+<img src="assets/img/ST-Brain-Logo-badge.png" width="96" height="96" alt="Shea's Tech">
+
 # Free DevOps Roadmap
 
-**[free.learnlinuxforwork.com](https://free.learnlinuxforwork.com)**
+**A free, open-source, 54-week self-study roadmap from `ls -la` to**
+**AWS Certified DevOps Engineer – Professional.**
 
-A free, open-source, 54-week self-study roadmap that takes you from `ls -la` to
-**AWS Certified DevOps Engineer – Professional** — with a real Linux home lab, a
-capstone project, and a certification checkpoint at the end of every phase.
+[**free.learnlinuxforwork.com**](https://free.learnlinuxforwork.com)
 
-Built by [Shea's Tech](https://www.learnlinuxforwork.com). Free forever, AGPL licensed,
-and open to contributions.
+[![License: AGPL v3](https://img.shields.io/badge/license-AGPL--3.0--or--later-0aa3ad?style=flat-square)](https://learnlinuxforwork.com/license)
+[![Live site](https://img.shields.io/badge/live-free.learnlinuxforwork.com-0aa3ad?style=flat-square)](https://free.learnlinuxforwork.com)
+[![No tracking](https://img.shields.io/badge/tracking-none-0aa3ad?style=flat-square)](#features)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-0aa3ad?style=flat-square)](#contributing)
+[![Made by Shea's Tech](https://img.shields.io/badge/made%20by-Shea's%20Tech-0aa3ad?style=flat-square)](https://www.sheastech.io)
 
-| | |
-|---|---|
-| **54** | weeks, week by week |
-| **9** | phases, from Linux foundations to the Professional exam |
-| **6** | certifications (RHCSA + five AWS) |
-| **$0** | to start — the whole roadmap is free to read and use |
+</div>
 
----
+<br>
+
+A real Linux home lab, a capstone project, and a certification checkpoint at the end of
+every phase — with a real explanation of why it exists, not just a task list. See
+[**Why I Built This Roadmap**](https://free.learnlinuxforwork.com/#story).
+
+<br>
+
+<div align="center">
+
+| 54 | 9 | 6 | $0 |
+|:---:|:---:|:---:|:---:|
+| **weeks** | **phases** | **certifications** | **to start** |
+
+</div>
+
+<br>
 
 ## What's inside
 
 - **Linux first.** A full six-week Linux on-ramp before you touch AWS: shell, permissions,
   systemd, LVM, networking, SELinux, and a timed RHCSA mock-exam checkpoint in Week 4.
+- **Real lab guides.** Every one of the 54 weeks has its own guide with the actual commands,
+  configs, and checkpoints — not just a task list. [See an example ›](https://free.learnlinuxforwork.com/lab/phase-0-week-1.html)
 - **A real home lab.** Where to get a $120 used laptop, how to install RHEL 10 free for up to
-  16 systems, which Linux-first laptop vendors are worth it, and how to scale to a closet
-  server running Proxmox when one machine stops being enough.
+  16 systems, and how to scale to a closet server running Proxmox when one machine stops
+  being enough.
 - **Certification roadmap.** RHCSA, then Cloud Practitioner, Solutions Architect, Developer,
   SysOps, and DevOps Engineer – Professional, with target weeks and costs.
-- **Week-by-week tasks.** Every week has a focus, 2–4 concrete tasks, an hour estimate, and
-  linked resources. Check them off; your progress is saved in your browser.
 - **Job description coverage map.** Every responsibility in a real DevOps job posting mapped
   to the phase that covers it.
 - **Honest costs.** Exams, practice tests, hardware, and AWS usage — with the specific
@@ -36,7 +53,7 @@ and open to contributions.
 
 ## Scope
 
-This roadmap covers **Linux and AWS only**. It intentionally contains no Microsoft Windows
+This roadmap covers **Linux and AWS only.** It intentionally contains no Microsoft Windows
 or Azure material — that is a deliberate scope decision, not an oversight, and it is enforced
 by a check in CI. Pull requests adding that content will be closed.
 
@@ -60,17 +77,22 @@ Then open <http://localhost:8000>.
 
 ```
 .
-├── index.html              # the whole UI shell
+├── index.html                 the whole UI shell
+├── unsupported.html           OS/browser gate destination page
 ├── assets/
-│   ├── css/style.css       # design tokens + dark/light themes
-│   ├── js/app.js           # renders roadmap.json, progress tracking, theme toggle
-│   └── img/favicon.svg
+│   ├── css/style.css          design tokens + dark/light themes
+│   ├── js/
+│   │   ├── app.js             renders roadmap.json, progress tracking, theme toggle
+│   │   ├── lab.js             theme toggle for the static lab pages
+│   │   └── gate.js            OS/browser gate
+│   └── img/
 ├── data/
-│   └── roadmap.json        # ← all content lives here
+│   └── roadmap.json           ← almost all content lives here
+├── lab/                       one static page per week — real commands and configs
 ├── .github/workflows/
-│   └── pages.yml           # validates JSON, blocks out-of-scope content, deploys Pages
-├── CNAME                   # free.learnlinuxforwork.com
-└── LICENSE                 # GNU AGPL v3.0
+│   └── pages.yml               validates JSON, blocks out-of-scope content, deploys Pages
+├── CNAME                       free.learnlinuxforwork.com
+└── LICENSE                     GNU AGPL v3.0
 ```
 
 **Everything you'd want to edit is in `data/roadmap.json`.** Add a week, change a task,
@@ -79,21 +101,19 @@ that file.
 
 ## Features
 
-- **Dark and light mode.** Follows your system preference by default; the toggle in the
-  header overrides it and the choice persists.
-- **Progress tracking.** Every task is a checkbox. Per-phase rings, sidebar percentages,
-  and an overall progress bar update live. Stored in `localStorage` — nothing is sent
-  anywhere, there is no account, and there is no analytics.
-- **Keyboard and screen-reader friendly.** Skip link, focus rings, semantic landmarks,
-  `aria-expanded` on the phase accordions.
-- **Prints cleanly.** All phases expand and the chrome drops away when you print or save
-  to PDF.
-- **No tracking, no cookies, no third-party scripts.** Zero JavaScript dependencies.
+| | |
+|---|---|
+| **Dark and light mode** | Follows your system preference by default; the toggle in the header overrides it and the choice persists. |
+| **Progress tracking** | Every task is a checkbox. Per-phase rings, sidebar percentages, and an overall progress bar update live — stored in `localStorage`, nothing is sent anywhere. |
+| **Keyboard and screen-reader friendly** | Skip link, focus rings, semantic landmarks, `aria-expanded` on the phase accordions. |
+| **Prints cleanly** | All phases expand and the chrome drops away when you print or save to PDF. |
+| **No tracking, no cookies** | Zero JavaScript dependencies, zero third-party scripts, zero analytics. |
 
 ## Contributing
 
 Contributions are welcome — corrections, dead-link fixes, better resource suggestions,
-and clearer task wording especially.
+and clearer task wording especially. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full
+guide; the short version:
 
 1. Fork the repo and create a branch.
 2. Edit `data/roadmap.json` (or the CSS/JS if you're changing the interface).
@@ -124,17 +144,33 @@ To set the custom domain up the first time:
 
 ## License
 
-Copyright (C) 2026 Shea's Tech.
+Copyright © 2026 Shea's Tech.
 
 Licensed under the **GNU Affero General Public License v3.0 or later** (AGPL-3.0-or-later).
-See [LICENSE](LICENSE).
+See [LICENSE](LICENSE) or the plain-language summary at
+[learnlinuxforwork.com/license](https://learnlinuxforwork.com/license).
 
 In short: you're free to use, study, share, and modify this. If you run a modified version
 as a public web service, you must offer that version's source to its users.
 
 ## Related
 
-- [Learn Linux For Work](https://www.learnlinuxforwork.com) — structured, work-focused Linux training
-- [Doc Linux](https://learnlinuxforwork.com/doc-linux) — command reference and syntax lookups
-- [LinuxCert Guru](https://linuxcert.guru/) — hands-on RHCSA mock exams
-- [Kubecraft Linux](https://www.skool.com/linux/classroom) — Linux and Kubernetes community classroom
+<div align="center">
+
+| | |
+|---|---|
+| **[Doc Linux](https://learnlinuxforwork.com/doc-linux)** | Command reference and syntax lookups |
+| **[Learn Linux For Work](https://www.learnlinuxforwork.com)** | Structured, work-focused Linux training |
+| **[The Hood](https://learnlinuxforwork.com/the-hood)** | Community space for questions and support |
+| **[LinuxCert Guru](https://linuxcert.guru/)** | Hands-on RHCSA mock exams |
+| **[Kubecraft Linux](https://www.skool.com/linux/classroom)** | Linux and Kubernetes community classroom |
+
+</div>
+
+<br>
+
+<div align="center">
+
+Built by **[Shea's Tech](https://www.sheastech.io)** · [sheastech.io](https://www.sheastech.io) · [learnlinuxforwork.com](https://www.learnlinuxforwork.com)
+
+</div>

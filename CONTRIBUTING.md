@@ -63,4 +63,4 @@ allow inline HTML — keep it to `<strong>`, `<em>`, `<code>`, and `<a>`.
 ## License
 
 By contributing, you agree your contributions are licensed under the
-GNU AGPL v3.0 or later, the same as the rest of this project.
+[GNU AGPL v3.0 or later](https://learnlinuxforwork.com/license), the same as the rest of this project.
