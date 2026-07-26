@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 3: Storage, networking &amp; SELinux — Free DevOps Roadmap</title>
+<meta name="description" content="Week 3 lab guide: partitions, LVM, fstab and swap, NetworkManager/nmcli, firewalld, SELinux modes and troubleshooting, TCP/IP subnetting and network diagnostics.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-0-week-3.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark">ST</span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 0 · Linux Foundations</div>
+    <h1>Week 3: Storage, networking &amp; SELinux</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 1–6</span><span>RHCSA (EX200) track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-0-week-2.html">&larr; Week 2</a>
+      <a class="btn" href="phase-0-week-4.html">Week 4 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Learn Linux For Work</a>
+      <a class="chip" href="https://www.redhat.com/en/interactive-labs" target="_blank" rel="noopener noreferrer">Red Hat Interactive Labs</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Partitions, LVM, filesystems, /etc/fstab, swap</h2>
+
+      <div class="codeblock__label">Partitioning with parted (GPT-safe, scriptable)</div>
+      <pre class="codeblock"><code>lsblk                                 # see all block devices
+parted /dev/sdb print
+parted /dev/sdb mklabel gpt
+parted /dev/sdb mkpart primary 0% 100%
+partprobe /dev/sdb                    # tell the kernel to re-read the partition table</code></pre>
+
+      <div class="codeblock__label">LVM — physical volume to logical volume</div>
+      <pre class="codeblock"><code>pvcreate /dev/sdb1
+vgcreate vg_data /dev/sdb1
+lvcreate -n lv_app -L 20G vg_data
+mkfs.xfs /dev/vg_data/lv_app
+
+# Growing a logical volume later:
+lvextend -L +10G /dev/vg_data/lv_app
+xfs_growfs /dev/vg_data/lv_app        # xfs; use resize2fs for ext4
+
+pvs; vgs; lvs                          # summary at each layer</code></pre>
+
+      <div class="codeblock__label">Mounting and /etc/fstab</div>
+      <pre class="codeblock"><code>mkdir -p /data
+mount /dev/vg_data/lv_app /data
+blkid /dev/vg_data/lv_app             # get the UUID
+
+# /etc/fstab — always mount by UUID, device names can shift
+UUID=3a1f...  /data  xfs  defaults  0 0
+
+mount -a                               # test fstab without rebooting — catches typos now, not at boot</code></pre>
+
+      <div class="codeblock__label">Swap</div>
+      <pre class="codeblock"><code>fallocate -l 2G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+swapon --show
+
+# /etc/fstab entry to make it persistent:
+/swapfile  none  swap  sw  0 0</code></pre>
+
+      <div class="callout callout--warn">
+        <div class="callout__title">Common trap</div>
+        <p>A bad UUID or typo in <code>/etc/fstab</code> can drop the system into emergency mode on next boot. Always run <code>mount -a</code> after editing it, and know the <code>rd.break</code> recovery flow from Week 1 in case you do get it wrong.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>NetworkManager/nmcli, static IPs, DNS, routing, firewalld</h2>
+
+      <div class="codeblock__label">nmcli basics</div>
+      <pre class="codeblock"><code>nmcli device status
+nmcli connection show
+nmcli connection show "System eth0"    # full detail on one connection
+nmcli device show eth0</code></pre>
+
+      <div class="codeblock__label">Setting a static IP</div>
+      <pre class="codeblock"><code>nmcli con add type ethernet con-name static-eth0 ifname eth0 \
+  ipv4.addresses 192.168.1.50/24 \
+  ipv4.gateway 192.168.1.1 \
+  ipv4.dns "1.1.1.1 8.8.8.8" \
+  ipv4.method manual
+
+nmcli con up static-eth0
+
+# Modifying an existing connection instead of creating a new one:
+nmcli con mod "System eth0" ipv4.addresses 192.168.1.50/24
+nmcli con mod "System eth0" ipv4.method manual
+nmcli con up "System eth0"</code></pre>
+
+      <div class="codeblock__label">Routing</div>
+      <pre class="codeblock"><code>ip route show
+nmcli con mod "System eth0" +ipv4.routes "10.10.0.0/16 192.168.1.254"
+ip route add 10.10.0.0/16 via 192.168.1.254   # non-persistent, testing only</code></pre>
+
+      <div class="codeblock__label">firewalld</div>
+      <pre class="codeblock"><code>firewall-cmd --state
+firewall-cmd --get-active-zones
+firewall-cmd --list-all
+firewall-cmd --add-service=http --permanent
+firewall-cmd --add-port=8080/tcp --permanent
+firewall-cmd --reload                          # required for --permanent changes to take effect
+firewall-cmd --list-services
+firewall-cmd --zone=public --add-source=10.0.0.0/8 --permanent</code></pre>
+
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>Configure a static IP with <code>nmcli</code>, confirm it survives a reboot, then open port 8443/tcp in firewalld permanently and verify with <code>firewall-cmd --list-ports</code>.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">3</span>SELinux modes, contexts, booleans, and troubleshooting denials</h2>
+
+      <div class="codeblock__label">Modes</div>
+      <pre class="codeblock"><code>getenforce                  # Enforcing, Permissive, or Disabled
+setenforce 0                # switch to Permissive (temporary, until reboot)
+setenforce 1                # back to Enforcing
+
+# /etc/selinux/config — controls the mode on boot
+SELINUX=enforcing
+SELINUXTYPE=targeted</code></pre>
+
+      <div class="codeblock__label">Contexts</div>
+      <pre class="codeblock"><code>ls -Z /var/www/html                 # show SELinux context on files
+ps -eZ | grep httpd                 # show context on running processes
+
+# Fix a mislabeled file (e.g. content copied instead of moved into place):
+semanage fcontext -a -t httpd_sys_content_t "/srv/web(/.*)?"
+restorecon -Rv /srv/web             # apply the policy you just defined</code></pre>
+
+      <div class="codeblock__label">Booleans — policy toggles without writing custom policy</div>
+      <pre class="codeblock"><code>getsebool -a | grep httpd
+getsebool httpd_can_network_connect
+setsebool httpd_can_network_connect on          # temporary
+setsebool -P httpd_can_network_connect on       # persistent across reboots</code></pre>
+
+      <div class="codeblock__label">Troubleshooting denials</div>
+      <pre class="codeblock"><code>sudo ausearch -m avc -ts recent          # recent denials, human-ish readable
+sudo ausearch -m avc -ts today | audit2why    # explain *why* it was denied
+
+# If the denial is legitimate for your use case, generate a custom policy module:
+sudo ausearch -m avc -ts recent | audit2allow -M myapp
+sudo semodule -i myapp.pp                # install the generated module
+
+sudo semodule -l | grep myapp             # confirm it loaded</code></pre>
+
+      <div class="callout callout--warn">
+        <div class="callout__title">Common trap</div>
+        <p>Never leave a production system in Permissive mode "to make the error go away." That disables SELinux enforcement system-wide. Fix the context or write a targeted policy module instead — treat SELinux denials as information, not an obstacle.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">4</span>TCP/IP and subnetting; curl, dig, traceroute, ss</h2>
+
+      <div class="codeblock__label">Subnetting — the fast way to read CIDR</div>
+      <pre class="codeblock"><code>/24  = 255.255.255.0    = 256 addresses (254 usable)
+/25  = 255.255.255.128  = 128 addresses (126 usable)
+/26  = 255.255.255.192  = 64 addresses  (62 usable)
+/27  = 255.255.255.224  = 32 addresses  (30 usable)
+/28  = 255.255.255.240  = 16 addresses  (14 usable)
+
+# 192.168.1.0/26 splits into 4 blocks of 64:
+# 192.168.1.0/26   hosts .1-.62    broadcast .63
+# 192.168.1.64/26  hosts .65-.126  broadcast .127
+# 192.168.1.128/26 hosts .129-.190 broadcast .191
+# 192.168.1.192/26 hosts .193-.254 broadcast .255</code></pre>
+
+      <div class="codeblock__label">curl</div>
+      <pre class="codeblock"><code>curl -I https://example.com                 # headers only
+curl -v https://example.com                 # verbose — see the full request/response
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"key":"value"}' https://example.com/api
+curl -o out.html https://example.com        # save to a file
+curl -w "%{http_code}\n" -o /dev/null -s https://example.com   # status code only</code></pre>
+
+      <div class="codeblock__label">dig</div>
+      <pre class="codeblock"><code>dig example.com
+dig +short example.com              # just the answer
+dig example.com MX                   # mail records
+dig -x 8.8.8.8                       # reverse lookup
+dig @1.1.1.1 example.com             # query a specific resolver</code></pre>
+
+      <div class="codeblock__label">traceroute and ss</div>
+      <pre class="codeblock"><code>traceroute example.com
+traceroute -n example.com           # skip reverse DNS on each hop, faster
+
+ss -tulpn                            # listening TCP/UDP sockets, with process names
+ss -s                                # socket summary statistics
+ss -tan state established            # only established TCP connections</code></pre>
+
+      <div class="callout callout--success">
+        <div class="callout__title">Checkpoint</div>
+        <p>Given a network of <code>10.20.0.0/22</code>, calculate by hand how many usable hosts it holds and what the broadcast address is, without a subnet calculator. This comes up constantly once you're designing VPCs in Phase 1.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-0-week-2.html">&larr; Week 2: Users, services &amp; packages</a>
+    <a class="btn" href="phase-0-week-4.html">Week 4: RHCSA checkpoint &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>

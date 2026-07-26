@@ -409,6 +409,7 @@
           "week": "Week 1",
           "focus": "Linux & the shell",
           "hours": "8–10",
+          "lab": "lab/phase-0-week-1.html",
           "tasks": [
             "Install RHEL 10 or Rocky Linux 10 on a real machine (see Home Lab)",
             "Filesystem hierarchy, navigation, redirection, pipes, grep/sed/awk",
@@ -426,6 +427,7 @@
           "week": "Week 2",
           "focus": "Users, services & packages",
           "hours": "8–10",
+          "lab": "lab/phase-0-week-2.html",
           "tasks": [
             "Users, groups, sudo policy, password aging, /etc/skel",
             "systemd: units, targets, systemctl, journald log analysis",
@@ -442,6 +444,7 @@
           "week": "Week 3",
           "focus": "Storage, networking & SELinux",
           "hours": "8–10",
+          "lab": "lab/phase-0-week-3.html",
           "tasks": [
             "Partitions, LVM, filesystems, /etc/fstab, swap",
             "NetworkManager/nmcli, static IPs, DNS, routing, firewalld",
@@ -458,6 +461,7 @@
           "week": "Week 4",
           "focus": "RHCSA checkpoint",
           "hours": "8–10",
+          "lab": "lab/phase-0-week-4.html",
           "tasks": [
             "Sit a full timed, hands-on RHCSA mock exam — no notes, no internet",
             "Score it, log every missed objective, rebuild those labs from scratch",
@@ -473,6 +477,7 @@
           "week": "Week 5",
           "focus": "Git & version control",
           "hours": "8–10",
+          "lab": "lab/phase-0-week-5.html",
           "tasks": [
             "Branching, merging, rebasing, conflict resolution",
             "Open a PR against a public repo; practice code review etiquette",
@@ -488,6 +493,7 @@
           "week": "Week 6",
           "focus": "Python & Bash automation",
           "hours": "8–10",
+          "lab": "lab/phase-0-week-6.html",
           "tasks": [
             "Bash: functions, arg parsing, set -euo pipefail, traps",
             "Python: file I/O, error handling, venvs, requests",

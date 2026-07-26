@@ -45,8 +45,48 @@ assets/css/style.css    Design tokens in :root, [data-theme="light"], [data-them
                         All colors are variables — never hardcode a hex in a component rule.
 assets/js/app.js        One IIFE. fetch()es data/roadmap.json, renders every section as
                         HTML strings, then wires events. No framework, no virtual DOM.
+assets/js/lab.js        Tiny IIFE shared by every page under lab/. Theme toggle only —
+                        no fetch, no progress tracking. Lab pages are static HTML, not
+                        rendered by app.js.
 data/roadmap.json       ALL CONTENT. This is the file to edit for any content change.
+lab/                    One static HTML page per week: phase-<n>-week-<n>.html.
+                        Real commands/configs/scripts for that week's tasks, plus a
+                        Reference & community links block (always Doc Linux + The Hood,
+                        plus that week's specific resources from roadmap.json).
+                        Self-contained pages: own <head>, reuses style.css + lab.js,
+                        no dependency on app.js or the SPA shell.
 ```
+
+### Lab guide pages (lab/)
+
+Each week in `data/roadmap.json` may carry a `"lab"` field, e.g.
+`"lab": "lab/phase-0-week-1.html"`. When present, `app.js` renders a "Lab guide" pill
+next to that week's hours (`.week__lab`, wired in `phaseHTML()`). Weeks without a `lab`
+field simply don't show the pill — this is how partial rollout across phases works
+without breaking anything.
+
+To add a new lab page:
+1. Copy the structure of an existing `lab/phase-*-week-*.html` — same `<head>` block
+   (anti-FOUC script, canonical URL, favicon, stylesheet), same header/footer markup as
+   `index.html` but with `../` path prefixes and no progress bar / reset button.
+2. Use `.doc-shell`, `.doc-hero`, `.doc-refs`, `.task-block`, and `pre.codeblock` (all
+   defined in style.css under "lab pages") — don't invent new layout classes per page.
+3. Reference links block: always include Doc Linux (`chip--accent`) and The Hood
+   (`chip--accent`) first, then that week's specific resources as plain `.chip`s, pulled
+   from the same week's `resources[]` array in roadmap.json.
+4. One `.task-block` per task in that week, with real, technically accurate commands —
+   this is the entire point of the page. Use `.codeblock__label` above a block to caption
+   it. Use `.callout` / `.callout--warn` / `.callout--success` for checkpoints and traps.
+5. Wire prev/next nav in `.doc-hero__nav` (top) and the matching block at the bottom of
+   `<main>` to the adjacent week's page. The last week of a phase should point its "next"
+   at `../index.html#phases` until the next phase's lab pages exist.
+6. Add the `"lab"` field to that week's object in `data/roadmap.json`.
+7. Run the verify steps below — the scope check applies to `lab/*.html` too (a Week 6
+   file has previously tripped it over a throwaway "N/A on Windows" comment — don't
+   mention Windows/Azure/etc at all, not even to exclude it).
+
+As of the last update, **Phase 0 (Weeks 1-6) is fully built**. Phases 1-8 (Weeks 7-54)
+do not have lab pages yet — those weeks have no `"lab"` field and show no pill.
 
 `app.js` responsibilities, in order:
 
@@ -105,10 +145,14 @@ deploys to GitHub Pages. `CNAME` pins the custom domain; do not delete it.
 
 ## Status / open items
 
-- [ ] Repo not yet created on GitHub. `setup.sh` creates and pushes it via `gh`.
-- [ ] Settings → Pages → Source must be set to **GitHub Actions** (one-time, manual).
-- [ ] DNS: `CNAME` record `free` → `learnlinuxforwork.github.io` (one-time, manual).
-- [ ] Enforce HTTPS in Settings → Pages once the certificate issues.
+- [x] Repo created on GitHub at `learnlinuxforwork/free-devops-roadmap` and pushed.
+- [x] Settings → Pages → Source set to **GitHub Actions**.
+- [x] DNS: `CNAME` record `free` → `learnlinuxforwork.github.io` created and live.
+- [x] Enforce HTTPS turned on in Settings → Pages.
+- [x] Lab guide pages (`lab/phase-0-week-*.html`) built for Phase 0, Weeks 1-6.
+- [ ] Lab guide pages for Phases 1-8 (Weeks 7-54) — see "Lab guide pages" above for the
+      pattern to follow. Continue phase by phase; each phase's weeks live in
+      `data/roadmap.json` under `phases[].items[]`.
 
 ## Style
 

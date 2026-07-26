@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 4: RHCSA checkpoint — Free DevOps Roadmap</title>
+<meta name="description" content="Week 4 lab guide: timed RHCSA mock exam structure, official exam objectives, a break/fix logging method, and how to book the real EX200.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-0-week-4.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark">ST</span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 0 · Linux Foundations</div>
+    <h1>Week 4: RHCSA checkpoint</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 1–6</span><span>RHCSA (EX200) track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-0-week-3.html">&larr; Week 3</a>
+      <a class="btn" href="phase-0-week-5.html">Week 5 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://linuxcert.guru/" target="_blank" rel="noopener noreferrer">linuxcert.guru — RHCSA mock exams</a>
+      <a class="chip" href="https://tidd.ly/4pCL8rI" target="_blank" rel="noopener noreferrer">Linux Foundation</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Sit a full timed, hands-on RHCSA mock exam — no notes, no internet</h2>
+      <div class="prose">
+        <p>The real EX200 is 2.5–3 hours of performance-based tasks on a live system — no multiple choice. Run your mock exam under the same conditions: timer running, notes closed, browser closed except the exam itself.</p>
+      </div>
+
+      <div class="codeblock__label">Official RHCSA (EX200) objective categories — score yourself against each</div>
+      <pre class="codeblock"><code>Understand and use essential tools
+  - Log in/out, use shell, redirection, pipes, remote systems (ssh)
+  - Archive, compress, unpack files (tar, gzip, xz)
+  - Search, edit text files, cron/anacron
+
+Create simple shell scripts
+  - Loops, conditionals, positional parameters, exit codes
+
+Operate running systems
+  - Boot, reboot, targets, single-user mode, kill/signal processes
+  - Locate and analyze log files, systemctl start/stop/enable/status
+
+Configure local storage
+  - Partitions, LVM, encrypted volumes, mount at boot or on demand
+
+Create and configure file systems
+  - ext4, xfs, swap, /etc/fstab, autofs, ACLs
+
+Deploy, configure, and maintain systems
+  - Package installation, network services, cron, time sync
+
+Manage users and groups
+  - useradd/usermod, sudo, password policy, /etc/skel
+
+Manage security
+  - Firewalld, SELinux modes/contexts/booleans, SSH key-based auth</code></pre>
+
+      <div class="codeblock__label">Structure your own mock exam</div>
+      <pre class="codeblock"><code># Write 20-24 tasks, one or two per objective category above, e.g.:
+1. Set the system hostname and update /etc/hosts
+2. Create an LVM volume group spanning two disks, 15GB logical volume, ext4, mounted at /projects, persistent
+3. Create a user with UID 1500, add to group 'ops', force password change at first login
+4. Configure a cron job as that user running every weekday at 6am
+5. Open TCP port 8080 permanently in firewalld
+6. Fix a provided SELinux denial on a web directory
+7. Create a bash script that takes a filename argument and reports if it's a broken symlink
+...
+# Time-box it at 2.5-3 hours. Stop when the timer ends, whether or not you're done —
+# that's real information about where you stand.</code></pre>
+
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>Finish a full mock under time pressure and self-score it honestly against the objective list above before looking anything up.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>Score it, log every missed objective, rebuild those labs from scratch</h2>
+      <div class="prose">
+        <p>This is where the real learning happens — not in taking the exam, but in the post-mortem. Keep a break/fix log, ideally the same one you started in Week 1 and will move into Git in Week 5.</p>
+      </div>
+
+      <div class="codeblock__label">Break/fix log entry format</div>
+      <pre class="codeblock"><code>## 2026-07-25 — Mock exam #1 — Score: 15/22 objectives
+
+### Missed: LVM volume group spanning two disks
+- What I did wrong: only added one physical volume to the VG
+- Root cause: forgot `vgextend` exists — assumed vgcreate takes multiple devices, and it does,
+  but I'd only prepped one PV with pvcreate before running vgcreate
+- Fix: pvcreate /dev/sdb1 /dev/sdc1 && vgcreate vg_data /dev/sdb1 /dev/sdc1
+- Rebuilt from scratch: yes, 3 times, until it was automatic
+
+### Missed: SELinux denial on custom web directory
+- What I did wrong: used chmod 777 to "fix" a permission-looking error that was actually SELinux
+- Root cause: didn't check `ausearch -m avc -ts recent` first
+- Fix: semanage fcontext -a -t httpd_sys_content_t "/srv/web(/.*)?" && restorecon -Rv /srv/web
+- Rebuilt from scratch: yes, 2 times</code></pre>
+
+      <div class="callout callout--warn">
+        <div class="callout__title">Common trap</div>
+        <p>Don't just read the correct answer and move on. Tear down the lab environment and rebuild each missed objective from a blank system, from memory, at least twice. Recognition is not recall — the exam requires recall.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">3</span>Repeat a second mock at the end of the week; target a clean pass</h2>
+      <div class="prose">
+        <p>Space the second mock at least 3-4 days after the first so the rebuild work has time to sink in. Use a different mock exam from linuxcert.guru if available, not the same one memorized.</p>
+      </div>
+
+      <div class="codeblock__label">Speed-drill: rehearse these until they take no thought</div>
+      <pre class="codeblock"><code>getenforce; setenforce 0; setenforce 1
+systemctl enable --now sshd
+useradd -m -G wheel newadmin && passwd newadmin
+firewall-cmd --add-service=http --permanent && firewall-cmd --reload
+pvcreate /dev/sdb1 && vgcreate vg1 /dev/sdb1 && lvcreate -n lv1 -L 5G vg1
+mkfs.xfs /dev/vg1/lv1 && mkdir /data && mount /dev/vg1/lv1 /data
+blkid /dev/vg1/lv1    # then add the UUID line to /etc/fstab, then: mount -a
+crontab -e            # add: */5 * * * * /usr/local/bin/script.sh
+chage -M 90 -W 7 newadmin
+setfacl -m u:auditor:r /data/report.txt && getfacl /data/report.txt</code></pre>
+
+      <div class="callout callout--success">
+        <div class="callout__title">Checkpoint</div>
+        <p>Pass the second mock at or above objective-mastery level — you should be scoring every category, not just most of them. If any single objective is still shaky, that's a half-day detour before Week 5, not something to carry forward.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">4</span>Optional: book the real EX200 for the end of Week 6</h2>
+      <div class="prose">
+        <p>The RHCSA (EX200) is administered by Red Hat, either at a testing center or remotely via a proctored online exam. If your two mocks both score cleanly, book it now — a deadline on the calendar is a forcing function, and Week 5-6 content (Git, Bash/Python automation) doesn't require re-touching Phase 0 material.</p>
+      </div>
+
+      <div class="codeblock__label">Booking checklist</div>
+      <pre class="codeblock"><code>1. Create/sign in to a Red Hat account: redhat.com
+2. Go to the Red Hat Certification portal and locate EX200
+3. Choose a delivery method:
+   - Individual exam at a Pearson VUE / Red Hat testing center
+   - Online Exam Delivery (remote, proctored, needs a private room and ID)
+4. Pick a date roughly 2-3 weeks out — enough runway, not so much you lose momentum
+5. Read the current exam objectives PDF from Red Hat's site the week before —
+   objectives do shift between RHEL major versions</code></pre>
+
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>This step is optional but strongly recommended (see the cost note on the main roadmap). If you skip the real exam, still hold yourself to the same mock-exam bar before moving into Phase 1 — the AWS phases assume this Linux foundation is solid.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-0-week-3.html">&larr; Week 3: Storage, networking &amp; SELinux</a>
+    <a class="btn" href="phase-0-week-5.html">Week 5: Git &amp; version control &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>

@@ -345,7 +345,12 @@
                 '<div class="week__head">' +
                   '<span class="week__n">' + esc(w.week) + "</span>" +
                   '<span class="week__focus">' + esc(w.focus) + "</span>" +
-                  '<span class="week__hrs">' + esc(w.hours) + " hrs</span>" +
+                  '<span class="week__right">' +
+                    (w.lab
+                      ? '<a class="week__lab" href="' + esc(w.lab) + '">' + ICON.ext + "Lab guide</a>"
+                      : "") +
+                    '<span class="week__hrs">' + esc(w.hours) + " hrs</span>" +
+                  "</span>" +
                 "</div>" +
                 '<ul class="tasks">' +
                   w.tasks.map(function (t, ti) {

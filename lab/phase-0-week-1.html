@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 1: Linux &amp; the shell — Free DevOps Roadmap</title>
+<meta name="description" content="Week 1 lab guide: install RHEL/Rocky Linux, filesystem navigation, redirection, pipes, grep/sed/awk, permissions, and a lockout-recovery lab.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-0-week-1.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark">ST</span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 0 · Linux Foundations</div>
+    <h1>Week 1: Linux &amp; the shell</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 1–6</span><span>RHCSA (EX200) track</span></div>
+    <div class="doc-hero__nav">
+      <span class="btn" aria-disabled="true">&larr; Start of plan</span>
+      <a class="btn" href="phase-0-week-2.html">Week 2 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Learn Linux For Work</a>
+      <a class="chip" href="https://www.skool.com/linux/classroom" target="_blank" rel="noopener noreferrer">Kubecraft Linux</a>
+      <a class="chip" href="https://www.redhat.com/en/interactive-labs" target="_blank" rel="noopener noreferrer">Red Hat Interactive Labs</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Install RHEL 10 or Rocky Linux 10 on a real machine</h2>
+      <div class="prose">
+        <p>Use a real machine or a VM on Proxmox/VirtualBox — see the Home Lab section on the main roadmap for hardware options. Rocky Linux is a free, bug-for-bug compatible rebuild of RHEL, so everything here applies to either distro.</p>
+        <p>Download the ISO and write it to a USB drive with <code>dd</code> (Linux/macOS) or balenaEtcher (any OS). Do not use disk-imaging tools that aren't purpose-built for bootable USB creation.</p>
+      </div>
+      <div class="codeblock__label">Write the ISO to USB (macOS/Linux — replace /dev/diskX with your actual device)</div>
+      <pre class="codeblock"><code># Find the device — DOUBLE CHECK this before running dd, it is destructive
+diskutil list                       # macOS
+lsblk                                # Linux
+
+# Unmount it first (macOS)
+diskutil unmountDisk /dev/diskX
+
+# Write the ISO — bs=4m keeps this reasonably fast without being reckless
+sudo dd if=Rocky-10-x86_64-dvd.iso of=/dev/rdiskX bs=4m status=progress
+sync</code></pre>
+      <div class="codeblock__label">After first boot, verify the install</div>
+      <pre class="codeblock"><code>cat /etc/os-release
+uname -r
+sudo dnf update -y
+sudo dnf install -y vim git curl wget bash-completion</code></pre>
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>You can SSH into the machine from your main computer, and <code>sudo dnf update -y</code> completes without error. If networking isn't up yet, that's Week 3 — for now, static config from the installer or DHCP is fine.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>Filesystem hierarchy, navigation, redirection, pipes, grep/sed/awk</h2>
+      <div class="prose">
+        <p>Everything in Linux hangs off a single root <code>/</code>. Know what lives where before you touch anything else:</p>
+      </div>
+      <pre class="codeblock"><code>/bin, /usr/bin      user commands (symlinked together on modern RHEL)
+/sbin, /usr/sbin    system administration commands
+/etc                system-wide configuration files
+/var                variable data: logs (/var/log), spool, cache
+/home               user home directories
+/root               root's home directory
+/tmp                world-writable temp storage, cleared on reboot
+/opt                third-party / optional software
+/proc, /sys         virtual filesystems exposing kernel and process state</code></pre>
+
+      <div class="codeblock__label">Navigation</div>
+      <pre class="codeblock"><code>pwd                       # print working directory
+ls -la                    # long listing, include dotfiles
+cd /var/log               # absolute path
+cd -                      # jump back to the previous directory
+cd ..                     # up one level
+find /etc -name "*.conf"  # find files by name
+find / -mtime -1 2>/dev/null   # files modified in the last day</code></pre>
+
+      <div class="codeblock__label">Redirection and pipes</div>
+      <pre class="codeblock"><code>echo "hello" > file.txt        # overwrite
+echo "again" >> file.txt       # append
+command 2> errors.log          # redirect stderr only
+command > out.log 2>&1         # redirect both stdout and stderr to the same file
+command < input.txt            # feed a file in as stdin
+
+ps aux | grep sshd             # pipe: filter process list
+dmesg | tail -20               # last 20 kernel log lines
+cat /var/log/messages | wc -l  # count lines</code></pre>
+
+      <div class="codeblock__label">grep — search text</div>
+      <pre class="codeblock"><code>grep "error" /var/log/messages
+grep -i "error" /var/log/messages       # case-insensitive
+grep -r "TODO" /etc/                    # recursive
+grep -v "^#" /etc/ssh/sshd_config       # invert match — exclude comments
+grep -c "Failed password" /var/log/secure   # count matches
+grep -E "fail(ed|ure)" /var/log/secure  # extended regex</code></pre>
+
+      <div class="codeblock__label">sed — stream editor</div>
+      <pre class="codeblock"><code>sed 's/foo/bar/' file.txt          # replace first match per line
+sed 's/foo/bar/g' file.txt         # replace all matches per line
+sed -i.bak 's/foo/bar/g' file.txt  # edit in place, keep a .bak backup
+sed -n '5,10p' file.txt            # print only lines 5-10
+sed '/^#/d' file.txt               # delete comment lines</code></pre>
+
+      <div class="codeblock__label">awk — field processing</div>
+      <pre class="codeblock"><code>awk '{print $1}' /etc/passwd -F:          # not valid — -F comes before the file
+awk -F: '{print $1}' /etc/passwd          # print field 1, colon-delimited
+awk -F: '{print $1, $3}' /etc/passwd      # username and UID
+awk -F: '$3 >= 1000 {print $1}' /etc/passwd   # human user accounts only
+df -h | awk '{print $5, $6}'              # disk usage % and mount point</code></pre>
+
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>Write a one-liner that lists every user with UID &gt;= 1000 from <code>/etc/passwd</code>, sorted alphabetically, using <code>awk</code> piped into <code>sort</code>. If you can do that without looking it up, this task is done.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">3</span>File permissions, ownership, umask, ACLs; hard vs symbolic links</h2>
+
+      <div class="codeblock__label">Reading permissions</div>
+      <pre class="codeblock"><code>ls -l file.txt
+# -rw-r--r-- 1 shea devops 220 Jul 25 10:00 file.txt
+#  |  |  |
+#  |  |  +-- other: read
+#  |  +----- group: read
+#  +-------- owner: read, write
+# type(-) | owner(rwx) | group(rwx) | other(rwx)</code></pre>
+
+      <div class="codeblock__label">chmod — symbolic and octal</div>
+      <pre class="codeblock"><code>chmod u+x script.sh          # add execute for owner
+chmod g-w file.txt            # remove write from group
+chmod o=r file.txt             # set other to read-only
+chmod 755 script.sh            # rwxr-xr-x — owner all, group/other read+execute
+chmod 644 file.txt             # rw-r--r-- — standard file default
+chmod -R 750 /srv/app          # recursive</code></pre>
+
+      <div class="codeblock__label">Ownership</div>
+      <pre class="codeblock"><code>chown shea file.txt
+chown shea:devops file.txt
+chgrp devops file.txt
+chown -R shea:devops /srv/app</code></pre>
+
+      <div class="codeblock__label">umask — default permission mask</div>
+      <pre class="codeblock"><code>umask                # show current mask, e.g. 0022
+umask 0027            # new files: 640, new dirs: 750
+# Files start at 666, dirs at 777; umask subtracts bits.
+# Set permanently in ~/.bashrc or /etc/profile</code></pre>
+
+      <div class="codeblock__label">ACLs — permissions beyond owner/group/other</div>
+      <pre class="codeblock"><code>setfacl -m u:jordan:rx /srv/app        # give user jordan read+execute
+setfacl -m g:auditors:r /srv/app       # give group auditors read
+getfacl /srv/app                        # view all ACL entries
+setfacl -x u:jordan /srv/app            # remove jordan's entry
+setfacl -b /srv/app                     # strip all ACLs</code></pre>
+
+      <div class="codeblock__label">Hard vs symbolic links</div>
+      <pre class="codeblock"><code>ln original.txt hardlink.txt      # hard link: same inode, same data
+ln -s original.txt symlink.txt    # symbolic link: a pointer to a path
+
+ls -li original.txt hardlink.txt  # note the identical inode number
+rm original.txt                   # hardlink.txt still has the data
+                                   # symlink.txt is now broken (dangling)</code></pre>
+
+      <div class="callout callout--warn">
+        <div class="callout__title">Common trap</div>
+        <p>Hard links can't cross filesystems and can't point to directories. Symlinks can do both, but break if the target moves or is deleted. Know which one a task calls for — this is a frequent RHCSA gotcha.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">4</span>Lab: recover a system you locked yourself out of</h2>
+      <div class="prose">
+        <p>Do this deliberately, on a VM or spare machine you can afford to break. Set a root password, then forget it on purpose, then recover it. This is a standard RHCSA objective and a real skill — you will do this for real, eventually, at 2am.</p>
+      </div>
+
+      <div class="codeblock__label">Step 1 — interrupt GRUB and edit the boot entry</div>
+      <pre class="codeblock"><code># Reboot, and at the GRUB menu press 'e' to edit the highlighted entry
+# Find the line starting with "linux" and append at the end:
+rd.break
+
+# Then press Ctrl+X (or F10) to boot with that change</code></pre>
+
+      <div class="codeblock__label">Step 2 — remount root read-write and chroot in</div>
+      <pre class="codeblock"><code>mount -o remount,rw /sysroot
+chroot /sysroot</code></pre>
+
+      <div class="codeblock__label">Step 3 — reset the password and set the SELinux relabel flag</div>
+      <pre class="codeblock"><code>passwd root
+# enter a new password twice
+
+touch /.autorelabel
+exit
+exit
+# system reboots</code></pre>
+
+      <div class="callout">
+        <div class="callout__title">Why /.autorelabel matters</div>
+        <p>Inside the <code>rd.break</code> shell, SELinux isn't fully initialized, so any file you edit — including <code>/etc/shadow</code> via <code>passwd</code> — gets the wrong SELinux context. <code>/.autorelabel</code> forces a full relabel of the filesystem on next boot, which fixes the context. Skip this and you'll likely get locked out of login again by SELinux denials.</p>
+      </div>
+
+      <div class="callout callout--success">
+        <div class="callout__title">Checkpoint</div>
+        <p>You can log in with the new root password after reboot, and <code>sudo ausearch -m avc -ts recent</code> shows no denials related to <code>/etc/shadow</code>. Do this lab twice from memory before moving on — Week 4's RHCSA mock exam will not give you these steps.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <span class="btn" aria-disabled="true">&larr; Start of plan</span>
+    <a class="btn" href="phase-0-week-2.html">Week 2: Users, services &amp; packages &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>

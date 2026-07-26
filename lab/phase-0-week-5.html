@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 5: Git &amp; version control — Free DevOps Roadmap</title>
+<meta name="description" content="Week 5 lab guide: branching, merging, rebasing and conflict resolution, opening a pull request, setting up a GitHub org for the capstone, and tracking a break/fix log in Git.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-0-week-5.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark">ST</span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 0 · Linux Foundations</div>
+    <h1>Week 5: Git &amp; version control</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 1–6</span><span>RHCSA (EX200) track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-0-week-4.html">&larr; Week 4</a>
+      <a class="btn" href="phase-0-week-6.html">Week 6 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener noreferrer">Pro Git book</a>
+      <a class="chip" href="https://www.theodinproject.com/" target="_blank" rel="noopener noreferrer">The Odin Project</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Branching, merging, rebasing, conflict resolution</h2>
+
+      <div class="codeblock__label">Branching</div>
+      <pre class="codeblock"><code>git branch                          # list local branches
+git checkout -b feature/backup-script    # create and switch
+git switch -c feature/backup-script      # same thing, newer syntax
+git branch -d feature/backup-script      # delete a merged branch
+git branch -D feature/backup-script      # force-delete an unmerged branch</code></pre>
+
+      <div class="codeblock__label">Merging</div>
+      <pre class="codeblock"><code>git checkout main
+git merge feature/backup-script      # fast-forward if possible, otherwise a merge commit
+git merge --no-ff feature/backup-script    # always create a merge commit, even if fast-forward is possible
+git log --oneline --graph --all      # visualize branch history</code></pre>
+
+      <div class="codeblock__label">Rebasing</div>
+      <pre class="codeblock"><code>git checkout feature/backup-script
+git rebase main                      # replay your commits on top of main's latest
+git rebase -i HEAD~3                 # interactive rebase — squash/reword/reorder last 3 commits
+
+# If a rebase goes wrong and you want out:
+git rebase --abort</code></pre>
+
+      <div class="codeblock__label">Resolving a conflict</div>
+      <pre class="codeblock"><code># git merge or rebase stops and marks the file:
+<<<<<<< HEAD
+timeout = 30
+=======
+timeout = 60
+>>>>>>> feature/backup-script
+
+# Edit the file to the version you want, removing the markers, then:
+git add config.yml
+git merge --continue      # if you were merging
+git rebase --continue      # if you were rebasing</code></pre>
+
+      <div class="callout callout--warn">
+        <div class="callout__title">Merge vs rebase — when to use which</div>
+        <p>Rebase your own feature branch to keep history linear before opening a PR. Never rebase a branch that others have already pulled from — it rewrites commit hashes and breaks their history. Merge (not rebase) when integrating a shared branch like <code>main</code>.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>Open a PR against a public repo; practice code review etiquette</h2>
+
+      <div class="codeblock__label">Fork, branch, push, open a PR</div>
+      <pre class="codeblock"><code>gh repo fork some-org/some-project --clone
+cd some-project
+git checkout -b fix/typo-in-readme
+
+# make your change
+git add README.md
+git commit -m "Fix typo in installation section"
+git push -u origin fix/typo-in-readme
+
+gh pr create --title "Fix typo in installation section" \
+  --body "Small doc fix — 'recieve' to 'receive' in the install steps."</code></pre>
+
+      <div class="codeblock__label">Reviewing someone else's PR</div>
+      <pre class="codeblock"><code>gh pr list --repo some-org/some-project
+gh pr checkout 42 --repo some-org/some-project   # pull their branch locally to test it
+gh pr diff 42
+gh pr review 42 --approve --body "LGTM, tested locally."
+gh pr review 42 --request-changes --body "See inline comment on error handling."</code></pre>
+
+      <div class="callout">
+        <div class="callout__title">Code review etiquette</div>
+        <p>Start with something specific you liked, not just critique. Ask questions ("what happens if this input is empty?") rather than issuing commands ("add a null check"). Keep feedback about the code, not the author. Small, focused PRs get reviewed faster and merged faster than large ones — this applies to your own PRs too.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">3</span>Set up a GitHub org for the capstone project — start it now</h2>
+      <div class="prose">
+        <p>The capstone in Phase 8 pulls together everything from every phase. Starting the org and repo now means eleven months of commits by the time you need it as a portfolio piece — that history is itself evidence of consistency.</p>
+      </div>
+
+      <div class="codeblock__label">Create the org and seed repo</div>
+      <pre class="codeblock"><code># Via the GitHub UI: github.com/account/organizations/new (free tier is enough)
+
+# Then, locally:
+gh repo create your-org/capstone-project --public \
+  --description "54-week DevOps roadmap capstone: cloud-native app on AWS" \
+  --clone
+
+cd capstone-project
+mkdir -p docs infra/terraform src .github/workflows
+echo "# Capstone Project" > README.md
+git add -A
+git commit -m "Initial capstone repo structure"
+git push -u origin main</code></pre>
+
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>The org and repo exist, have a README describing the eventual project (even as a rough draft — you'll refine it every phase), and branch protection is on for <code>main</code> (Settings → Branches → require PRs before merge). Treat it like a real team repo from day one.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">4</span>Move your break/fix log into the repo and commit to it weekly</h2>
+      <div class="prose">
+        <p>You started this log in Week 1. Move it into version control now so it becomes a searchable, dated record instead of scattered notes.</p>
+      </div>
+
+      <div class="codeblock__label">Set it up</div>
+      <pre class="codeblock"><code>cd capstone-project
+mkdir -p docs
+mv ~/notes/break-fix-log.md docs/break-fix-log.md
+git add docs/break-fix-log.md
+git commit -m "Add break/fix log tracking the roadmap"
+git push</code></pre>
+
+      <div class="codeblock__label">A weekly habit worth automating later (Phase 6 territory, but start the habit now)</div>
+      <pre class="codeblock"><code># Every Friday:
+cd capstone-project
+$EDITOR docs/break-fix-log.md      # add this week's entries
+git add docs/break-fix-log.md
+git commit -m "Break/fix log: Week $(date +%V)"
+git push</code></pre>
+
+      <div class="callout callout--success">
+        <div class="callout__title">Checkpoint</div>
+        <p>Run <code>git log --oneline -- docs/break-fix-log.md</code> at the end of Phase 0 and see at least six weekly commits. This log becomes one of the most concrete things you can point to in an interview — "here's every mistake I made and how I fixed it, dated and public."</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-0-week-4.html">&larr; Week 4: RHCSA checkpoint</a>
+    <a class="btn" href="phase-0-week-6.html">Week 6: Python &amp; Bash automation &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>

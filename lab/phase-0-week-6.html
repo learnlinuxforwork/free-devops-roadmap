@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 6: Python &amp; Bash automation — Free DevOps Roadmap</title>
+<meta name="description" content="Week 6 lab guide: Bash functions, argument parsing, set -euo pipefail and traps, Python file I/O and error handling, three real automation scripts, and your first boto3 AWS API call.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://free.learnlinuxforwork.com/lab/phase-0-week-6.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("fdr.theme.v1");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="brand" href="../index.html">
+    <span class="brand__mark">ST</span>
+    <span class="brand__text">
+      <span class="brand__title">Free DevOps Roadmap</span>
+      <span class="brand__sub">by Shea&#39;s Tech · free.learnlinuxforwork.com</span>
+    </span>
+  </a>
+  <span class="header__spacer"></span>
+  <button class="btn btn--icon" data-theme-toggle title="Toggle dark / light mode" aria-label="Toggle dark or light mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="4.2" y1="4.2" x2="6" y2="6"/><line x1="18" y1="18" x2="19.8" y2="19.8"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.2" y1="19.8" x2="6" y2="18"/><line x1="18" y1="6" x2="19.8" y2="4.2"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+  <a class="btn" href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer" title="Source on GitHub" aria-label="Source on GitHub">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+  </a>
+</header>
+
+<main class="doc-shell" id="main">
+  <a class="doc-back" href="../index.html#phases">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to the roadmap
+  </a>
+
+  <div class="doc-hero">
+    <div class="doc-hero__kicker">Phase 0 · Linux Foundations</div>
+    <h1>Week 6: Python &amp; Bash automation</h1>
+    <div class="doc-hero__meta"><span>8–10 hrs</span><span>Weeks 1–6</span><span>RHCSA (EX200) track</span></div>
+    <div class="doc-hero__nav">
+      <a class="btn" href="phase-0-week-5.html">&larr; Week 5</a>
+      <a class="btn" href="../index.html#phases">Phase 1 &rarr;</a>
+    </div>
+  </div>
+
+  <section class="doc-refs">
+    <h2>Reference &amp; community links</h2>
+    <div class="chips">
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux — command reference</a>
+      <a class="chip chip--accent" href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood — questions &amp; forum</a>
+      <a class="chip" href="https://scrimba.com/learn-python-c03?via=u4481332" target="_blank" rel="noopener noreferrer">Scrimba Python</a>
+      <a class="chip" href="https://automatetheboringstuff.com/" target="_blank" rel="noopener noreferrer">Automate the Boring Stuff</a>
+    </div>
+  </section>
+
+  <section>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">1</span>Bash: functions, arg parsing, set -euo pipefail, traps</h2>
+
+      <div class="codeblock__label">Functions</div>
+      <pre class="codeblock"><code>backup_dir() {
+  local src="$1"
+  local dest="$2"
+  tar -czf "${dest}/backup-$(date +%Y%m%d-%H%M%S).tar.gz" -C "$src" .
+  echo "Backed up $src to $dest"
+}
+
+backup_dir /etc /srv/backups</code></pre>
+
+      <div class="codeblock__label">Argument parsing with getopts</div>
+      <pre class="codeblock"><code>#!/usr/bin/env bash
+while getopts "s:d:v" opt; do
+  case "$opt" in
+    s) SRC="$OPTARG" ;;
+    d) DEST="$OPTARG" ;;
+    v) VERBOSE=1 ;;
+    *) echo "Usage: $0 -s source -d dest [-v]"; exit 1 ;;
+  esac
+done
+
+[ -z "$SRC" ] && { echo "Error: -s source is required"; exit 1; }
+echo "Backing up $SRC to ${DEST:-/srv/backups}"</code></pre>
+
+      <div class="codeblock__label">set -euo pipefail — fail loudly instead of silently</div>
+      <pre class="codeblock"><code>#!/usr/bin/env bash
+set -euo pipefail
+# -e: exit immediately if any command fails
+# -u: treat unset variables as an error, not an empty string
+# -o pipefail: a pipeline fails if ANY command in it fails, not just the last one
+
+# Without pipefail, this would report success even if grep found nothing:
+cat missing-file.txt | grep "error"   # now correctly exits non-zero</code></pre>
+
+      <div class="codeblock__label">Traps — guaranteed cleanup</div>
+      <pre class="codeblock"><code>#!/usr/bin/env bash
+set -euo pipefail
+
+TMPDIR=$(mktemp -d)
+cleanup() {
+  echo "Cleaning up $TMPDIR"
+  rm -rf "$TMPDIR"
+}
+trap cleanup EXIT             # runs on normal exit AND on error
+trap 'echo "Interrupted"; exit 130' INT
+
+# ... script logic that uses $TMPDIR ...
+echo "Working in $TMPDIR"</code></pre>
+
+      <div class="callout">
+        <div class="callout__title">Checkpoint</div>
+        <p>Write a script that takes <code>-s</code> and <code>-d</code> flags, uses <code>set -euo pipefail</code>, and cleans up a temp directory via <code>trap</code> even if you kill it mid-run with Ctrl+C.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">2</span>Python: file I/O, error handling, venvs, requests</h2>
+
+      <div class="codeblock__label">File I/O — always use a context manager</div>
+      <pre class="codeblock"><code>with open("access.log") as f:
+    for line in f:
+        if "ERROR" in line:
+            print(line.strip())
+
+with open("report.txt", "w") as f:
+    f.write("Report generated\n")
+
+with open("data.json") as f:
+    import json
+    data = json.load(f)</code></pre>
+
+      <div class="codeblock__label">Error handling</div>
+      <pre class="codeblock"><code>import sys
+
+try:
+    with open("config.yml") as f:
+        contents = f.read()
+except FileNotFoundError:
+    print("config.yml not found", file=sys.stderr)
+    sys.exit(1)
+except PermissionError as e:
+    print(f"Permission denied: {e}", file=sys.stderr)
+    sys.exit(1)
+else:
+    print("Loaded config successfully")
+finally:
+    print("Done attempting to load config")</code></pre>
+
+      <div class="codeblock__label">Virtual environments</div>
+      <pre class="codeblock"><code>python3 -m venv .venv
+source .venv/bin/activate
+pip install requests boto3
+pip freeze > requirements.txt
+deactivate</code></pre>
+
+      <div class="codeblock__label">requests</div>
+      <pre class="codeblock"><code>import requests
+
+resp = requests.get("https://api.github.com/repos/torvalds/linux", timeout=10)
+resp.raise_for_status()              # raises an exception on 4xx/5xx instead of failing silently
+data = resp.json()
+print(data["stargazers_count"])
+
+resp = requests.post(
+    "https://api.example.com/items",
+    json={"name": "widget"},
+    headers={"Authorization": "Bearer TOKEN"},
+    timeout=10,
+)</code></pre>
+
+      <div class="callout callout--warn">
+        <div class="callout__title">Common trap</div>
+        <p>Never skip <code>timeout=</code> on a <code>requests</code> call — without it, a hung remote server will hang your script forever. And always call <code>raise_for_status()</code> or check <code>resp.status_code</code> explicitly; a 500 response with a JSON error body will otherwise parse "successfully" and fail somewhere confusing downstream.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">3</span>Write 3 automation scripts (log parser, backup script, API poller)</h2>
+
+      <div class="codeblock__label">1. Log parser — count HTTP status codes in an access log</div>
+      <pre class="codeblock"><code>#!/usr/bin/env python3
+import re
+import sys
+from collections import Counter
+
+pattern = re.compile(r'"\w+ \S+ HTTP/[\d.]+" (\d{3})')
+
+def main(path):
+    counts = Counter()
+    with open(path) as f:
+        for line in f:
+            m = pattern.search(line)
+            if m:
+                counts[m.group(1)] += 1
+    for status, n in sorted(counts.items()):
+        print(f"{status}: {n}")
+
+if __name__ == "__main__":
+    main(sys.argv[1] if len(sys.argv) > 1 else "/var/log/nginx/access.log")</code></pre>
+
+      <div class="codeblock__label">2. Backup script — tar with timestamp, keep the last 7</div>
+      <pre class="codeblock"><code>#!/usr/bin/env bash
+set -euo pipefail
+
+SRC="/etc"
+DEST="/srv/backups"
+STAMP=$(date +%Y%m%d-%H%M%S)
+FILE="${DEST}/etc-${STAMP}.tar.gz"
+
+mkdir -p "$DEST"
+tar -czf "$FILE" -C "$(dirname "$SRC")" "$(basename "$SRC")"
+echo "Created $FILE"
+
+# Rotate: keep only the 7 most recent backups
+ls -1t "${DEST}"/etc-*.tar.gz | tail -n +8 | xargs -r rm --
+echo "Rotation complete, $(ls "${DEST}"/etc-*.tar.gz | wc -l) backups retained"</code></pre>
+
+      <div class="codeblock__label">3. API poller — check an endpoint on an interval, log status</div>
+      <pre class="codeblock"><code>#!/usr/bin/env python3
+import time
+import requests
+import logging
+
+logging.basicConfig(
+    filename="poller.log",
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+)
+
+URL = "https://api.example.com/health"
+INTERVAL_SECONDS = 60
+
+def poll_once():
+    try:
+        resp = requests.get(URL, timeout=10)
+        logging.info("status=%s latency_ms=%d", resp.status_code, resp.elapsed.microseconds // 1000)
+    except requests.RequestException as e:
+        logging.error("poll failed: %s", e)
+
+if __name__ == "__main__":
+    while True:
+        poll_once()
+        time.sleep(INTERVAL_SECONDS)</code></pre>
+
+      <div class="callout callout--success">
+        <div class="callout__title">Checkpoint</div>
+        <p>All three scripts run without errors against real data, and the poller is wired up as a systemd service (see Week 2) instead of left running in a terminal tab.</p>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <h2><span class="task-block__n">4</span>Install and configure boto3; make your first AWS API call</h2>
+
+      <div class="codeblock__label">Install and configure credentials</div>
+      <pre class="codeblock"><code>pip install boto3
+
+aws configure
+# AWS Access Key ID: AKIA...
+# AWS Secret Access Key: ****
+# Default region name: us-east-1
+# Default output format: json
+
+# Credentials are stored in ~/.aws/credentials and ~/.aws/config</code></pre>
+
+      <div class="codeblock__label">First API call</div>
+      <pre class="codeblock"><code>import boto3
+
+s3 = boto3.client("s3")
+response = s3.list_buckets()
+for bucket in response["Buckets"]:
+    print(bucket["Name"])
+
+# Using a resource interface instead of a low-level client:
+ec2 = boto3.resource("ec2")
+for instance in ec2.instances.all():
+    print(instance.id, instance.state["Name"])</code></pre>
+
+      <div class="callout callout--warn">
+        <div class="callout__title">Security note</div>
+        <p>Never commit AWS credentials to Git — not even to a private repo. Use <code>aws configure</code>, environment variables, or (later, in Phase 1) IAM roles. Add <code>.aws/</code> and any <code>*.pem</code> files to your global <code>.gitignore</code> now, before you have anything to leak.</p>
+      </div>
+
+      <div class="callout callout--success">
+        <div class="callout__title">Phase 0 exit criteria</div>
+        <p>You can pass a timed RHCSA mock without notes, you push to Git without thinking about it, and you have three working automation scripts in a public repo. If any of those is shaky, spend an extra week here — every phase that follows assumes it.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="doc-hero__nav" style="margin-top:8px">
+    <a class="btn" href="phase-0-week-5.html">&larr; Week 5: Git &amp; version control</a>
+    <a class="btn" href="../index.html#phases">Back to the full plan &rarr;</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <strong>Free DevOps Roadmap</strong> — free.learnlinuxforwork.com<br>
+      Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPL v3.0 or later</a>. Free forever.
+    </div>
+    <div class="footer__links">
+      <a href="https://www.learnlinuxforwork.com" target="_blank" rel="noopener noreferrer">Linux training</a>
+      <a href="https://learnlinuxforwork.com/doc-linux" target="_blank" rel="noopener noreferrer">Doc Linux</a>
+      <a href="https://learnlinuxforwork.com/the-hood" target="_blank" rel="noopener noreferrer">The Hood</a>
+      <a href="https://github.com/learnlinuxforwork/free-devops-roadmap" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>
