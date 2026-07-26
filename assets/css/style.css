@@ -344,6 +344,8 @@ li { margin-bottom: 5px; }
   border-radius: var(--radius); border: 1px solid var(--border);
   box-shadow: var(--shadow-lg); background: #000;
 }
+.story__social { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.story__social .btn { flex: 1; justify-content: center; white-space: nowrap; }
 .story__text p { max-width: 78ch; }
 .story__quote {
   font-size: 15.5px; font-style: italic; line-height: 1.7;
