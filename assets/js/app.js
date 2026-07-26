@@ -279,7 +279,9 @@
               g.items.map(function (it) {
                 return (
                   '<a class="res" href="' + esc(it.url) + '" target="_blank" rel="noopener noreferrer">' +
-                  '<div class="res__name">' + esc(it.name) + ICON.ext + "</div>" +
+                  '<div class="res__name">' + esc(it.name) + ICON.ext +
+                    (it.badge ? '<span class="chip chip--warn">' + esc(it.badge) + "</span>" : "") +
+                  "</div>" +
                   '<div class="res__desc">' + esc(it.desc) + "</div></a>"
                 );
               }).join("") +

@@ -802,7 +802,8 @@
         "category": "Community",
         "items": [
           { "name": "r/devops", "url": "https://www.reddit.com/r/devops/", "desc": "Plus r/aws and r/linuxadmin. Good for unblocking and reality checks." },
-          { "name": "AWS re:Post", "url": "https://repost.aws/", "desc": "AWS's official Q&A community." }
+          { "name": "AWS re:Post", "url": "https://repost.aws/", "desc": "AWS's official Q&A community." },
+          { "name": "The Hood", "url": "https://learnlinuxforwork.com/the-hood", "desc": "Learn Linux For Work's community space to ask questions and connect with other learners.", "badge": "Requires Login" }
         ]
       }
     ]

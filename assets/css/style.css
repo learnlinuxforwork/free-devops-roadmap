@@ -462,6 +462,7 @@ tbody td:first-child { color: var(--text); font-weight: 600; }
 }
 a.chip:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; background: var(--info-bg); }
 .chip--accent { background: var(--info-bg); border-color: color-mix(in srgb, var(--accent) 30%, transparent); color: var(--accent); }
+.chip--warn { background: var(--warn-bg); border-color: color-mix(in srgb, var(--warn) 35%, transparent); color: var(--warn); }
 
 /* progress ring */
 .ring { display: block; transform: rotate(-90deg); }
