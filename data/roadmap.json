@@ -164,7 +164,7 @@
       "title": "Start here — the three-step path",
       "steps": [
         "Buy a used business laptop (~$100–$200) with 16 GB RAM and an SSD.",
-        "Wipe it and install <strong>RHEL 10</strong> using the free Red Hat Developer subscription (covers up to <strong>16 machines</strong>), or <strong>Rocky Linux 10</strong> if you'd rather not create an account.",
+        "Wipe whatever came on it and install <strong>RHEL 10</strong> using the free Red Hat Developer subscription (covers up to <strong>16 machines</strong>), or <strong>Rocky Linux 10</strong> if you'd rather not create an account.",
         "Break it, fix it, reinstall it. Repeat until reinstalling is boring."
       ]
     },
@@ -177,7 +177,7 @@
       {
         "step": "Step 1",
         "title": "Pick your operating system",
-        "intro": "Both are RHEL 10 for exam purposes. Use real RHEL if you can; Rocky is the free rebuild — same commands, no account required.",
+        "intro": "The first two are RHEL 10 for exam purposes — use real RHEL if you can, Rocky is the free rebuild with the same commands. Ubuntu is a different family; keep it on a second machine.",
         "columns": ["Operating system", "What it is and when to use it", "Cost"],
         "items": [
           {
@@ -193,12 +193,19 @@
             "url": "https://rockylinux.org/",
             "desc": "A community rebuild of RHEL 10 — bug-for-bug compatible, no account, no limits. Use it for extra nodes once you've used up your 16 RHEL entitlements, or if you want to lab without registering anything.",
             "meta": "Free · unlimited"
+          },
+          {
+            "name": "Ubuntu",
+            "sub": "Canonical — ubuntu.com",
+            "url": "https://ubuntu.com/",
+            "desc": "Not RHEL-compatible, so it is the wrong choice for RHCSA practice — but it is the distro you are most likely to meet at work. It is the default on most AWS EC2 images and in a large share of job postings. Run it on a <em>second</em> machine or VM alongside RHEL so you are fluent in both <code>dnf</code> and <code>apt</code>, and use it as your primary distro if you are targeting LFCS instead of RHCSA.",
+            "meta": "Free · unlimited"
           }
         ],
         "after": {
           "title": "Installing it",
           "bullets": [
-            "Download the DVD ISO from <a href=\"https://developers.redhat.com/products/rhel/download\" target=\"_blank\" rel=\"noopener\">developers.redhat.com</a> (RHEL) or <a href=\"https://rockylinux.org/\" target=\"_blank\" rel=\"noopener\">rockylinux.org</a> (Rocky).",
+            "Download the ISO from <a href=\"https://developers.redhat.com/products/rhel/download\" target=\"_blank\" rel=\"noopener\">developers.redhat.com</a> (RHEL), <a href=\"https://rockylinux.org/\" target=\"_blank\" rel=\"noopener\">rockylinux.org</a> (Rocky), or <a href=\"https://ubuntu.com/\" target=\"_blank\" rel=\"noopener\">ubuntu.com</a> (Ubuntu).",
             "Write it to a USB stick with <code>dd</code> or balenaEtcher, then boot the laptop from USB.",
             "<strong>Install to bare metal</strong> — wipe the whole disk. This is a lab machine, not your daily driver.",
             "Need more than one node? Install <a href=\"https://www.virtualbox.org/\" target=\"_blank\" rel=\"noopener\">Oracle VirtualBox</a> on a second machine (or on the laptop itself) and run 2–3 VMs. Snapshot before every lab so you can roll back in seconds."
@@ -222,8 +229,36 @@
             "url": "https://www.ebay.com/str/nurtech",
             "desc": "Cheapest and roughest. Expect cosmetic damage and possible self-repairs (battery, keyboard, screen). Great value if you're comfortable with a screwdriver.",
             "meta": "Budget / as-is"
+          },
+          {
+            "name": "Back Market",
+            "url": "https://www.backmarket.com/en-us/l/computers-laptops/41f464b5-9356-48d3-86c3-a2bf52ced60e#price=0&price=300",
+            "desc": "Marketplace of vetted refurbishers with a 1-year warranty and a 30-day return window — the safest used purchase if you have never bought refurbished before. That link is pre-filtered to laptops under $300.",
+            "meta": "Warrantied · under $300"
+          },
+          {
+            "name": "Refurb.me",
+            "url": "https://www.refurb.me/",
+            "desc": "Price tracker and aggregator for refurbished Macs, including Apple's own certified refurbished stock. Set an alert and wait for a deal rather than buying on the day you start looking.",
+            "meta": "Deal tracker"
+          },
+          {
+            "name": "Mac of All Trades",
+            "url": "https://www.macofalltrades.com/",
+            "desc": "Long-running used Mac dealer with graded conditions and warranties. Older Intel MacBook Pros land cheap here and make excellent Linux laptops.",
+            "meta": "Used Macs"
           }
-        ]
+        ],
+        "after": {
+          "title": "Yes — you can wipe a used MacBook and install Linux on it",
+          "bullets": [
+            "A used Mac is just a laptop. Wipe macOS entirely, install RHEL, Rocky, or Ubuntu, and you have a lab machine with a great screen, keyboard, and build quality for the price of a beat-up plastic PC.",
+            "<strong>Intel Macs (roughly 2012–2020) are the safe buy.</strong> Linux installs and runs on them the same way it does on any other x86 laptop — boot from USB, wipe the disk, done. These are the cheapest good laptops on the used market right now precisely because macOS has dropped support for many of them.",
+            "<strong>Apple Silicon Macs (M1 and later) are the harder path.</strong> Linux on them means <a href=\"https://asahilinux.org/\" target=\"_blank\" rel=\"noopener\">Asahi Linux</a>, which is impressive but still incomplete, and RHEL and Rocky do not target that hardware. If you want a Mac for this lab, buy Intel.",
+            "Hold <code>Option</code> at boot to pick the USB installer. On a T2-chip Mac (2018–2020) you must first disable Secure Boot in Recovery → Startup Security Utility, or the installer will not boot.",
+            "Check the battery cycle count and the keyboard before you buy — the 2016–2019 butterfly keyboards were a known failure point."
+          ]
+        }
       },
       {
         "step": "Option B",
