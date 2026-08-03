@@ -2,9 +2,9 @@
 
 <img src="assets/img/ST-Brain-Logo-badge.png" width="96" height="96" alt="Shea's Tech">
 
-# Free DevOps Roadmap
+# AWS DevOps
 
-**A free, open-source, 54-week self-study roadmap from `ls -la` to**
+**An open-source, 54-week self-study roadmap from `ls -la` to**
 **AWS Certified DevOps Engineer – Professional.**
 
 [**free.learnlinuxforwork.com**](https://free.learnlinuxforwork.com) · [CHANGELOG](CHANGELOG.md)

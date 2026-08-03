@@ -1,5 +1,5 @@
 /*
- * Free DevOps Roadmap — free.learnlinuxforwork.com
+ * AWS DevOps — free.learnlinuxforwork.com
  * Copyright (C) 2026 Shea's Tech
  * Licensed under the GNU AGPL v3.0 or later.
  */
@@ -124,7 +124,7 @@
     /* hero */
     html.push(
       '<section class="hero">' +
-        '<div class="hero__kicker">' + esc(data.meta.org) + " · Free &amp; open source</div>" +
+        '<div class="hero__kicker">' + esc(data.meta.org) + " · Open source</div>" +
         "<h1>" + esc(data.meta.title) + "</h1>" +
         '<p class="hero__lead">' + esc(data.meta.subtitle) + ". " + esc(data.meta.tagline) + "</p>" +
         '<div class="hero__stats">' +
