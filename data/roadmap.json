@@ -914,5 +914,108 @@
       { "head": "Buy the voucher early.", "text": "Treat every exam voucher purchase as a deadline. Buy it 2–3 weeks out to force commitment." },
       { "head": "Revisit the fundamentals.", "text": "When a Kubernetes or AWS problem stops making sense, drop down a layer — it's usually Linux." }
     ]
+  },
+
+  "credits": {
+    "id": "credits",
+    "title": "Credits and Trademarks",
+    "subtitle": "This course is independent. Every product named here belongs to somebody, and that somebody is not me.",
+    "body": [
+      "This is an independent, self-study roadmap. It is <strong>not affiliated with, sponsored by, endorsed by, or certified by</strong> Amazon Web Services, Red Hat, Inc., the Cloud Native Computing Foundation, or any other organization named on this page. Nothing here is official courseware, and completing this roadmap guarantees nothing about any exam.",
+      "All roadmap text, lab guides, and scripts are original work by Shea, released under the GNU AGPL v3.0 or later. Exam guides and objectives are published directly by each certifying body — AWS, Red Hat, and the Linux Foundation — and are the authoritative statement of what each exam covers. Always check the source before you book one."
+    ],
+    "columns": ["Product or mark", "Belongs to", "Used here for"],
+    "rows": [
+      [
+        "AWS, Amazon Web Services, Amazon EC2, Amazon EKS, AWS CloudFormation, AWS CDK, Amazon ECR, and the AWS Certified Cloud Practitioner / Solutions Architect / Developer / SysOps Administrator / DevOps Engineer certifications",
+        "Amazon.com, Inc.",
+        "The cloud platform and five-certification track this roadmap is built around, from Phase 1 through the DOP-C02 capstone. AWS publishes the exam guides every phase maps to. <a href=\"https://aws.amazon.com/\" target=\"_blank\" rel=\"noopener\">aws.amazon.com</a>"
+      ],
+      [
+        "Red Hat, Red Hat Enterprise Linux (RHEL), RHCSA, Ansible",
+        "Red Hat, Inc.",
+        "The Linux foundation built in Phase 0, the RHCSA certification recommended as this roadmap's Linux credential, and the configuration-management tool used in Phase 7. <a href=\"https://www.redhat.com/\" target=\"_blank\" rel=\"noopener\">redhat.com</a>"
+      ],
+      [
+        "Rocky Linux",
+        "Rocky Enterprise Software Foundation",
+        "A free, community-maintained rebuild of RHEL, used as the no-account practice option for the Phase 0 Linux lab. <a href=\"https://rockylinux.org/\" target=\"_blank\" rel=\"noopener\">rockylinux.org</a>"
+      ],
+      [
+        "Ubuntu",
+        "Canonical Ltd.",
+        "Recommended host OS for the lab hypervisor, and the default guest OS on most AWS EC2 images referenced throughout. <a href=\"https://ubuntu.com/\" target=\"_blank\" rel=\"noopener\">ubuntu.com</a>"
+      ],
+      [
+        "Oracle VirtualBox",
+        "Oracle Corporation",
+        "Free hypervisor option for running extra nodes on a laptop, Phase 0 home lab. <a href=\"https://www.virtualbox.org/\" target=\"_blank\" rel=\"noopener\">virtualbox.org</a>"
+      ],
+      [
+        "Proxmox VE",
+        "Proxmox Server Solutions GmbH",
+        "Bare-metal hypervisor option for a dedicated home-lab server, Phase 3 onward. <a href=\"https://www.proxmox.com/\" target=\"_blank\" rel=\"noopener\">proxmox.com</a>"
+      ],
+      [
+        "Docker",
+        "Docker, Inc.",
+        "Container fundamentals in Phase 4, before Kubernetes. <a href=\"https://www.docker.com/\" target=\"_blank\" rel=\"noopener\">docker.com</a>"
+      ],
+      [
+        "Kubernetes, Helm, Argo, ArgoCD, Prometheus",
+        "Their respective open source communities, under the Cloud Native Computing Foundation",
+        "Core objects, Amazon EKS, Helm charts, GitOps delivery, and metrics/alerting across Phase 4 and Phase 6. <a href=\"https://www.cncf.io/\" target=\"_blank\" rel=\"noopener\">cncf.io</a>"
+      ],
+      [
+        "Grafana",
+        "Grafana Labs",
+        "Dashboards and visualization paired with Prometheus, Phase 6. <a href=\"https://grafana.com/\" target=\"_blank\" rel=\"noopener\">grafana.com</a>"
+      ],
+      [
+        "Terraform",
+        "HashiCorp, Inc.",
+        "Infrastructure as Code in Phase 3, from syntax to a real provisioned environment. <a href=\"https://www.terraform.io/\" target=\"_blank\" rel=\"noopener\">terraform.io</a>"
+      ],
+      [
+        "Checkov",
+        "Bridgecrew (Palo Alto Networks, Inc.)",
+        "Static analysis for Terraform and CloudFormation, referenced in Phase 3. <a href=\"https://www.checkov.io/\" target=\"_blank\" rel=\"noopener\">checkov.io</a>"
+      ],
+      [
+        "GitHub, GitHub Actions",
+        "GitHub, Inc.",
+        "Version control from Phase 0 onward, and the CI/CD pipeline tool built in Phase 5. <a href=\"https://github.com/\" target=\"_blank\" rel=\"noopener\">github.com</a>"
+      ],
+      [
+        "Jenkins",
+        "The Jenkins project, a Continuous Delivery Foundation project",
+        "Named as an alternative CI/CD pipeline tool in Phase 5. <a href=\"https://www.jenkins.io/\" target=\"_blank\" rel=\"noopener\">jenkins.io</a>"
+      ],
+      [
+        "Linux Foundation, LFCS, CKA, CKAD",
+        "The Linux Foundation",
+        "Named as a distro-neutral alternative to RHCSA, and the source of the Kubernetes certification track. <a href=\"https://www.linuxfoundation.org/\" target=\"_blank\" rel=\"noopener\">linuxfoundation.org</a>"
+      ],
+      [
+        "Cantrill (learn.cantrill.io), Tutorials Dojo, KodeKloud, LabEx, Scrimba",
+        "Their respective owners — Adrian Cantrill; Tutorials Dojo; KodeKloud; LabEx; Scrimba AS",
+        "Third-party training platforms referenced throughout the AWS phases, some linked with affiliate codes that help fund this roadmap at no extra cost to you."
+      ],
+      [
+        "The Scrum Guide",
+        "Ken Schwaber and Jeff Sutherland",
+        "Referenced as the source of truth for Scrum ceremonies, Phase 7. <a href=\"https://scrumguides.org/\" target=\"_blank\" rel=\"noopener\">scrumguides.org</a>"
+      ],
+      [
+        "Linux",
+        "Linus Torvalds",
+        "The kernel every phase of this roadmap ultimately runs on, registered trademark in the US and other countries."
+      ]
+    ],
+    "note": {
+      "kind": "info",
+      "title": "Trademark notice",
+      "text": "All trademarks, service marks, and trade names are the property of their respective owners. Their use here is nominative — to identify the products this roadmap teaches you to use — and does not imply any affiliation with or endorsement by the trademark holders. If you own one of these marks and want the wording changed, <a href=\"https://github.com/learnlinuxforwork/free-devops-roadmap/issues\" target=\"_blank\" rel=\"noopener\">open an issue</a> and it will be fixed."
+    }
   }
 }

@@ -333,6 +333,19 @@
       "</section>"
     );
 
+    /* credits */
+    var cr = data.credits;
+    if (cr) {
+      html.push(
+        '<section class="section" id="' + cr.id + '">' +
+          sectionHead("11 · Credits", cr.title, cr.subtitle) +
+          '<div class="prose">' + cr.body.map(function (p) { return "<p>" + p + "</p>"; }).join("") + "</div>" +
+          table(cr.columns, cr.rows) +
+          callout(cr.note) +
+        "</section>"
+      );
+    }
+
     main.innerHTML = html.join("");
     nav.innerHTML = navHTML(data);
 
@@ -421,7 +434,8 @@
           { href: "#" + data.resources.id, text: data.resources.title },
           { href: "#" + data.costs.id, text: data.costs.title },
           { href: "#" + data.tips.id, text: data.tips.title },
-          { href: "#" + data.story.id, text: data.story.title }
+          { href: "#" + data.story.id, text: data.story.title },
+          { href: "#" + data.credits.id, text: data.credits.title }
         ]
       }
     ];
