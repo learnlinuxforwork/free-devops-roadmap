@@ -2,7 +2,7 @@
 
 <img src="assets/img/ST-Brain-Logo-badge.png" width="96" height="96" alt="Shea's Tech">
 
-# AWS DevOps
+# AWS DevOps Course
 
 **An open-source, 54-week self-study roadmap from `ls -la` to**
 **AWS Certified DevOps Engineer – Professional.**

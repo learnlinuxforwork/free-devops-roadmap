@@ -1,5 +1,5 @@
 /*
- * AWS DevOps — free.learnlinuxforwork.com
+ * AWS DevOps Course — free.learnlinuxforwork.com
  * Copyright (C) 2026 Shea's Tech
  * Licensed under the GNU AGPL v3.0 or later.
  *

@@ -4,7 +4,7 @@ Context for Claude Code working in this repository.
 
 ## What this is
 
-A static site published at **https://free.learnlinuxforwork.com**, branded **AWS DevOps** —
+A static site published at **https://free.learnlinuxforwork.com**, branded **AWS DevOps Course** —
 an open-source 54-week self-study roadmap taking someone from Linux fundamentals to AWS
 Certified DevOps Engineer – Professional. Owned by Shea's Tech (`github.com/learnlinuxforwork`).
 
